@@ -14,26 +14,29 @@ describe "a user can join cardMe" do
     click_button "Join"
 
     within ".welcomepage" do
-      expect(page).to have_content "Hello, #{user.firstname}!"
+      expect(page).to have_content "Hello, #{user.first_name}!"
     end
+
     click_link "Log Out, #{user.first_name}"
 
-    witin "header" do
-      expect(page).to have_content "Log In"
+  
+    within ".login" do
+      expect(page).to have_content "Email"
     end
 
     login(user)
 
     within ".welcomepage" do
-      expect(page).to have_content "Hello, #{user.firstname}!"
+      expect(page).to have_content "Hello, #{user.first_name}!"
     end
 
+    
     click_link "Log Out, #{user.first_name}"
 
     login(user1)
 
     within ".welcomepage" do
-      expect(page).to_not have_content "Hello, #{user.firstname}!"
+      expect(page).to_not have_content "Hello, #{user.first_name}!"
       expect(page).to have_content "Hello, #{user1.first_name}"
     end
 
@@ -41,9 +44,8 @@ describe "a user can join cardMe" do
   end
 
   def login(user)
-    click_link "Log in"
     fill_in :email, with: user.email
-    fill_in :user_password, with: user.password
+    fill_in :password, with: user.password
     click_button "Log in"
   end
 end

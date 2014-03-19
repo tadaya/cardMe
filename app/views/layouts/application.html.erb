@@ -8,6 +8,18 @@
 </head>
 <body>
 
+<header>
+  <ul class="nav">
+
+    <li><%= link_to("Log In", "/" ) if session[:user_id].nil? %></li>
+    <li><%= link_to "Profile", user_path(session[:user_id]) unless session[:user_id].nil?%></li>
+    <li>
+     <%= link_to("Log Out, #{current_user.first_name}", "/logout", method: "delete") unless session[:user_id].nil? %>
+   </li>
+  </ul>
+</header>
+
+
 <%= yield %>
 
 </body>
