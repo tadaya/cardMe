@@ -52,11 +52,12 @@ group :development, :test do
   gem 'pry-rails'
 
   # unit testing frameworks
+  gem 'rspec-core'
   gem 'rspec-rails'
   gem 'jasmine'
 
   # acceptance testing
-  gem 'capybara-rails'
+  gem 'capybara'
   gem 'launchy'
 
   # test helper libraries
