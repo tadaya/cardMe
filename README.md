@@ -20,8 +20,8 @@
   * NY Times
 
 ##### Pivotal Tracker and Heroku Links
-[Pivotal Tracker](https://www.pivotaltracker.com/s/projects/1040258)
-Heroku Link Pending
+- [Pivotal Tracker](https://www.pivotaltracker.com/s/projects/1040258)
+- Heroku Link Pending
 
 ##### ERD for the project
 ![ScreenShot](cardMeERD.png)
