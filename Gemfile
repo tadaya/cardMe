@@ -34,6 +34,7 @@ end
 
 gem "paperclip", "~> 4.1"
 
+
 # Use ActiveModel has_secure_password
  gem 'bcrypt'
 
@@ -55,7 +56,7 @@ group :development, :test do
   gem 'jasmine'
 
   # acceptance testing
-  #gem 'capybara-rails'
+  gem 'capybara-rails'
   gem 'launchy'
 
   # test helper libraries
