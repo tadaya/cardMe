@@ -1,0 +1,76 @@
+APIApplication Details
+Company:
+
+cardMe
+
+Application Name:
+
+cardMe
+
+API Key:
+
+77k6rimx3nzbg7
+
+Secret Key:
+
+UaTXf1mhyB9AjcSa
+
+OAuth User Token:
+
+7d3b9632-648d-4c0b-bfbc-bc828761fb14
+
+OAuth User Secret:
+
+9094be25-d70d-4526-a959-7338ccf4f52c
+
+https://api.fullcontact.com/v2/email/disposable.json?email=joe%2Btag%40sharklasers.com&apiKey=78d8d32cbcb9a606
+
+https://api.fullcontact.com/v2/person.json?email=bart@fullcontact.com&apiKey=78d8d32cbcb9a606
+
+HTTParty.get("http://api.usatoday.com/open/articles?keyword=etsy&api_key=d4tnpbznse8r3kqc6vvw9h7r")
+
+Times Developer Network Application Registration
+Thank you for registering.
+Your API Keys:
+
+Article Search API
+KEY: 39DF8DDBDD4E589D9DB4A757AEC977E0:11:68994445
+
+Application: cardMe Key: 39df8ddbdd4e589d9db4a757aec977e0:11:68994445 Status: active Registered: 8 seconds ago
+Key Rate Limits
+10  Calls per second
+10,000  Calls per day
+Event Listings API
+KEY: 7D8C8415D26B5BA26D66A92A3B173245:19:68994445
+
+Application: cardMe Key: 7d8c8415d26b5ba26d66a92a3b173245:19:68994445 Status: active Registered: 8 seconds ago
+Key Rate Limits
+10  Calls per second
+10,000  Calls per day
+Most Popular API
+KEY: 9E52C0BC518010F4250D83F11F863217:12:68994445
+
+Application: cardMe Key: 9e52c0bc518010f4250d83f11f863217:12:68994445 Status: active Registered: 8 seconds ago
+Key Rate Limits
+8 Calls per second
+5,000 Calls per day
+Semantic API
+KEY: CC670BB36BF2852F149384FA997C4721:8:68994445
+
+Application: cardMe Key: cc670bb36bf2852f149384fa997c4721:8:68994445 Status: active Registered: 8 seconds ago
+Key Rate Limits
+8 Calls per second
+5,000 Calls per day
+TimesTags API
+KEY: D4BFE9A97F061AD942E520006E41E487:18:68994445
+
+Application: cardMe Key: d4bfe9a97f061ad942e520006e41e487:18:68994445 Status: active Registered: 8 seconds ago
+Key Rate Limits
+40  Calls per second
+5,000 Calls per day
+Your new key will be e-mailed to you. You can also click "http://developer.nytimes.com/member/my-account" at any time to view your API Keys.
+
+Click "APIs" to read the documentation and start coding. Post your comments and questions in the forum. We look forward to seeing what you create!
+
+http://api.nytimes.com/svc/search/v2/articlesearch.json?fq=etsy&api-key=39DF8DDBDD4E589D9DB4A757AEC977E0:11:68994445
+
