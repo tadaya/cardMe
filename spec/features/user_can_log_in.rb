@@ -7,10 +7,10 @@ describe "a user can join cardMe" do
   it "creates a new user" do
     visit "/"
     click_link "Join cardMe"
-    fill_in :email, with: user.email
-    fill_in :first_name, with: user.first_name
-    fill_in :password, with: user.password
-    fill_in :password_confirmation, with: user.password_confirmation
+    fill_in :user_email, with: user.email
+    fill_in :user_first_name, with: user.first_name
+    fill_in :user_password, with: user.password
+    fill_in :user_password_confirmation, with: user.password_confirmation
     click_button "Join"
 
     within ".welcomepage" do
@@ -40,10 +40,10 @@ describe "a user can join cardMe" do
     click_link "Log Out, #{user1.first_name}"
   end
 
-  def login
+  def login(user)
     click_link "Log in"
     fill_in :email, with: user.email
-    fill_in :password, with: user.password
+    fill_in :user_password, with: user.password
     click_button "Log in"
   end
 end
