@@ -32,8 +32,10 @@ group :doc do
   gem 'sdoc', require: false
 end
 
+gem "paperclip", "~> 4.1"
+
 # Use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.1.2'
+ gem 'bcrypt-ruby', '~> 3.1.2'
 
 # Use unicorn as the app server
 # gem 'unicorn'
@@ -42,4 +44,22 @@ end
 # gem 'capistrano', group: :development
 
 # Use debugger
-# gem 'debugger', group: [:development, :test]
+ gem 'debugger', group: [:development, :test]
+
+group :development, :test do
+  # for debugging
+  gem 'pry-rails'
+
+  # unit testing frameworks
+  gem 'rspec-rails'
+  gem 'jasmine'
+
+  # acceptance testing
+  gem 'capybara-rails'
+  gem 'launchy'
+
+  # test helper libraries
+  gem 'shoulda-matchers'
+  gem 'factory_girl_rails'
+  gem 'ffaker', '~> 1.2.0'
+end
