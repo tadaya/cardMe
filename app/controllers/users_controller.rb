@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   
   def send_mail
       @email = params[:email]
-      @card = params[:my_cards]
+      @card = Card.find_by(card_name: params[:my_cards])
       if UserMailer.send_card(@user, @card, @email).deliver
         flash[:notice] = 'Card Sent!'
       else
@@ -16,7 +16,7 @@ class UsersController < ApplicationController
 
   def send_sms
     @phone = params[:phone]
-    @card = params[:my_cards]
+    @card = Card.find_by(card_name: params[:my_cards])
     if @user.send_text(@user, @phone, @card)
       flash[:text_notice] = 'Text Sent!'
     else
@@ -43,6 +43,7 @@ class UsersController < ApplicationController
 
   def show
     @cards = @user.cards.all
+    @card = Card.find_by(card_name: params[:card_name])
     @my_card = @cards.map(&:card_name)
   end
 

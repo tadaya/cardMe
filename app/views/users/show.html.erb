@@ -1,19 +1,17 @@
 <div class="welcomepage">
   <p>Hello, <%= @user.first_name %>!<p>
 
-<%= form_tag( user_cards_path(@user), method: "get") do |f| %>
-  <%= label_tag("My Cards") %>
-  <%= select_tag(:my_cards, options_for_select(@my_card)) %>
-  <%= submit_tag "Show", :name => nil%>
-<% end %>
-
 <%= form_tag("/users/#{@user.id}/sms") do %>
   <%= text_field_tag 'phone' %>
+  <%= label_tag("Select Card") %>
+  <%= select_tag(:my_cards, options_for_select(@my_card)) %>
   <%= submit_tag "Text Card" %>
 <% end %>
 
 <%= form_tag(user_path(@user)) do %>
   <%= email_field_tag 'email' %>
+  <%= label_tag("Select Card") %>
+  <%= select_tag(:my_cards, options_for_select(@my_card)) %>
   <%= submit_tag "Email Card" %>
 <% end %>
 <div class="flash-message">
