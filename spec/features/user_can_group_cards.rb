@@ -12,10 +12,10 @@ describe "user can group cards" do
   it "divide card collection by group" do
     visit "/"
     login(user)
-    click_on "Profile"
-    click_on "Rolodex"
-    find("#new-group").click
-    fill_in "Group", with: "Friends"
+    click_link "Rolodex"
+    save_and_open_page
+    fill_in "group_group_name", with: "Friends"
+    
     click_button "Submit"
    
   end

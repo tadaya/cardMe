@@ -4,7 +4,7 @@ BODY & HEADER & NAV
 
 
 body{
-  margin: 0px;
+  margin-top: 130px;
   font-family: sans-serif;
   list-style-type: none;
 }
@@ -109,6 +109,11 @@ body.joinpage{
 .login form{
   margin: 20px;
   line-height: 18pt;
+}
+
+.success {
+  color: red;
+  font-style: italic;
 }
 
 

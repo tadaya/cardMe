@@ -3,10 +3,14 @@ class UsersController < ApplicationController
   before_action :authenticate, :authorize, only: [:edit, :update, :show]
   
   def send_mail
-    @user = User.find(params[:id])
-    @email = @user.email
-    UserMailer.send_card(@user, @email).deliver
-    redirect_to user_path, notice: 'Message sent'
+      @user = User.find(params[:id])
+      @email = @user.email
+      if UserMailer.send_card(@user, @email).deliver
+      flash[:notice] = 'Card Sent!'
+      else
+      flash[:notice] = "Problems sending mail - please double check the address"
+      end
+    redirect_to user_path
   end
 
   def new
@@ -25,6 +29,7 @@ class UsersController < ApplicationController
   end
 
   def show
+    @cards = @user.cards.all
   end
 
   def load_user
