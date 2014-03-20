@@ -1,15 +1,26 @@
 class UsersController < ApplicationController
-  before_action :load_user, only: [:show, :edit, :update, :destroy]
+  before_action :load_user, only: [:show, :edit, :update, :destroy, :send_mail, :send_sms]
   before_action :authenticate, :authorize, only: [:edit, :update, :show]
   
   def send_mail
-      @user = User.find(params[:id])
-      @email = @user.email
+      @email = params[:email]
       if UserMailer.send_card(@user, @email).deliver
-      flash[:notice] = 'Card Sent!'
+        flash[:notice] = 'Card Sent!'
       else
-      flash[:notice] = "Problems sending mail - please double check the address"
+        flash[:notice] = "Problems sending mail - please double check the address"
       end
+
+      redirect_to user_path
+  end
+
+  def send_sms
+    @phone = params[:phone]
+    if @user.send_text(@user, @phone)
+      flash[:text_notice] = 'Text Sent!'
+    else
+      flash[:text_notice] = 'Problems sending text - please double check the phone number'
+    end
+
     redirect_to user_path
   end
 

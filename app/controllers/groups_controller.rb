@@ -1,9 +1,15 @@
 class GroupsController < ApplicationController
  
+
+  def index
+    @user = current_user
+    @groups = current_user.groups
+    render json: @groups
+  end
+
   def create
     @user = current_user
-    @group = Group.new(group_name: params[:group_name])
-    @group.save
-    redirect_to user_cards_path(@user)
+    @group = Group.create(user: current_user, group_name: params[:group_name])
+    render json: @group
   end
 end
