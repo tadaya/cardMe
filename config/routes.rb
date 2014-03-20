@@ -12,5 +12,4 @@ Cardme::Application.routes.draw do
   get "/login", to: "session#new"
   post "/session", to: "session#create"
   delete "/logout", to: "session#destroy"
-
 end
