@@ -183,9 +183,6 @@ PLATFORMS
 DEPENDENCIES
   bcrypt-ruby
   capybara
-
-
-
   coffee-rails (~> 4.0.0)
   debugger
   factory_girl_rails

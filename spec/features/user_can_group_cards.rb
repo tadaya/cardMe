@@ -12,14 +12,15 @@ describe "user can group cards" do
   it "divide card collection by group" do
     visit "/"
     login(user)
-    visit user_cards_path(user)
-    click_button "New Group"
+    click_on "Profile"
+    click_on "Rolodex"
+    find("#new-group").click
     fill_in "Group", with: "Friends"
-    click_button "Save"
+    click_button "Submit"
+   
   end
 
   def login(user)
-    click_link "Log in"
     fill_in :email, with: user.email
     fill_in :password, with: user.password
     click_button "Log in"
