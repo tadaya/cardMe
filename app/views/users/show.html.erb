@@ -2,7 +2,7 @@
   <p>Hello, <%= @user.first_name %>!<p>
 
 <%= form_tag( user_cards_path(@user), method: "get") do |f| %>
-  <%= label_tag("My Cards") %>
+  <%= label_tag("Select Cards:") %>
   <%= select_tag(:my_cards, options_for_select(@my_card)) %>
   <%= submit_tag "Show", :name => nil%>
 <% end %>
