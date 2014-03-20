@@ -1,7 +1,22 @@
-
 <%= link_to "Join cardMe", new_user_path %>
 
+<div class="flip-container" ontouchstart="this.classList.toggle('hover');">
+  <div class="flipper">
+    <div class="front">
+      <%= image_tag("cardmelogo.png")%>
+    </div>
+    <div class="back">
+      <div class="cardback">
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
 <div class = "login">
+<h2>Log In</h2>
+
  <%= form_tag "/session" do %>
     <%= label_tag :email %>:
     <%= email_field_tag :email %></br>
@@ -11,3 +26,4 @@
     <%= submit_tag "Log in!" %>
   <% end %>
 </div>
+
