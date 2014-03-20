@@ -35,6 +35,10 @@ header li{
 LOG IN PAGE
 ******************/
 
+body.joinpage{
+  margin-top: 70px;
+}
+
 .welcomepage{
   margin-top: 50px;
 }
