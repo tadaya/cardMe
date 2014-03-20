@@ -27,6 +27,15 @@
     
     <%= submit_tag "Log in!" %>
   <% end %>
+
+  <% unless flash[:message].nil? %>
+    <div id="errors">
+      <h3>Errors!</h3>
+      <ul>
+        <li><em><%= flash[:message] %></em></li>
+      </ul>
+    </div>
+    <% end %>
 </div>
 </body>
 
