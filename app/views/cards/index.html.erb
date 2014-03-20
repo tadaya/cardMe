@@ -1,22 +1,11 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
 
-
-=======
->>>>>>> afc3f15007e3b57fed380e42a31fc07db1dc5b0c
 <button id="new-group">New Group</button>
 
 <%= form_tag("/users/#{user.id}/cards", method: "post") do %>
   <%= text_field_tag %>
   <%= submit_tag("Submit") %>
-<<<<<<< HEAD
-=======
-<% @connections.each do |connection| %>
-  <%= connection.card.user.first_name %>
->>>>>>> c56339f398a82aa682333cb7c29d09bdf4a023e5
-=======
+
 
 <% @connections.each do |connection| %>
   <%= connection.card.user.first_name %>
->>>>>>> afc3f15007e3b57fed380e42a31fc07db1dc5b0c
 <% end %>
