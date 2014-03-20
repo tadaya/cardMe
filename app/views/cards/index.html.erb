@@ -1,9 +1,9 @@
-
-
 <button id="new-group">New Group</button>
-
 
 <%= form_tag("/users/#{user.id}/cards", method: "post") do %>
   <%= text_field_tag %>
   <%= submit_tag("Submit") %>
+
+<% @connections.each do |connection| %>
+  <%= connection.card.user.first_name %>
 <% end %>
