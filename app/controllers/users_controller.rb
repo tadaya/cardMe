@@ -4,7 +4,8 @@ class UsersController < ApplicationController
   
   def send_mail
       @email = params[:email]
-      if UserMailer.send_card(@user, @email).deliver
+      @card = params[:my_cards]
+      if UserMailer.send_card(@user, @card, @email).deliver
         flash[:notice] = 'Card Sent!'
       else
         flash[:notice] = "Problems sending mail - please double check the address"
@@ -15,7 +16,8 @@ class UsersController < ApplicationController
 
   def send_sms
     @phone = params[:phone]
-    if @user.send_text(@user, @phone)
+    @card = params[:my_cards]
+    if @user.send_text(@user, @phone, @card)
       flash[:text_notice] = 'Text Sent!'
     else
       flash[:text_notice] = 'Problems sending text - please double check the phone number'
