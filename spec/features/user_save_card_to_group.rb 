@@ -1,23 +1,14 @@
 require 'spec_helper'
 
-describe "user can group cards" do 
+describe "user can save card to a group" do 
   let(:user) { FactoryGirl.create(:user) }
   let(:card) { FactoryGirl.create(:card, user: user) }
 
-  # 5.times do {
-  #   let(:connection) { FactoryGirl.create(:user) }
-  #   FactoryGirl.create(:card, user: connnection)
-  # }
-
-  it "divide card collection by group" do
+  it "can save card to a group" do
     visit "/"
     login(user)
     click_link "Rolodex"
-    save_and_open_page
-    fill_in "group_group_name", with: "Friends"
     
-    click_button "Submit"
-   
   end
 
   def login(user)
@@ -27,3 +18,4 @@ describe "user can group cards" do
   end
   
 end
+
