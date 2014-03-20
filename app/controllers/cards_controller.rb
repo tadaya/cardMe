@@ -1,5 +1,5 @@
-
-class CardsController < ActionController::Base
+class CardsController < ApplicationController
+  
   def index
     @group = Group.new
     @user = current_user
