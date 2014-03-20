@@ -14,12 +14,11 @@
 
 
 <script>
-// Need some logic for not being able to create groups with same name 
   $('form').on("submit", function(e){
     e.preventDefault();
     input = $('input#group_group_name')
     $.ajax({
-      url: '/users/' + @user.id + '/groups',
+      url: '/users/' + <%= @user.id %> + '/groups',
       type: 'POST',
       data: {group_name: input.val()}
     });
