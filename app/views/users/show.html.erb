@@ -7,10 +7,11 @@
 <button id="text">Text Card</button>
 </form>
 
-<%= form_tag(user_path) do %>
+<%= form_tag(user_path(@user)) do %>
   <%= email_field_tag 'email' %>
   <%= submit_tag "Email Card" %>
 <% end %>
 <%= raw("<p><strong class='success'>#{flash[:notice]}</strong></p>") unless flash[:notice].nil? %>
 
 <%= link_to "Rolodex", user_cards_path(@user) %>
+
