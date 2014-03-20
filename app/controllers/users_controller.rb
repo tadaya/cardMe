@@ -5,7 +5,10 @@ class UsersController < ApplicationController
   def send_mail
       @email = params[:email]
       @card = Card.find_by(card_name: params[:my_cards])
-      if UserMailer.send_card(@user, @card, @email).deliver
+      @token = Token.new(card: @card)
+      @token.generateKey
+      @token.save
+      if UserMailer.send_card(@user, @token, @email).deliver
         flash[:notice] = 'Card Sent!'
       else
         flash[:notice] = "Problems sending mail - please double check the address"

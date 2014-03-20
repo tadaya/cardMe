@@ -1,8 +1,8 @@
 class UserMailer < ActionMailer::Base
   default from: "card.me.invite@gmail.com"
 
-  def send_card(user, card, email_input)
-    @card = card
+  def send_card(user, token, email_input)
+    @token = token
     @user = user
     @email = email_input
     # @url = user_card_path(@user)
