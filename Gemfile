@@ -34,6 +34,8 @@ end
 
 gem "paperclip", "~> 4.1"
 
+gem 'twilio-ruby'
+
 gem "letter_opener", group: [:development, :test]
 
 # Use ActiveModel has_secure_password
