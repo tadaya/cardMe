@@ -46,6 +46,20 @@ class UsersController < ApplicationController
     @my_card = @cards.map(&:card_name)
   end
 
+  def edit
+    @update_worked = true
+  end
+
+  def update
+    @update_worked = @user.update(user_params)
+
+    if @update_worked
+      redirect_to user_path(@user)
+    else
+      render(:edit)
+    end
+  end
+
   def load_user
     return @user = User.find(params[:id])
   end 
