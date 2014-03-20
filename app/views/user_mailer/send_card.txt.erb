@@ -1,7 +1,7 @@
 <%= @user.first_name %> <%= @user.last_name %> carded you!
 ================================================
 
-Follow this link to view and add them to your rolodex: <%= @url %>
+Follow this link to view and add them to your rolodex: <a href="<%= user_path(@user.id) %>">See Card Here</a> 
 
 ================================================
 
