@@ -29,6 +29,7 @@ class UsersController < ApplicationController
   end
 
   def show
+    @cards = @user.cards.all
   end
 
   def load_user
