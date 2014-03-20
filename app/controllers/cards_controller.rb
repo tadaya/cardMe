@@ -1,5 +1,5 @@
 class CardsController < ApplicationController
-  before_action(:load_user, {only: [:create, :new, :edit, :update, :destroy, :user, :show] })
+  before_action(:load_user, {only: [:create, :new, :edit, :update, :user, :show] })
   before_action(:load_card, {only: [:edit, :update, :destroy, :show] })
   
   def index
@@ -33,7 +33,7 @@ class CardsController < ApplicationController
 
   def destroy
     @card.destroy
-    redirect_to user_path(@user)
+    redirect_to user_path(@card.user_id)
   end
 
   def card_params
