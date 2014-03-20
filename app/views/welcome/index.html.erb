@@ -1,7 +1,22 @@
-
 <%= link_to "Join cardMe", new_user_path %>
 
+<div class="flip-container" ontouchstart="this.classList.toggle('hover');">
+  <div class="flipper">
+    <div class="front">
+      <%= image_tag("cardmelogo.png")%>
+    </div>
+    <div class="back">
+      <div class="cardback">
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
 <div class = "login">
+<h2>Log In</h2>
+
  <%= form_tag "/session" do %>
     <%= label_tag :email %>:
     <%= email_field_tag :email %></br>
@@ -11,3 +26,28 @@
     <%= submit_tag "Log in!" %>
   <% end %>
 </div>
+
+<div class = "description">
+  <div class="how">
+    <h2> How does it work? </h2>
+  </div>
+  <container class="steps">
+    <div class="step">
+      <%= image_tag("pplicon.png") %>
+      <p>Meet Judy and Jim. They just met! Judy prepared and created a business card on cardMe. (She's so smart)</p>
+    </div>
+    <div class="step">
+      <%= image_tag("pplicon2.png") %>
+      <p>Jim asks, "Do you have a business card?" Judy logs on to cardMe and sends it straight to his phone.</p> 
+    </div>
+    <div class="step">
+      <%= image_tag("pplicon3.png") %>
+      <p>Then he signs up for an account and saves her card to his digital roledex. Success!</p> 
+    </div>
+  </container>
+</div>
+
+<footer>
+  cardMe company
+</footer>
+
