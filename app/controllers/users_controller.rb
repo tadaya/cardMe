@@ -1,6 +1,14 @@
 class UsersController < ApplicationController
   before_action :load_user, only: [:show, :edit, :update, :destroy]
   before_action :authenticate, :authorize, only: [:edit, :update, :show]
+  
+  def send_mail
+    @user = User.find(params[:id])
+    @email = @user.email
+    UserMailer.send_card(@user, @email).deliver
+    redirect_to user_path, notice: 'Message sent'
+  end
+
   def new
     @user = User.new
   end

@@ -1,3 +1,13 @@
 <div class="welcomepage">
   <p>Hello, <%= @user.first_name %>!<p>
 </div>
+
+<form id="send-text">
+  <input type="text", id="sendtext", placeholder="Enter Phone" />
+<button id="text">Text Card</button>
+</form>
+
+<%= form_tag(user_path) do %>
+  <%= email_field_tag 'email' %>
+  <%= submit_tag "Email Card" %>
+<% end %>
