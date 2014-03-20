@@ -5,5 +5,6 @@ FactoryGirl.define do
     last_name { Faker::Name.last_name }
     password "getcarded"
     password_confirmation "getcarded"
+
   end
 end
