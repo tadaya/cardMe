@@ -2,16 +2,21 @@
   <p>Hello, <%= @user.first_name %>!<p>
 
 
-<form id="send-text">
-  <input type="text", id="sendtext", placeholder="Enter Phone" />
-<button id="text">Text Card</button>
-</form>
+<%= form_tag("/users/#{@user.id}/sms") do %>
+  <%= text_field_tag 'phone' %>
+  <%= submit_tag "Text Card" %>
+<% end %>
 
 <%= form_tag(user_path(@user)) do %>
   <%= email_field_tag 'email' %>
   <%= submit_tag "Email Card" %>
 <% end %>
+<div class="flash-message">
 <%= raw("<p><strong class='success'>#{flash[:notice]}</strong></p>") unless flash[:notice].nil? %>
+</div>
+<div class="flash-message">
+<%= raw("<p><strong class='success'>#{flash[:text_notice]}</strong></p>") unless flash[:text_notice].nil? %>
+</div>
 
 <%= link_to "Rolodex", user_cards_path(@user) %>
 

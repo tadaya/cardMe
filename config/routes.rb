@@ -7,6 +7,7 @@ Cardme::Application.routes.draw do
   end
 
   post "/users/:id", to: "users#send_mail"
+  post "/users/:id/sms", to: "users#send_sms"
 
   get "/login", to: "session#new"
   post "/session", to: "session#create"
