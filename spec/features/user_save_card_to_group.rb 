@@ -18,4 +18,3 @@ describe "user can save card to a group" do
   end
   
 end
-

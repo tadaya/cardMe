@@ -14,7 +14,7 @@
 <%= raw("<p><strong class='success'>#{flash[:notice]}</strong></p>") unless flash[:notice].nil? %>
 
 <%= link_to "Rolodex", user_cards_path(@user) %>
-
+<%= link_to "Edit Profile", edit_user_path(@user) %>
 
 
 <% if @cards.empty? %>
