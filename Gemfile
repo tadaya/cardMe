@@ -55,7 +55,7 @@ group :development, :test do
   gem 'pry-rails'
 
   # unit testing frameworks
-  gem 'rspec-rails', '~> 3.0.0.beta'
+  gem 'rspec-rails'
   gem 'jasmine'
 
   # acceptance testing
