@@ -3,6 +3,7 @@ Cardme::Application.routes.draw do
 
   resources :users do
     resources :cards
+    resources :groups
   end
 
   post "/users/:id", to: "users#send_mail"
