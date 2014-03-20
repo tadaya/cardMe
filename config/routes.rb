@@ -6,4 +6,8 @@ Cardme::Application.routes.draw do
     resources :groups
   end
 
+  get "/login", to: "session#new"
+  post "/session", to: "session#create"
+  delete "/logout", to: "session#destroy"
+
 end
