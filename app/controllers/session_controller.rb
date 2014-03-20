@@ -14,8 +14,8 @@ class SessionController < ApplicationController
       #redirect to user show page
       redirect_to ( user_path (user) )
     else
-      @message = "This email and password combination does not exist."
-      render :new
+      flash[:message] = "This email and password combination does not exist."
+      redirect_to root_path
     end
   end
 
