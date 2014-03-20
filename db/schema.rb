@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140319160226) do
+ActiveRecord::Schema.define(version: 20140320203318) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,6 +50,14 @@ ActiveRecord::Schema.define(version: 20140319160226) do
   create_table "groups", force: true do |t|
     t.integer "user_id"
     t.string  "group_name"
+  end
+
+  create_table "tokens", force: true do |t|
+    t.integer  "card_id"
+    t.string   "secret_key"
+    t.datetime "expiration"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "users", force: true do |t|
