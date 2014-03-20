@@ -5,6 +5,7 @@ class CardsController < ApplicationController
   def index
     @group = Group.new
     @user = current_user
+    @groups = current_user.groups
     @connections = @user.connections
   end
 
