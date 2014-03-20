@@ -1,7 +1,6 @@
 <div class="welcomepage">
   <p>Hello, <%= @user.first_name %>!<p>
 
-
 <%= form_tag("/users/#{@user.id}/sms") do %>
   <%= text_field_tag 'phone' %>
   <%= submit_tag "Text Card" %>
@@ -41,10 +40,6 @@
      <%= submit_tag("Delete") %>
      <% end %> </li>
     </ul>
-
-
-
-     link_to("delete", user_path(@user)) %>
   <% end %>
   <%= link_to("Create another card", new_user_card_path(@user)) %>
 <% end %>
