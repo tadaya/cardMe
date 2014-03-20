@@ -1,6 +1,11 @@
 <div class="welcomepage">
   <p>Hello, <%= @user.first_name %>!<p>
 
+<%= form_tag( user_cards_path(@user), method: "get") do |f| %>
+  <%= label_tag("My Cards") %>
+  <%= select_tag(:my_cards, options_for_select(@my_card)) %>
+  <%= submit_tag "Show", :name => nil%>
+<% end %>
 
 <%= form_tag("/users/#{@user.id}/sms") do %>
   <%= text_field_tag 'phone' %>
@@ -19,7 +24,7 @@
 </div>
 
 <%= link_to "Rolodex", user_cards_path(@user) %>
-
+<%= link_to "Edit Profile", edit_user_path(@user) %>
 
 
 <% if @cards.empty? %>
@@ -34,17 +39,13 @@
         <li><%= card.position %></li>
       </ul>
     </div>
-    <ul class = "edit">
-      <li><%= link_to("edit", edit_user_card_path(@user, card)) %></li>
+    <ul class="edit">
+      <li><%= link_to("edit", edit_card_path(card)) %></li>
 
-     <li><%= form_tag user_card_path(@user, card), method: "delete", data: {confirm: "Are you sure you want to delete this card?"} do %>
+     <li><%= form_tag card_path(card), method: "delete", data: {confirm: "Are you sure you want to delete this card?"} do %>
      <%= submit_tag("Delete") %>
      <% end %> </li>
     </ul>
-
-
-
-     link_to("delete", user_path(@user)) %>
   <% end %>
   <%= link_to("Create another card", new_user_card_path(@user)) %>
 <% end %>
