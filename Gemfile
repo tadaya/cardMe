@@ -53,7 +53,7 @@ group :development, :test do
 
   # unit testing frameworks
   gem 'rspec-core'
-  gem 'rspec-rails'
+  gem 'rspec-rails' '~> 3.0.0.beta'
   gem 'jasmine'
 
   # acceptance testing
