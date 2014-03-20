@@ -34,6 +34,7 @@ end
 
 gem "paperclip", "~> 4.1"
 
+gem "letter_opener", group: [:development]
 
 # Use ActiveModel has_secure_password
  gem 'bcrypt-ruby'
