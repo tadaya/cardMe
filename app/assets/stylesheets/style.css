@@ -111,6 +111,11 @@ body.joinpage{
   line-height: 18pt;
 }
 
+.success {
+  color: red;
+  font-style: italic;
+}
+
 
 
 /**********

@@ -11,5 +11,6 @@
   <%= email_field_tag 'email' %>
   <%= submit_tag "Email Card" %>
 <% end %>
+<%= raw("<p><strong class='success'>#{flash[:notice]}</strong></p>") unless flash[:notice].nil? %>
 
 <%= link_to "Rolodex", user_cards_path(@user) %>

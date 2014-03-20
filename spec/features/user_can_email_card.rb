@@ -8,11 +8,9 @@ describe "a user can email a card" do
     login(user)
     fill_in 'email', with: user.email
     click_button "Email Card"
-    page.driver.browser.window_handles.last
-    save_and_open_page
 
-    expect(page).to have_content(user.last_name)
-    # expect(page).to have_link("users/#{user}")
+    expect(page).to have_content("Card Sent")
+
   end
 
   def login(user)
