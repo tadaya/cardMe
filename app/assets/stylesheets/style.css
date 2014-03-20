@@ -1,0 +1,167 @@
+/******************
+BODY & HEADER & NAV
+******************/
+
+
+body{
+  margin: 0px;
+  font-family: sans-serif;
+  list-style-type: none;
+}
+
+header{
+  height: 70px;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  background-color: #BE1E2D;
+}
+
+header li{
+  display: inline-block;
+}
+
+.nav li a{
+  text-decoration: none;
+  color: black;
+  position: absolute;
+  top: 30px;
+  right: 40px;
+  font-size: 1.5em;
+
+}
+
+/******************
+LOG IN PAGE
+******************/
+
+.welcomepage{
+  margin-top: 50px;
+}
+
+.description{
+  width: 100%;
+  height: 500px;
+  margin-top: 200px; 
+  background-color: #BE1E2D;
+}
+
+.how{
+  background-color: #686868;
+  width: 100%;
+  height: 50px;
+  padding: 10px 0;
+}
+
+.how h2{
+  text-align: center;
+  color: #F8F8F8;
+}
+
+.steps{
+  width: 80%;
+  display: block;
+  margin: 0 auto;
+}
+
+.step{
+  height: 200px;
+  width: 200px;
+  background-color: white;
+  border-radius: .25em;
+  display: inline-block;
+  margin-top: 20px;
+  padding: 5px;
+}
+
+
+.step:nth-of-type(2) {
+  margin-right: 15%;
+  margin-left: 15%;
+}
+
+
+.step p{
+  padding-top: 240px;
+  color: white;
+}
+
+
+.step img{
+  float: left;
+}
+
+.login{
+  padding: 10px 10px;
+  height: 200px;
+  width: 200px;
+  border: 1px solid black;
+  border-radius: 10px;
+  position: relative;
+  top: 20px;
+  left: 240px;
+}
+
+.login form{
+  margin: 20px;
+  line-height: 18pt;
+}
+
+
+
+/**********
+CARD FLIP
+***********
+
+/* entire container, keeps perspective */
+.flip-container {
+  -webkit-perspective: 1000;
+}
+  /* flip the pane when hovered */
+  .flip-container:hover .flipper, .flip-container.hover .flipper {
+    -webkit-transform: rotateY(180deg);
+  }
+
+.flip-container, .front, .back {
+  width: 200px;
+  height: 200px;
+  margin-bottom: 60px; 
+}
+
+/* flip speed goes here */
+.flipper {
+  -webkit-transition: 0.6s;
+  -webkit-transform-style: preserve-3d;
+
+  position: relative;
+}
+
+/* hide back of pane during swap */
+.front, .back {
+  -webkit-backface-visibility: hidden;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+/* front pane, placed above back */
+.front {
+  z-index: 2;
+}
+
+/* back, initially hidden pane */
+.back {
+  -webkit-transform: rotateY(180deg);
+}
+
+.cardback{
+  position: absolute;
+  top: 70px;
+  width: 230px;
+  height: 145px;
+  border: 1px solid black;
+  border-radius: 20px;
+}
+
+
