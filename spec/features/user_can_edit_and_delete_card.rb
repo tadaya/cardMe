@@ -11,7 +11,6 @@ it "edits a card" do
   add_card(card)
   first(:link, "edit").click
   fill_in :card_organization, with: "Kittens are cool"
-  save_and_open_page
   click_button "Save Changes"
 
   within ".card" do
@@ -35,4 +34,22 @@ end
     fill_in :card_organization, with: card.organization
     click_button "CardMe!"
   end
+
+  it "can delete a business card" do
+    visit '/'
+    login(user)
+    add_card(card)
+    first(:button, "Delete").click
+    
+    save_and_open_page
+    within ".welcomepage" do
+      expect(page).to_not have_content card.organization
+      expect(page).to_not have_content card.email
+    end
+  end
+
+
 end
+
+
+

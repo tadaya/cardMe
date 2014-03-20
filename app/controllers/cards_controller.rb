@@ -1,6 +1,6 @@
 class CardsController < ApplicationController
-  before_action(:load_user, {only: [:create, :new, :edit, :update] })
-  before_action(:load_card, {only: [:edit, :update] })
+  before_action(:load_user, {only: [:create, :new, :edit, :update, :destroy, :user] })
+  before_action(:load_card, {only: [:edit, :update, :destroy] })
   
   def index
     @group = Group.new
@@ -9,7 +9,9 @@ class CardsController < ApplicationController
   end
 
   def edit
+  end
 
+  def show
   end
 
   def update
@@ -24,6 +26,11 @@ class CardsController < ApplicationController
 
   def create
     @card = @user.cards.create(card_params)
+    redirect_to user_path(@user)
+  end
+
+  def destroy
+    @card.destroy
     redirect_to user_path(@user)
   end
 
