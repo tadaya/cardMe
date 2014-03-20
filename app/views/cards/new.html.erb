@@ -1,17 +1,5 @@
 <body class="newcard">
 
-<%= form_for [@user, @card] do |f| %>
-  <%= f.label :email %>:
-  <%= f.email_field :email %></br>
-  <%= f.label :card_name %>:
-  <%= f.text_field :card_name %></br>
-  <%= f.label :phone_number %>:
-  <%= f.text_field :phone_number %></br>
-  <%= f.label :organization %>:
-  <%= f.text_field :organization %></br>
-  <%= f.label :position %>:
-  <%= f.text_field :position %></br>  
-  <%= f.submit "CardMe!" %>
-<% end %>
+  <%= render 'form' %>
 
 </body>

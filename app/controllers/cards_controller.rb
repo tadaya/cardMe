@@ -1,11 +1,20 @@
 class CardsController < ApplicationController
-  before_action(:load_user, {only: [:create, :new, :edit] })
-
+  before_action(:load_user, {only: [:create, :new, :edit, :update] })
+  before_action(:load_card, {only: [:edit, :update] })
   
   def index
     @group = Group.new
     @user = current_user
     @connections = @user.connections
+  end
+
+  def edit
+
+  end
+
+  def update
+    @card.update(card_params)
+    redirect_to user_path(@user)
   end
 
 
@@ -30,7 +39,7 @@ private
   end 
 
   def load_card
-    return @card = @user.cards.find(params[:id])
+    return @card = Card.find(params[:id])
   end
 
 end

@@ -29,6 +29,7 @@
         <li><%= card.position %></li>
       </ul>
     </div>
+    <%= link_to("edit", edit_user_card_path(@user, card)) %>
   <% end %>
   <%= link_to("Create another card", new_user_card_path(@user)) %>
 <% end %>

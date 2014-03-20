@@ -13,7 +13,6 @@ describe "user can group cards" do
     visit "/"
     login(user)
     click_link "Rolodex"
-    save_and_open_page
     fill_in "group_group_name", with: "Friends"
     
     click_button "Submit"
