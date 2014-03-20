@@ -8,6 +8,12 @@ describe "user can save card to a group" do
     visit "/"
     login(user)
     click_link "Rolodex"
+    expect(page).to have_content card
+    click_button "Add to Group"
+
+    within "#groupnames" do 
+      expect(page).to have_content card 
+    end
     
   end
 
