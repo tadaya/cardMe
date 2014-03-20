@@ -23,4 +23,5 @@ describe "user can group cards" do
     fill_in :password, with: user.password
     click_button "Log in"
   end
+  
 end
