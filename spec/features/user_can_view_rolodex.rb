@@ -10,7 +10,6 @@ describe "a user can join cardMe" do
     visit "/"
     login(user)
     click_link "Rolodex"
-    save_and_open_page
     expect(page).to have_content(user2.first_name)
   end
 
