@@ -217,7 +217,9 @@ DEPENDENCIES
   pg
   pry-rails
   rails (= 4.0.3)
+
   rmagick
+
   rspec-rails (~> 3.0.0.beta2)
   sass-rails (~> 4.0.0)
   sdoc

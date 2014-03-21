@@ -1,25 +1,44 @@
 
 
-<%= form_for [@user, @group] do |f| %>
-  <%= f.label :group_name %>
-  <%= f.text_field :group_name %>
-  <%= f.submit "Submit" %>
-<% end %>
+Submit Group Name:
+
+<div id="group_form">
+  <%= form_for [@user, @group] do |f| %>
+    <%= f.label :group_name %>
+    <%= f.text_field :group_name %>
+    <%= f.submit "Submit" %>
+  <% end %>
+</div>
 
 
 
+See your connections:
+<ul class="connection_card">
 <% @connections.each do |connection| %>
-  <%= connection.card.user.first_name %>
-  <%= connection.card.organization %>
+
+<% card = Card.find(connection.card_id) %>
+  <li class="<%=card.card_name.gsub(" ", "_")%>"><%= card.card_name %><button id="<%= connection.id%>">+</button>
+    <% for group in @groups %>
+    <div id="add-to-groups">
+      <%= check_box_tag "#{group.group_name}", id="#{group.group_name}" %>
+      <%= group.group_name %>
+    </div>
+    <% end %>
+    <%= submit_tag "Add" %>
+  </li>
+
 <% end %>
-
-
-<ul class="groups">
- <!-- @groups.each do |group| 
-  <li><group.group_name </li>
- end --> 
 </ul>
 
+
+
+
+See your groups:
+<ul>
+<% @groups.each do |group| %>
+  <li class="<%= group.group_name.gsub(" ","_")%>"><%= group.group_name %></li>
+<% end %>
+<ul>
 
 
 <script>
@@ -37,7 +56,6 @@ function addGroups() {
   showGroups()
   });
 }
-  
 
 function showGroups() {
   $.getJSON("/users/" + <%= @user.id %> + "/groups", function(response) {
@@ -63,5 +81,8 @@ function deleteGroup() {
 showGroups();
 addGroups();
 // deleteGroup()
+
   
-</script>
+</ul>
+
+<%= javascript_include_tag "cards", "data-turbolinks-track" => true %>

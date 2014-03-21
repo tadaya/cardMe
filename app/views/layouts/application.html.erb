@@ -6,6 +6,10 @@
 
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
+  
+  <% unless @user.nil? %>
+    <script>localStorage["user_id"] = <%= @user.id %></script>
+  <% end %>
 </head>
 <body>
 
