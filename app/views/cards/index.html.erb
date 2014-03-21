@@ -1,5 +1,5 @@
 
-
+Submit Group Name:
 <%= form_for [@user, @group] do |f| %>
   <%= f.label :group_name %>
   <%= f.text_field :group_name %>
@@ -7,17 +7,29 @@
 <% end %>
 
 
-
+See your connections:
+<ul class="connection_card">
 <% @connections.each do |connection| %>
-  <%= connection.card.user.first_name %>
+<% card = Card.find(connection.card_id) %>
+  <li class="<%=card.card_name.gsub(" ", "_")%>"><%= card.card_name %><button id="<%= connection.id%>">+</button>
+    <% for group in @groups %>
+    <div id="add-to-groups">
+      <%= check_box_tag "#{group.group_name}", id="#{group.group_name}" %>
+      <%= group.group_name %>
+    </div>
+    <% end %>
+    <%= submit_tag "Add" %>
+  </li>
 <% end %>
+</ul>
 
-
+See your groups:
 <ul>
 <% @groups.each do |group| %>
-  <li><%= group.group_name %></li>
+  <li class="<%= group.group_name.gsub(" ","_")%>"><%= group.group_name %></li>
 <% end %>
 <ul>
+
 
 
 <script>

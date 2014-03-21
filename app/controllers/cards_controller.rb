@@ -7,6 +7,7 @@ class CardsController < ApplicationController
     @user = current_user
     @groups = current_user.groups
     @connections = @user.connections
+    @cards = @user.cards.all
   end
 
   def edit
