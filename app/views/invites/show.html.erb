@@ -13,18 +13,8 @@
 
       <script>
 
-      $("button").on("click", function() {
+      $(".addbutton").on("click", function() {
         $.post("/connections", {user: <%=current_user.id %>, card: <%= @card.id%>})
-         .done(function(response){
-          if (response.success === true){
-            //do something with response.id
-          } else {
-            //do something with response.message
-          }
-         })
-         .error(function(response){
-           console.log("AJAX FAILED!");
-         });
       });
       </script>
     <% else %>

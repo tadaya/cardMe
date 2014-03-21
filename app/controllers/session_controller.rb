@@ -15,7 +15,7 @@ class SessionController < ApplicationController
       
       respond_to do |format|
         format.json do
-          render json: {success: true, id: session[:id]}
+          render json: {success: true, id: session[:user_id]}
         end
         format.html do
           redirect_to ( user_path (user) )
