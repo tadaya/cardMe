@@ -1,10 +1,10 @@
-
-
-<%= form_for [@user, @group] do |f| %>
-  <%= f.label :group_name %>
-  <%= f.text_field :group_name %>
-  <%= f.submit "Submit" %>
-<% end %>
+<div id="group_form">
+  <%= form_for [@user, @group] do |f| %>
+    <%= f.label :group_name %>
+    <%= f.text_field :group_name %>
+    <%= f.submit "Submit" %>
+  <% end %>
+</div>
 
 
 
@@ -19,47 +19,4 @@
  end --> 
 </ul>
 
-
-<script>
-var allGroups;
-function addGroups() {
-  $('form').on("submit", function(e){
-    e.preventDefault();
-    input = $('input#group_group_name')
-    $.ajax({
-      url: '/users/' + <%= @user.id %> + '/groups',
-      type: 'POST',
-      data: {group_name: input.val()}
-    });
-    input.val("")
-  showGroups()
-  });
-}
-  
-
-function showGroups() {
-  $.getJSON("/users/" + <%= @user.id %> + "/groups", function(response) {
-    allGroups = response;
-    $("ul.groups").empty();
-    for(i = 0; i < allGroups.length; i++) {
-      ($("<li>" + allGroups[i].group_name + "</li>").append("<span id="+ allGroups[i].id + ">" + ' X ' + "</span>")).appendTo("ul.groups");
-    }// for loop ends
-    $("span").on("click", function(e){
-      var groupId = e.target.id;
-      $.ajax({
-        url: '/users/' + <%= @user.id %> + '/groups/' + groupId,
-        type: "DELETE",
-        success: function(){
-          e.target.parentElement.remove();
-        }
-      });
-      //ajax closed
-    })// ends listener
-  });// ends getJSON
-}// ends showGroups
-
-
-showGroups();
-addGroups();
-  
-</script>
+<%= javascript_include_tag "cards", "data-turbolinks-track" => true %>
