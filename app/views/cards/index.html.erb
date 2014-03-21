@@ -10,6 +10,7 @@ Submit Group Name:
 See your connections:
 <ul class="connection_card">
 <% @connections.each do |connection| %>
+
 <% card = Card.find(connection.card_id) %>
   <li class="<%=card.card_name.gsub(" ", "_")%>"><%= card.card_name %><button id="<%= connection.id%>">+</button>
     <% for group in @groups %>
@@ -20,10 +21,9 @@ See your connections:
     <% end %>
     <%= submit_tag "Add" %>
   </li>
+
 <% end %>
 </ul>
-
-<<<<<<< HEAD
 
 <ul class="groups">
  <!-- @groups.each do |group| 
@@ -31,21 +31,14 @@ See your connections:
  end --> 
 </ul>
 
-<div class ="news-stories">
-  <% @nytarticles.each do |article| %>
-    <%= article["Title"] %>
-    <%= article["Url"] %>
-  <% end %>
-</div>
-=======
+
+
 See your groups:
 <ul>
 <% @groups.each do |group| %>
   <li class="<%= group.group_name.gsub(" ","_")%>"><%= group.group_name %></li>
 <% end %>
 <ul>
->>>>>>> 8e78c8635f16af883ca6552835f7645594e4d23e
-
 
 
 <script>
