@@ -10,6 +10,11 @@ describe "user can group cards" do
   it "can see invite from another user" do
     visit '/'
     login(user)
+    within '.email' do
+      select(card.card_name, :from => 'my_cards')
+    end
+
+
     fill_in("email", with: user2.email)
     click_button "Email Card"
     token.generateKey
@@ -17,8 +22,9 @@ describe "user can group cards" do
 
     visit '/'
     login(user2)
+    binding.pry
     visit '/invite?=' + token.secret_key.to_s
-    save_and_open_page
+    
     expect(page).to have_content user.card.email
   end
 

@@ -6,3 +6,29 @@
         <li><%= @card.position %></li>
       </ul>
     </div>
+
+
+    <% if current_user %>
+      <button> ADD ME </button>
+
+      <script>
+
+      $("button").on("click", function() {
+        $.post("/connections", {user: <%=current_user.id %>, card: <%= @card.id%>})
+         .done(function(response){
+          if (response.success === true){
+            //do something with response.id
+          } else {
+            //do something with response.message
+          }
+         })
+         .error(function(response){
+           console.log("AJAX FAILED!");
+         });
+      });
+      </script>
+    <% else %>
+     <%= render 'form' %>
+    <% end %>
+
+ 
