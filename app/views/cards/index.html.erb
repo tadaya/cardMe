@@ -34,30 +34,9 @@ See your connections:
 
 
 See your groups:
-<ul>
-<% @groups.each do |group| %>
-  <li class="<%= group.group_name.gsub(" ","_")%>"><%= group.group_name %></li>
-<% end %>
+<ul class="groups">
+
 <ul>
 
-
-<script>
-var allGroups;
-function addGroups() {
-  $('form').on("submit", function(e){
-    e.preventDefault();
-    input = $('input#group_group_name')
-    $.ajax({
-      url: '/users/' + <%= @user.id %> + '/groups',
-      type: 'POST',
-      data: {group_name: input.val()}
-    });
-    input.val("")
-  showGroups()
-  });
-}
-
-  
-</ul>
 
 <%= javascript_include_tag "cards", "data-turbolinks-track" => true %>
