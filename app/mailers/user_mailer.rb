@@ -5,6 +5,7 @@ class UserMailer < ActionMailer::Base
     @token = token
     @user = user
     @email = email_input
+
     # @url = user_card_path(@user)
     # attachments.inline['profile.jpg'] = File.read(@user.profile_pic)
     # attachments.inline['background.jpg'] = File.read(@user.background_image_file_name)

@@ -7,10 +7,12 @@ class User < ActiveRecord::Base
   validates :email, presence: true
   has_secure_password
 
+
   def send_text(user, phone, token)
     @token = token
     @user = user
     @phone = phone
+
     @twilio_client = Twilio::REST::Client.new ENV["TWIL_SID"], ENV["TWIL_AUTH"]
     @twilio_client.account.sms.messages.create(
       :from => "+17472013048",
