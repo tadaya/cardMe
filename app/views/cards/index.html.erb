@@ -1,10 +1,15 @@
 
+
 Submit Group Name:
-<%= form_for [@user, @group] do |f| %>
-  <%= f.label :group_name %>
-  <%= f.text_field :group_name %>
-  <%= f.submit "Submit" %>
-<% end %>
+
+<div id="group_form">
+  <%= form_for [@user, @group] do |f| %>
+    <%= f.label :group_name %>
+    <%= f.text_field :group_name %>
+    <%= f.submit "Submit" %>
+  <% end %>
+</div>
+
 
 
 See your connections:
@@ -25,11 +30,6 @@ See your connections:
 <% end %>
 </ul>
 
-<ul class="groups">
- <!-- @groups.each do |group| 
-  <li><group.group_name </li>
- end --> 
-</ul>
 
 
 
@@ -56,31 +56,8 @@ function addGroups() {
   showGroups()
   });
 }
+
   
+</ul>
 
-function showGroups() {
-  $.getJSON("/users/" + <%= @user.id %> + "/groups", function(response) {
-    allGroups = response;
-    $("ul.groups").empty();
-    for(i = 0; i < allGroups.length; i++) {
-      ($("<li>" + allGroups[i].group_name + "</li>").append("<span>" + ' X ' + "</span>")).appendTo("ul.groups")
-    }
-  })
-}
-
-function deleteGroup() {
-  $("span").on("click", function(){
-    $.ajax({
-      url: '/users/' + <%= @user.id %> + '/groups/' + <%= @group.id %>,
-      type: "DELETE"
-    })
-    showGroups();
-  })
-}
-
-
-showGroups();
-addGroups();
-deleteGroup()
-  
-</script>
+<%= javascript_include_tag "cards", "data-turbolinks-track" => true %>
