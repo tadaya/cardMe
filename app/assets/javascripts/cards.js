@@ -6,7 +6,7 @@ function addGroups() {
     $.ajax({
       url: '/users/' + localStorage["user_id"] + '/groups',
       // localStorage["user_id"] is a key for a special localstorage hash
-      // that can be found in application.html.erb
+      // that can be found in application.html.erb DmitryJ
       type: 'POST',
       data: {group_name: input.val()}
     });
