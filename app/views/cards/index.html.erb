@@ -40,17 +40,26 @@ function addGroups() {
 function showGroups() {
   $.getJSON("/users/" + <%= @user.id %> + "/groups", function(response) {
     allGroups = response;
-    console.log(response)
     $("ul.groups").empty();
     for(i = 0; i < allGroups.length; i++) {
-      var liGroup = $("<li>");
-      liGroup.text(allGroups[i].group_name);
-      $("ul.groups").append(liGroup)
+      ($("<li>" + allGroups[i].group_name + "</li>").append("<span>" + ' X ' + "</span>")).appendTo("ul.groups")
     }
   })
 }
+
+function deleteGroup() {
+  $("span").on("click", function(){
+    $.ajax({
+      url: '/users/' + <%= @user.id %> + '/groups/' + <%= @group.id %>,
+      type: "DELETE"
+    })
+    showGroups();
+  })
+}
+
+
 showGroups();
 addGroups();
-
+deleteGroup()
   
 </script>
