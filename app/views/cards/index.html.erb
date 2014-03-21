@@ -13,14 +13,16 @@
 <% end %>
 
 
-<ul>
-<% @groups.each do |group| %>
-  <li><%= group.group_name %></li>
-<% end %>
-<ul>
+<ul class="groups">
+ <!-- @groups.each do |group| 
+  <li><group.group_name </li>
+ end --> 
+</ul>
 
 
 <script>
+var allGroups;
+function addGroups() {
   $('form').on("submit", function(e){
     e.preventDefault();
     input = $('input#group_group_name')
@@ -29,5 +31,35 @@
       type: 'POST',
       data: {group_name: input.val()}
     });
+    input.val("")
+  showGroups()
   });
+}
+  
+
+function showGroups() {
+  $.getJSON("/users/" + <%= @user.id %> + "/groups", function(response) {
+    allGroups = response;
+    $("ul.groups").empty();
+    for(i = 0; i < allGroups.length; i++) {
+      ($("<li>" + allGroups[i].group_name + "</li>").append("<span>" + ' X ' + "</span>")).appendTo("ul.groups")
+    }
+  })
+}
+
+function deleteGroup() {
+  $("span").on("click", function(){
+    $.ajax({
+      url: '/users/' + <%= @user.id %> + '/groups/' + <%= @group.id %>,
+      type: "DELETE"
+    })
+    showGroups();
+  })
+}
+
+
+showGroups();
+addGroups();
+deleteGroup()
+  
 </script>

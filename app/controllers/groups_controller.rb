@@ -11,4 +11,10 @@ class GroupsController < ApplicationController
     @group = Group.create(user: current_user, group_name: params[:group_name])
     render json: @group
   end
+
+  def destroy
+    @user = current_user
+    @group = @user.groups.find(params[:id])
+    @group.destroy
+  end
 end
