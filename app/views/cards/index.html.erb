@@ -42,19 +42,26 @@ function showGroups() {
     allGroups = response;
     $("ul.groups").empty();
     for(i = 0; i < allGroups.length; i++) {
-      ($("<li>" + allGroups[i].group_name + "</li>").append("<span>" + ' X ' + "</span>")).appendTo("ul.groups")
+      ($("<li>" + allGroups[i].group_name + "</li>").append("<span id="+ allGroups[i].id + ">" + ' X ' + "</span>")).appendTo("ul.groups");
+
     }
   })
 }
 
 function deleteGroup() {
-  $("span").on("click", function(){
-    $.ajax({
-      url: '/users/' + <%= @user.id %> + '/groups/' + <%= @group.id %>,
-      type: "DELETE"
-    })
+  var allSpans = $("span");
+  for(i = 0; i < allSpans.length; i++){
+    $(allSpans[i]).on("hover", function(){
+      debugger
+      console.log("hello")
+    // $.ajax({
+    //   url: '/users/' + <%= @user.id %> + '/groups/' + allGroups[0].id,
+    //   type: "DELETE"
+    // })
     showGroups();
   })
+  }
+  
 }
 
 
