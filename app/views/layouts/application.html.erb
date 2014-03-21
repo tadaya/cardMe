@@ -9,7 +9,6 @@
   
   <% unless @user.nil? %>
     <script>localStorage["user_id"] = <%= @user.id %></script>
-    <!-- localStorage hash is a storage for manipulation with variables from different languages and stuff like that. DmitryJ.-->
   <% end %>
 </head>
 <body>

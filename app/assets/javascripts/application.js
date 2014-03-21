@@ -13,5 +13,4 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
-//= require_tree ./sitewide // PLEASE PUT ALL JS FILES THAT SUPPOSED TO
-// RUN ALL OVER THE WEB SITE IN sitewide DIRECTORY, THE REST CAN BE PLACED SEPARATELY
+//= require_tree ./sitewide 
