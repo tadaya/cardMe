@@ -19,6 +19,13 @@
 <% end %>
 <ul>
 
+<div class ="news-stories">
+  <% @nytarticles.each do |article| %>
+    <%= article["Title"] %>
+    <%= article["Url"] %>
+  <% end %>
+</div>
+
 
 <script>
   $('form').on("submit", function(e){
