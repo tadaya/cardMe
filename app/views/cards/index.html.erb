@@ -11,27 +11,6 @@ Submit Group Name:
 </div>
 
 
-
-See your connections:
-<ul class="connection_card">
-<% @connections.each do |connection| %>
-
-<% card = Card.find(connection.card_id) %>
-  <li class="<%=card.card_name.gsub(" ", "_")%>"><%= card.card_name %><button id="<%= connection.id%>">+</button>
-    <% for group in @groups %>
-    <div id="add-to-groups">
-      <%= check_box_tag "#{group.group_name}", id="#{group.group_name}" %>
-      <%= group.group_name %>
-    </div>
-    <% end %>
-    <%= submit_tag "Add" %>
-  </li>
-
-<% end %>
-
-
-
-
 See your groups:
 <ul class="groups">
 
