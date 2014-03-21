@@ -1,6 +1,7 @@
 <div class="welcomepage">
   <p>Hello, <%= @user.first_name %>!<p>
 
+
 <%= form_tag("/users/#{@user.id}/sms") do %>
   <%= text_field_tag 'phone' %>
   <%= label_tag("Select Card") %>
