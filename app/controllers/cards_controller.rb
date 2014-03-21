@@ -13,7 +13,6 @@ class CardsController < ApplicationController
   end
 
   def show
-    binding.pry
     @cards = @user.cards.all
   end
 

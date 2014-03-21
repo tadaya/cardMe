@@ -20,7 +20,10 @@ class UsersController < ApplicationController
   def send_sms
     @phone = params[:phone]
     @card = Card.find_by(card_name: params[:my_cards])
-    if @user.send_text(@user, @phone, @card)
+    @token = Token.new(card: @card)
+    @token.generateKey
+    @token.save
+    if @user.send_text(@user, @phone, @token)
       flash[:text_notice] = 'Text Sent!'
     else
       flash[:text_notice] = 'Problems sending text - please double check the phone number'
