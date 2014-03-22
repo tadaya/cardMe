@@ -9,21 +9,21 @@ class UsersController < ApplicationController
     @token.generateKey
     @token.save
 
-    # user1 card1 -> user2
-    # check in connections that ! user2 card1
+    # # user1 card1 -> user2
+    # # check in connections that ! user2 card1
 
-    reciever = User.find_by(email: @email)
-    reciever_connections = reciever.connections.map(&:user_id)
+    # reciever = User.find_by(email: @email)
+    # reciever_connections = reciever.connections.map(&:user_id)
 
-    if(reciever_connections.include?(@card.id)) 
-      flash[:notice] = "Already connected! Visit your Rolodex!"
-    else 
+    # if(reciever_connections.include?(@card.id)) 
+    #   flash[:notice] = "Already connected! Visit your Rolodex!"
+    # else 
       if UserMailer.send_card(@user, @token, @email).deliver
         flash[:notice] = 'Card Sent!'
       else
         flash[:notice] = "Problems sending mail - please double check the address"
       end
-    end
+    # end
 
       redirect_to user_path
   end
@@ -35,18 +35,18 @@ class UsersController < ApplicationController
     @token.generateKey
     @token.save
 
-    reciever = @user.cards.find_by(phone_number: @phone)
-    reciever_connections = reciever.connections.map(&:user_id)
+    # reciever = @user.cards.find_by(phone_number: @phone)
+    # reciever_connections = reciever.connections.map(&:user_id)
 
-    if(reciever_connections.include?(@card.id)) 
-      flash[:notice] = "Already connected! Visit your Rolodex!"
-    else 
+    # if(reciever_connections.include?(@card.id)) 
+    #   flash[:notice] = "Already connected! Visit your Rolodex!"
+    # else 
       if @user.send_text(@user, @phone, @token)
         flash[:text_notice] = 'Text Sent!'
       else
         flash[:text_notice] = 'Problems sending text - please double check the phone number'
       end
-    end
+    # end
 
     redirect_to user_path
   end
