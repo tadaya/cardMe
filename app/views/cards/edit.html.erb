@@ -1,1 +1,28 @@
 <%= render 'form' %>
+<div class="card">
+    <ul class="personal_info_list">
+    </ul>
+
+  <div class="card_profile_pic">
+  </div>
+</div>
+<div class="card_design_menu">
+  <h3>Card Design Menu</h3>
+  <ul>
+    
+  </ul>
+</div>
+
+<script>
+var cardAttr;
+function listDetails() {
+    $("#card_email").keypress(function(){
+      $("<li>").appendTo(".personal_info_list")
+      $(".personal_info_list li").innerText = this.value
+    // $(".personal_info_list li").append($("#card_email").val())
+    })
+}
+  
+  
+listDetails()
+</script>

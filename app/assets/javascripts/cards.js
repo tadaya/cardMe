@@ -20,7 +20,7 @@ function showGroups() {
   $.getJSON("/users/" + localStorage["user_id"] + "/groups", function(response) {
     allGroups = response;
     $("ul.groups").empty();
-    for(i = 0; i < allGroups.length; i++) {
+    for(var i = 0; i < allGroups.length; i++) {
       ($("<li>" + allGroups[i].group_name + "</li>").append("<span id="+ allGroups[i].id + ">" + ' X ' + "</span>")).appendTo("ul.groups");
     }// for loop ends
     $("span").on("click", function(e){

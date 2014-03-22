@@ -8,16 +8,18 @@ class CardsController < ApplicationController
     @groups = current_user.groups
     @connections = @user.connections
 
-  #   @nytarticles = news_stories(@card.organization)
+#   @nytarticles = news_stories(@card.organization)
     @cards = @user.cards.all
 
   end
 
   def edit
+    
   end
 
   def show
     @cards = @user.cards.all
+    render json: @card
   end
 
   def update
@@ -60,7 +62,7 @@ class CardsController < ApplicationController
 private
 
   def load_user
-    return @user = User.find(params[:user_id])
+    return @user = current_user
   end 
 
   def load_card
