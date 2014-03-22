@@ -24,7 +24,7 @@ function getConnections(){
       for(var i = 0; i < allConnections.length; i++){
         if(allConnections[i].user_id == localStorage["user_id"]) {
           $.getJSON("/cards/" + allConnections[i].card_id, function(cardFound) {
-            var connect = $("<div class='card' id=" + cardFound.id + "></div>");
+            var connect = $("<option value=" + cardFound.id + "> <div class='card' id=" + cardFound.id + "></div></option>");
             $("ul.connection-cards").append(connect);
             $("<li>" + cardFound.email + "</li>").appendTo(connect);
             $("<li>" + cardFound.phone_number + "</li>").appendTo(connect);
