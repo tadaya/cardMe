@@ -45,6 +45,7 @@
 #   password_confirmation: "1234"
 #   )
 
+
 # Card.create(card_name: "freelance",
 
 #     organization: "business1",
@@ -93,8 +94,6 @@
 # Connection.create(user_id: 2, card_id: 27)
 # Connection.create(user_id: 3, card_id: 26)
 # Connection.create(user_id: 2, card_id: 25)
-
-
 
 
 

@@ -31,7 +31,7 @@ function getConnections(){
             $("<li>" + cardFound.organization + "</li>").appendTo(connect);
             $("<li>" + cardFound.position + "</li>").appendTo(connect);
             $("<button id='add-group'> + </button>").appendTo(connect);
-            $("#add-group").on("click", addCardToGroup());
+            $("#add-group").on("click", addCardToGroup);
           });
         }
       }
@@ -39,16 +39,15 @@ function getConnections(){
 }
 
 function addCardToGroup(){
-  var groups = $("<div class='groups'>");
+  console.log("CLICKED!");
+  var groups = $("body");
   $("<ul class='groups_popup'>").appendTo(groups);
-  $.getJSON("/users/" + localStorage["user_id"] + "groups"), function(response){
+  $.getJSON("/users/" + localStorage["user_id"] + "/groups", function(response){
     allGroups = response;
-    $("ul.groups_popup").empty();
     for(var i = 0; i < allGroups.length; i++) {
-      $("<li>" + allGroups[i].group_name + "</li>").appendTo("ul.groups_popup");
+      $("<li>" + allGroups[i].group_name + "</li>").appendTo("ul.groups_popup").append($("<input type='checkbox'>"));
     }
-  }
-
+  });
 }
 
 

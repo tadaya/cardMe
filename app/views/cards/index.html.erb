@@ -13,14 +13,27 @@
   <% end %>
 </div>
 
+
+See All Your Connections
 <ul class="connection-cards">
-  See All Your Connections
+  <div class="groups">
+    <div>
 </ul>
 
 
-<ul class="groups">
+<div class ="news-stories">
+  <h1>News Stories</h1>
+  <% @nytarticles.take(4).each do |article| %>
+    <li><a href= "<%= article["Url"] %>"><%= article["Title"] %></a></li>
+  <% end %>
+</div> 
+
+
 See your groups:
-<ul>
+<ul class="groups">
+
+
+
 
 <%= javascript_include_tag "cards", "data-turbolinks-track" => true %>
 
