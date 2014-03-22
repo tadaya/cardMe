@@ -12,28 +12,24 @@
     console.log("^^in script")
     $.post('/session', {email: $("input[name='email']").val(), password: $("input[name='password']").val() }).done(function(response){
           if (response.success === true){
-           
             var addButton =  function(){
-                console.log(this);
-                 console.log("^^add Button");
-                $("<button class ='addbutton'> ADD CARD </button>").appendTo("body");
-                $("form").remove();
-                $(".addbutton").on("click", function() {
-                  $.post("/connections", {user: response.id, card: <%= @card.id%>}).done(function(response_connection){
-                    console.log(this);
-                     console.log("^^post connection");
-                    if (response_connection.success ==true ){
-                      window.location = 'http://localhost:3000/users/' +response_connection.id + '/cards';
-                    }
-                  })
-                });
-              };
-
+              console.log(this);
+              console.log("^^add Button");
+              $("<button class ='addbutton'> ADD CARD </button>").appendTo("body");
+              $("form").remove();
+              $(".addbutton").on("click", function() {
+                $.post("/connections", {user: response.id, card: <%= @card.id%>}).done(function(response_connection){
+                  console.log(this);
+                   console.log("^^post connection");
+                  if (response_connection.success ==true ){
+                    window.location = 'http://localhost:3000/users/' +response_connection.id + '/cards';
+                  }
+                })
+              });
+            };
             addButton();
-
-
-
           } else {
+    
            
           }
          })
@@ -41,11 +37,5 @@
            console.log("AJAX FAILED!");
          });
   })
-
-
-  var addButton = function() {
-
-  };
   
-
 </script>
