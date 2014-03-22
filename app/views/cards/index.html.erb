@@ -1,5 +1,4 @@
 
-
 Submit Group Name:
 
 <div id="group_form">
@@ -10,9 +9,12 @@ Submit Group Name:
   <% end %>
 </div>
 
-See your connections:
-<ul class="connection_card">
-<% @connections.each do |connection| %>
+See All Your Connections
+<ul class="connection-cards">
+  <div class="groups">
+    <div>
+</ul>
+
 
 <% card = Card.find(connection.card_id) %>
   <li class="<%=card.card_name.gsub(" ", "_")%>"><%= card.card_name %><button id="<%= connection.id%>">+</button>
@@ -77,3 +79,4 @@ See your groups:
 <ul>
 
 <%= javascript_include_tag "cards", "data-turbolinks-track" => true %>
+

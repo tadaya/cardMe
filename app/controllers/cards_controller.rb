@@ -1,5 +1,5 @@
 class CardsController < ApplicationController
-  before_action(:load_user, {only: [:create, :new, :edit, :update, :user, :show] })
+  before_action(:load_user, {only: [:create, :new, :edit, :update, :user] })
   before_action(:load_card, {only: [:edit, :update, :destroy, :show] })
   
   def index
@@ -7,9 +7,9 @@ class CardsController < ApplicationController
     @user = current_user
     @groups = current_user.groups
     @connections = @user.connections
-
   #   @nytarticles = news_stories(@card.organization)
     @cards = @user.cards.all
+    @all_cards = Card.all
 
   end
 
@@ -17,7 +17,7 @@ class CardsController < ApplicationController
   end
 
   def show
-    @cards = @user.cards.all
+    render json: @card
   end
 
   def update
