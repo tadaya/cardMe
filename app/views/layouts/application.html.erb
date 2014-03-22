@@ -8,7 +8,9 @@
   <%= csrf_meta_tags %>
   
   <% unless @user.nil? %>
-    <script>localStorage["user_id"] = <%= @user.id %></script>
+    <script>
+    localStorage["user_id"] = <%= @user.id %>
+    </script>
   <% end %>
 </head>
 <body>
@@ -19,7 +21,7 @@
     <li><%= link_to("Log In", "/" ) if session[:user_id].nil? %></li>
     <li><%= link_to "Profile", user_path(session[:user_id]) unless session[:user_id].nil?%></li>
     <li>
-     <%= link_to("Log Out, #{current_user.first_name}", "/logout", method: "delete") unless session[:user_id].nil? %>
+     <%= link_to("Log Out", "/logout", method: "delete") unless session[:user_id].nil? %>
    </li>
   </ul>
 </header>
