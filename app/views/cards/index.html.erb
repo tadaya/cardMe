@@ -1,21 +1,27 @@
 
-Submit Group Name:
+<body class="dashboard-body">
 
-<div id="group_form">
+
+<div id='groupmenu'>
+
+
+<div id="group-form">
   <%= form_for [@user, @group] do |f| %>
     <%= f.label :group_name %>
     <%= f.text_field :group_name %>
     <%= f.submit "Submit" %>
   <% end %>
 </div>
-See All Your Connections
+
 <ul class="connection-cards">
+  See All Your Connections
 </ul>
 
-See your groups:
-<ul class="groups">
 
+<ul class="groups">
+See your groups:
 <ul>
 
 <%= javascript_include_tag "cards", "data-turbolinks-track" => true %>
 
+</body>

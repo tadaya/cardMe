@@ -9,17 +9,19 @@ body{
   list-style-type: none;
 }
 
-header{
+/*header{
   height: 70px;
   width: 100%;
   position: absolute;
   top: 0;
   background-color: #BE1E2D;
 }
-
+*/
 header li{
   display: inline-block;
+  margin: 10px;
 }
+
 
 .nav li a{
   text-decoration: none;
@@ -28,6 +30,7 @@ header li{
   top: 30px;
   right: 40px;
   font-size: 1.5em;
+  display: inline-block;
 
 }
 
