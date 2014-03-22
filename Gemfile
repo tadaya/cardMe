@@ -40,6 +40,8 @@ gem 'aws-sdk'
 
 # gem 'rmagick'
 
+gem 'httparty'
+
 gem "letter_opener", group: [:development, :test]
 
 # Use ActiveModel has_secure_password
