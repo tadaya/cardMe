@@ -36,6 +36,10 @@ gem "paperclip", "~> 4.1"
 
 gem 'twilio-ruby'
 
+gem 'aws-sdk'
+
+gem 'rmagick'
+
 gem "letter_opener", group: [:development, :test]
 
 # Use ActiveModel has_secure_password
@@ -55,7 +59,8 @@ group :development, :test do
   gem 'pry-rails'
 
   # unit testing frameworks
-  gem 'rspec-rails'
+
+  gem 'rspec-rails', '~> 3.0.0.beta2' # PJ: KEEP IT LIKE THIS!
   gem 'jasmine'
 
   # acceptance testing

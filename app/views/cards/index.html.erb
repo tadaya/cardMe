@@ -1,40 +1,19 @@
 
 
-<%= form_for [@user, @group] do |f| %>
-  <%= f.label :group_name %>
-  <%= f.text_field :group_name %>
-  <%= f.submit "Submit" %>
-<% end %>
+Submit Group Name:
 
-
-
-<% @connections.each do |connection| %>
-  <%= connection.card.user.first_name %>
-<% end %>
-
-
-<ul>
-<% @groups.each do |group| %>
-  <li><%= group.group_name %></li>
-<% end %>
-<ul>
-
-<div class ="news-stories">
-  <% @nytarticles.each do |article| %>
-    <%= article["Title"] %>
-    <%= article["Url"] %>
+<div id="group_form">
+  <%= form_for [@user, @group] do |f| %>
+    <%= f.label :group_name %>
+    <%= f.text_field :group_name %>
+    <%= f.submit "Submit" %>
   <% end %>
 </div>
 
 
-<script>
-  $('form').on("submit", function(e){
-    e.preventDefault();
-    input = $('input#group_group_name')
-    $.ajax({
-      url: '/users/' + <%= @user.id %> + '/groups',
-      type: 'POST',
-      data: {group_name: input.val()}
-    });
-  });
-</script>
+See your groups:
+<ul class="groups">
+
+<ul>
+
+<%= javascript_include_tag "cards", "data-turbolinks-track" => true %>

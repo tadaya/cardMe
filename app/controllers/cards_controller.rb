@@ -1,13 +1,16 @@
 class CardsController < ApplicationController
   before_action(:load_user, {only: [:create, :new, :edit, :update, :user, :show] })
-  before_action(:load_card, {only: [:index, :edit, :update, :destroy, :show] })
+  before_action(:load_card, {only: [:edit, :update, :destroy, :show] })
   
   def index
     @group = Group.new
     @user = current_user
     @groups = current_user.groups
     @connections = @user.connections
+
   #   @nytarticles = news_stories(@card.organization)
+    @cards = @user.cards.all
+
   end
 
   def edit
@@ -38,7 +41,7 @@ class CardsController < ApplicationController
   end
 
   def card_params
-    params.require(:card).permit(:email, :card_name, :position, :organization, :phone_number, :user_id)
+    params.require(:card).permit(:email, :card_name, :position, :organization, :phone_number, :user_id, :background_image, :ogranization_logo, :profile_picture)
   end
 
   # def news_stories(organization)
@@ -46,6 +49,13 @@ class CardsController < ApplicationController
   #   @articles = allarticles["response"]["docs"].map { |article| {"Title" => "#{article["snippet"]}", "Url" => "#{article["web_url"]}" }}
   # end
 
+
+# <div class ="news-stories">
+#   <% @nytarticles.each do |article| %>
+#     <%= article["Title"] %>
+#     <%= article["Url"] %>
+#   <% end %>
+# </div> 
 
 private
 

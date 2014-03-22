@@ -14,7 +14,7 @@ describe "user can group cards" do
     click_button "Submit"
 
     expect(page).to have_content(user2.first_name)
-
+    
     
   end
 
