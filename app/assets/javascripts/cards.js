@@ -13,7 +13,6 @@ function addGroups() {
     });
     input.val("");
   showGroups();
-  listCards();
   });
 }
 
@@ -24,31 +23,59 @@ function getConnections(){
       for(var i = 0; i < allConnections.length; i++){
         if(allConnections[i].user_id == localStorage["user_id"]) {
           $.getJSON("/cards/" + allConnections[i].card_id, function(cardFound) {
-            var connect = $("<div class='card' id=" + cardFound.id + "></div>");
-            $("ul.connection-cards").append(connect);
-            $("<li>" + cardFound.email + "</li>").appendTo(connect);
-            $("<li>" + cardFound.phone_number + "</li>").appendTo(connect);
-            $("<li>" + cardFound.organization + "</li>").appendTo(connect);
-            $("<li>" + cardFound.position + "</li>").appendTo(connect);
-            $("<button id='add-group'> + </button>").appendTo(connect);
-            $("#add-group").on("click", addCardToGroup);
+            var cards = $("<div class='card' id='" + cardFound.id + "' data-connection='" + allConnections[i].id + "'>");
+            $(cards).appendTo("ul.connection-cards");
+            $("<li>" + cardFound.email + "</li>").appendTo(cards);
+            $("<li>" + cardFound.phone_number + "</li>").appendTo(cards);
+            $("<li>" + cardFound.organization + "</li>").appendTo(cards);
+            $("<li>" + cardFound.position + "</li>").appendTo(cards);
+            $("<button> + </button>").appendTo(cards).on("click", addCardToGroup);
           });
         }
       }
   });
 }
 
+
+
 function addCardToGroup(){
-  console.log("CLICKED!");
-  var groups = $("body");
-  $("<ul class='groups_popup'>").appendTo(groups);
+  $('#add-group').remove();
+  $("<ul class='groups_popup'>").appendTo($(this).parent());
   $.getJSON("/users/" + localStorage["user_id"] + "/groups", function(response){
-    allGroups = response;
+  allGroups = response;
+
     for(var i = 0; i < allGroups.length; i++) {
-      $("<li>" + allGroups[i].group_name + "</li>").appendTo("ul.groups_popup").append($("<input type='checkbox'>"));
+      var connection_id = $(this).parent().parent().parent().parent().attr("data-connection");
+      checkbox = $("<input type='checkbox'>");
+      $("<li id=" + allGroups[i].id + ">" + allGroups[i].group_name + "</li>").appendTo("ul.groups_popup").append(checkbox);
+      checkbox.on("change", selectGroup);
+      //card_id
     }
+
+    $("<button>Add To Groups</button>").appendTo("ul.groups_popup").on("click", getConnections);
+
   });
 }
+
+function selectGroup() {
+  var group_id = $(this).parent().attr('id');
+  var connection_id = $(this).parent().parent().parent().attr("data-connection");
+
+  if(this.checked == true){
+    $.ajax({
+      url: "/groupsconnections",
+      data: {connection: connection_id, group: group_id},
+      type: "POST"
+    });
+  } else {
+    $.ajax({
+      url: "/groupsconnections",
+      data: {connection: connection_id, group: group_id},
+      type: "DELETE"
+    });
+  }
+}
+
 
 
 function showGroups() {

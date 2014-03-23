@@ -1,4 +1,3 @@
-
 Submit Group Name:
 
 <div id="group_form">
@@ -23,26 +22,15 @@ See All Your Connections
 $(".connection-cards").on("click","div", function(){
   $(".showcard div").remove();
   $(this).clone().appendTo(".showcard");
-
-});
-  // $(this).detach(".showcard").appendTo(".connection-cards");
-
-  // });
+  });
 </script>
 
-
-<div class ="news-stories">
-  <h1>News Stories</h1>
-  <% @nytarticles.take(4).each do |article| %>
-    <li><a href= "<%= article["Url"] %>"><%= article["Title"] %></a></li>
-  <% end %>
-</div> 
 
 
 See your groups:
 <ul class="groups">
 
-<ul>
+</ul>
 
 <%= javascript_include_tag "cards", "data-turbolinks-track" => true %>
 

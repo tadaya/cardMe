@@ -12,15 +12,20 @@ class CardsController < ApplicationController
     @connection = @connections.find_by(card_id: 3)
     @connection_card = Card.find(@connection.card_id)
     @nytarticles = news_stories(@connection_card.organization)
-
   end
 
   def edit
   end
 
   def show
+    # call new function
     render json: @card
   end
+
+  # def card_news
+  #   @card = Card.find_by()
+  #   render json: @card
+  # end
 
   def update
     @card.update(card_params)

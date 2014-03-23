@@ -19,4 +19,6 @@ Cardme::Application.routes.draw do
   get "/login", to: "session#new"
   post "/session", to: "session#create"
   delete "/logout", to: "session#destroy"
+
+  get "/card_news/:id", to: "cards#card_news"
 end
