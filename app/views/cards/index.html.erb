@@ -1,3 +1,4 @@
+<div class = "roladex">
 Submit Group Name:
 
 <div id="group_form">
@@ -21,13 +22,13 @@ See All Your Connections
 <div class="showcard">
 </div>
 
-<script>
+  <script>
 
-$(".connection-cards").on("click","div", function(){
-  $(".showcard div").remove();
-  $(this).clone().appendTo(".showcard");
-  });
-</script>
+// $(".connection-cards").on("click","div", function(){
+//   $(".showcard div").remove();
+//   $(this).clone().appendTo(".showcard");
+//   });
+// </script>
 
 
 
@@ -38,4 +39,5 @@ See your groups:
 </ul>
 
 <%= javascript_include_tag "cards", "data-turbolinks-track" => true %>
+</div>
 
