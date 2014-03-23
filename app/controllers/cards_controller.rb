@@ -9,6 +9,7 @@ class CardsController < ApplicationController
     @connections = @user.connections
     @cards = @user.cards.all
     @all_cards = Card.all
+
     #@connection = @connections.find_by(card_id: 3)
     #@connection_card = Card.find(@connection.card_id)
     #@nytarticles = news_stories(@connection_card.organization)
@@ -22,10 +23,21 @@ class CardsController < ApplicationController
 #   <% end %>
 # </div> 
 
-
+    # @connection = @connections.find_by(card_id: 3)
+    # @connection_card = Card.find(@connection.card_id)
+    # @nytarticles = news_stories(@connection_card.organization)
   end
 
+  
+# <div class ="news-stories">
+#   <h1>News Stories</h1>
+#   <% @nytarticles.take(4).each do |article| %>
+#     <li><a href= "<%= article["Url"] %>"><%= article["Title"] %></a></li>
+#   <% end %>
+# </div> 
+
   def edit
+    
   end
 
   def show
@@ -65,7 +77,7 @@ class CardsController < ApplicationController
 private
 
   def load_user
-    return @user = User.find(params[:user_id])
+    return @user = current_user
   end 
 
   def load_card
