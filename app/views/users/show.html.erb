@@ -1,35 +1,42 @@
 <div class="welcomepage">
   <p>Hello, <%= @user.first_name %>!<p>
 
+<div class ="sendform">
+  <div class= "text">
+    <%= form_tag("/users/#{@user.id}/sms") do %>
+      Phone Number: <%= text_field_tag 'phone' %>
+      <div class = "text">
+      <%= label_tag("Select Card") %>
+      <%= select_tag(:my_cards, options_for_select(@my_card)) %>
+      <%= submit_tag "Text Card", class: 'button' %>
+      </div>
+    <% end %>
+  </text>
 
-<%= form_tag("/users/#{@user.id}/sms") do %>
-  <%= text_field_tag 'phone' %>
-  <div class = "text">
-  <%= label_tag("Select Card") %>
-  <%= select_tag(:my_cards, options_for_select(@my_card)) %>
-  <%= submit_tag "Text Card" %>
-  </div>
-<% end %>
-
-<%= form_tag(user_path(@user)) do %>
-  <%= email_field_tag 'email' %>
   <div class = "email">
-  <%= label_tag("Select Card") %>
-  <%= select_tag(:my_cards, options_for_select(@my_card)) %>
-  <%= submit_tag "Email Card" %>
+    <%= form_tag(user_path(@user)) do %>
+      Email: <%= email_field_tag 'email' %>
+      <div class = "email">
+      <%= label_tag("Select Card") %>
+      <%= select_tag(:my_cards, options_for_select(@my_card)) %>
+      <%= submit_tag "Email Card", class: 'button' %>
+      </div>
+    <% end %>
   </div>
-<% end %>
-<div class="flash-message">
-<%= raw("<p><strong class='success'>#{flash[:notice]}</strong></p>") unless flash[:notice].nil? %>
-</div>
-<div class="flash-message">
-<%= raw("<p><strong class='success'>#{flash[:text_notice]}</strong></p>") unless flash[:text_notice].nil? %>
+
+  <div class="flash-message">
+  <%= raw("<p><strong class='success'>#{flash[:notice]}</strong></p>") unless flash[:notice].nil? %>
+  </div>
+  <div class="flash-message">
+  <%= raw("<p><strong class='success'>#{flash[:text_notice]}</strong></p>") unless flash[:text_notice].nil? %>
+  </div>
 </div>
 
 <%= link_to "Rolodex", user_cards_path(@user) %>
 <%= link_to "Edit Profile", edit_user_path(@user) %>
 
-
+<h2> MY CARDS </h2>
+<hr>
 <% if @cards.empty? %>
 <%= link_to("Create a new card", new_user_card_path(@user)) %>
 <% else %>

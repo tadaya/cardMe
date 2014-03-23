@@ -41,8 +41,14 @@ class CardsController < ApplicationController
   end
 
   def show
+    # call new function
     render json: @card
   end
+
+  # def card_news
+  #   @card = Card.find_by()
+  #   render json: @card
+  # end
 
   def update
     @card.update(card_params)
@@ -68,10 +74,10 @@ class CardsController < ApplicationController
     params.require(:card).permit(:email, :card_name, :position, :organization, :phone_number, :user_id, :background_image, :ogranization_logo, :profile_picture)
   end
 
-  def news_stories(organization)
-    allarticles = HTTParty.get("http://api.nytimes.com/svc/search/v2/articlesearch.json?fq=#{organization}&api-key=#{NYTIMES_CLIENT_ID}&begin_date=20130101")
-    articles = allarticles["response"]["docs"].map { |article| {"Title" => "#{article["snippet"]}", "Url" => "#{article["web_url"]}" }}
-  end
+  # def news_stories(organization)
+  #   allarticles = HTTParty.get("http://api.nytimes.com/svc/search/v2/articlesearch.json?#{organization}&api-key=#{NYTIMES_CLIENT_ID}&begin_date=20130101")
+  #   articles = allarticles["response"]["docs"].map { |article| {"Title" => "#{article["snippet"]}", "Url" => "#{article["web_url"]}" }}
+  # end
 
 
 private

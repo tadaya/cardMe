@@ -37,7 +37,6 @@ function getConnections(){
 }
 
 
-
 function addCardToGroup(){
   $('#add-group').remove();
   $("<ul class='groups_popup'>").appendTo($(this).parent());
