@@ -24,7 +24,7 @@ function getConnections(){
       for(var i = 0; i < allConnections.length; i++){
         if(allConnections[i].user_id == localStorage["user_id"]) {
           $.getJSON("/cards/" + allConnections[i].card_id, function(cardFound) {
-            var connect = $("<span><div class='card' id=" + cardFound.id + "></div></span>");
+            var connect = $("<div class='card' id=" + cardFound.id + "></div>");
             $("ul.connection-cards").append(connect);
             $("<li>" + cardFound.email + "</li>").appendTo(connect);
             $("<li>" + cardFound.phone_number + "</li>").appendTo(connect);
@@ -56,7 +56,7 @@ function showGroups() {
     allGroups = response;
     $("ul.groups").empty();
     for(var i = 0; i < allGroups.length; i++) {
-      ($("<li class="has-sub">" + allGroups[i].group_name + "</li>").append("<span id="+ allGroups[i].id + ">" + ' X ' + "</span>")).appendTo("ul.groups");
+      ($("<li class='has-sub'>" + allGroups[i].group_name + "</li>").append("<span id="+ allGroups[i].id + ">" + ' X ' + "</span>")).appendTo("ul.groups");
     }// for loop ends
     $("span").on("click", function(e){
       var groupId = e.target.id;
@@ -75,3 +75,22 @@ function showGroups() {
 getConnections();
 showGroups();
 addGroups();
+
+$('#groupmenu > ul > li > a').click(function() {
+  $('#groupmenu li').removeClass('active');
+  $(this).closest('li').addClass('active'); 
+  var checkElement = $(this).next();
+  if((checkElement.is('ul')) && (checkElement.is(':visible'))) {
+    $(this).closest('li').removeClass('active');
+    checkElement.slideUp('normal');
+  }
+  if((checkElement.is('ul')) && (!checkElement.is(':visible'))) {
+    $('#groupmenu ul ul:visible').slideUp('normal');
+    checkElement.slideDown('normal');
+  }
+  if($(this).closest('li').find('ul').children().length == 0) {
+    return true;
+  } else {
+    return false; 
+  }   
+});

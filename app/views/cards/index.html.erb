@@ -1,13 +1,10 @@
 
-<body class="dashboard-body">
-
+<body class="dashboard">
 
 <div id='groupmenu'>
 
-
 <div id="group-form">
   <%= form_for [@user, @group] do |f| %>
-    <%= f.label :group_name %>
     <%= f.text_field :group_name %>
     <%= f.submit "Submit" %>
   <% end %>
@@ -17,22 +14,23 @@
 See All Your Connections
 <ul class="connection-cards">
   <div class="groups">
-    <div>
+  <div>
 </ul>
 
-
-<div class ="news-stories">
-  <h1>News Stories</h1>
-  <% @nytarticles.take(4).each do |article| %>
-    <li><a href= "<%= article["Url"] %>"><%= article["Title"] %></a></li>
-  <% end %>
-</div> 
 
 
 See your groups:
 <ul class="groups">
+</ul>
 
 
+</div>
+
+<div id='newsarticle'>
+  <div id='newsarticle-header'> news article here </div>
+  <p> ......... <p> 
+  <p> ......... </p>
+</div>
 
 
 <%= javascript_include_tag "cards", "data-turbolinks-track" => true %>
