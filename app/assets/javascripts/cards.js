@@ -23,7 +23,7 @@ function getConnections(){
       for(var i = 0; i < allConnections.length; i++){
         if(allConnections[i].user_id == localStorage["user_id"]) {
           $.getJSON("/cards/" + allConnections[i].card_id, function(cardFound) {
-            var cards = $("<div class='card' id='" + cardFound.id + "' data-connection='" + allConnections[i].id + "'>");
+            var cards = $("<div class='card' id='" + cardFound.id + "' data-connection='5'>");
             $(cards).appendTo("ul.connection-cards");
             $("<li>" + cardFound.email + "</li>").appendTo(cards);
             $("<li>" + cardFound.phone_number + "</li>").appendTo(cards);
@@ -35,7 +35,6 @@ function getConnections(){
       }
   });
 }
-
 
 
 function addCardToGroup(){
