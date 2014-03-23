@@ -16,11 +16,11 @@
   <ul>
     <li class="profile-pic-menu">
       <h3>Choose profile picture position</h3>
-      <form action="">
-<input type="radio" name="position" value="right-top">right-top<br>
-<input type="radio" name="position" value="right-bottom">right-bottom<br>
-<input type="radio" name="position" value="right-bottom">left-top<br>
-<input type="radio" name="position" value="right-bottom">left-bottom<br>
+      <form id="profile-pic-menu-radio" action="">
+<input id="right-top" type="radio" name="position" value="right-top">right-top<br>
+<input id="right-bottom" type="radio" name="position" value="right-bottom">right-bottom<br>
+<input id="left-top" type="radio" name="position" value="left-top">left-top<br>
+<input id="left-bottom" type="radio" name="position" value="left-bottom">left-bottom<br>
 
 </form>
     </li>
@@ -30,7 +30,6 @@
 <script>
 var cardAttr;
 function listDetails() {
-  // $("<li>").appendTo(".personal_info_list")
     $("#card_email").keyup(function(){
     $(".personal_info_list #card_email").text(this.value)
     });
@@ -49,9 +48,13 @@ function listDetails() {
 }
 
 function profilePicPosition() {
-  
+  $("#profile-pic-menu-radio").on("change", "input", function(){
+    if($("#right-top").prop('checked') === true){
+      $(".card-profile-pic").css.className = ".card-profile-pic-right-top"
+    }
+  })
 }
   
-  
+profilePicPosition();  
 listDetails()
 </script>
