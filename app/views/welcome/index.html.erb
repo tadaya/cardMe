@@ -1,48 +1,73 @@
 <body class ="joinpage">
 
-<div class="flip-container" ontouchstart="this.classList.toggle('hover');">
-  <div class="flipper">
-    <div class="front">
-      <%= image_tag("cardmelogo.png")%>
-    </div>
-    <div class="back">
-        <%= image_tag("cardmelogoback.png")%>
+<div class="background">
+
+  <div class="flip-container" ontouchstart="this.classList.toggle('hover');">
+    <div class="flipper">
+      <div class="front">
+        <%= image_tag("cardmelogo.png")%>
+      </div>
+      <div class="back">
+          <%= image_tag("cardmelogoback.png")%>
+      </div>
     </div>
   </div>
-</div>
 
 
 
-<div class = "login">
-<h2>LOG IN</h2>
+  <div class = "login">
+  <h2>LOG IN</h2>
 
-<hr>
+  <hr>
 
-<%= link_to "Join cardMe", new_user_path unless session[:user_id] %>
+  <%= link_to "Join cardMe", new_user_path unless session[:user_id] %>
 
- <%= form_tag "/session" do %>
-    <div class="inputinfo">
-      <%= label_tag :email %>:
-      <%= email_field_tag :email %>
-    </div>  
-    </br>
-    <div class="inputinfo">
-    <%= label_tag :password %>:
-    <%= password_field_tag :password %>
-    </div>
-    </br>
-    
-    <%= submit_tag "Log in!", class: 'button' %>
-  <% end %>
-
-  <% unless flash[:message].nil? %>
-    <div id="errors">
-      <h3>Errors!</h3>
-      <ul>
-        <li><em><%= flash[:message] %></em></li>
-      </ul>
-    </div>
+   <%= form_tag "/session" do %>
+      <div class="inputinfo">
+        <%= label_tag :email %>:
+        <%= email_field_tag :email %>
+      </div>  
+      </br>
+      <div class="inputinfo">
+      <%= label_tag :password %>:
+      <%= password_field_tag :password %>
+      </div>
+      </br>
+      
+      <%= submit_tag "Log in!", class: 'button' %>
     <% end %>
-</div>
+
+    <% unless flash[:message].nil? %>
+      <div id="errors">
+        <h3>Errors!</h3>
+        <ul>
+          <li><em><%= flash[:message] %></em></li>
+        </ul>
+      </div>
+      <% end %>
+  </div>
+  </div>
+
+  <div class = "description">
+    <div class="how">
+      <h2> How does it work? </h2>
+    </div>
+    <container class="steps">
+      <div class="step">
+        
+      </div>
+      <div class="step">
+       
+      </div>
+      <div class="step">
+
+      </div>
+    </container>
+  </div>
 </body>
+
+<footer>
+  cardMe company
+</footer>
+
 
