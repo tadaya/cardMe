@@ -33,32 +33,36 @@ function getConnections(){
             $("<button id='add-group'> + </button>").appendTo(connect);
             $("#add-group").on("click", addCardToGroup);
           });
-          // group_id, card_id - pass into addCardToGroup
         }
       }
   });
 }
 
-// card_id - pass into addCardToGroup
+
 
 function addCardToGroup(){
-
+  $('#add-group').remove();
   var groups = $(".card");
   $("<ul class='groups_popup'>").appendTo(groups);
   $.getJSON("/users/" + localStorage["user_id"] + "/groups", function(response){
-    allGroups = response;
+  allGroups = response;
+
     for(var i = 0; i < allGroups.length; i++) {
       checkbox = $("<input type='checkbox'>");
       $("<li id=" + allGroups[i].id + ">" + allGroups[i].group_name + "</li>").appendTo("ul.groups_popup").append(checkbox);
       checkbox.on("change", selectGroup);
       //card_id
     }
+
+    $("<button>Add To Groups</button>").appendTo("ul.groups_popup").on("click", getConnections);
+
   });
 }
-// group_id, card_id - pass into selectGroup
+
 function selectGroup() {
   var group_id = $(this).parent().attr('id');
   var connection_id = $(this).parent().parent().parent().attr("data-connection");
+
   if(this.checked == true){
     $.ajax({
       url: "/groupsconnections",
