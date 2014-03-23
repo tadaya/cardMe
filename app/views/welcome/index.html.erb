@@ -1,15 +1,12 @@
 <body class ="joinpage">
 
-<%= link_to "Join cardMe", new_user_path %>
-
 <div class="flip-container" ontouchstart="this.classList.toggle('hover');">
   <div class="flipper">
     <div class="front">
       <%= image_tag("cardmelogo.png")%>
     </div>
     <div class="back">
-      <div class="cardback">
-      </div>
+        <%= image_tag("cardmelogoback.png")%>
     </div>
   </div>
 </div>
@@ -17,15 +14,25 @@
 
 
 <div class = "login">
-<h2>Log In</h2>
+<h2>LOG IN</h2>
+
+<hr>
+
+<%= link_to "Join cardMe", new_user_path unless session[:user_id] %>
 
  <%= form_tag "/session" do %>
-    <%= label_tag :email %>:
-    <%= email_field_tag :email %></br>
+    <div class="inputinfo">
+      <%= label_tag :email %>:
+      <%= email_field_tag :email %>
+    </div>  
+    </br>
+    <div class="inputinfo">
     <%= label_tag :password %>:
-    <%= password_field_tag :password %></br>
+    <%= password_field_tag :password %>
+    </div>
+    </br>
     
-    <%= submit_tag "Log in!" %>
+    <%= submit_tag "Log in!", class: 'button' %>
   <% end %>
 
   <% unless flash[:message].nil? %>

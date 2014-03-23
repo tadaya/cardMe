@@ -15,6 +15,21 @@ See All Your Connections
     <div>
 </ul>
 
+<div class="showcard">
+</div>
+
+<script>
+
+$(".connection-cards").on("click","div", function(){
+  $(".showcard div").remove();
+  $(this).clone().appendTo(".showcard");
+
+});
+  // $(this).detach(".showcard").appendTo(".connection-cards");
+
+  // });
+</script>
+
 
 <div class ="news-stories">
   <h1>News Stories</h1>
