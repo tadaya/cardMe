@@ -1,5 +1,20 @@
 <body class="newcard">
 
-  <%= render 'form' %>
+<%= form_for [@user, @card] do |f| %>
+  <%= f.label :email %>:
+  <%= f.email_field :email %></br>
+  <%= f.label :card_name %>:
+  <%= f.text_field :card_name %></br>
+  <%= f.label :phone_number %>:
+  <%= f.text_field :phone_number %></br>
+  <%= f.label :organization %>:
+  <%= f.text_field :organization %></br>
+  <%= f.label :position %>:
+  <%= f.text_field :position %></br>
+  <%= f.file_field :background_image, placeholder:"Upload Card Background"%>
+  <%= f.file_field :ogranization_logo, placeholder:"Upload logo"%>
+  <%= f.file_field :profile_picture, placeholder:"Upload Your Beauty"%>
+  <%= f.submit "CardMe!" %>
+<% end %>
 
 </body>

@@ -42,12 +42,12 @@ function getConnections(){
 // card_id - pass into addCardToGroup
 
 function addCardToGroup(){
+
   var groups = $(".card");
   $("<ul class='groups_popup'>").appendTo(groups);
   $.getJSON("/users/" + localStorage["user_id"] + "/groups", function(response){
     allGroups = response;
     for(var i = 0; i < allGroups.length; i++) {
-      $("<li>" + allGroups[i].group_name + "</li>").appendTo("ul.groups_popup").append($("<input type='checkbox'>"));
       checkbox = $("<input type='checkbox'>");
       $("<li id=" + allGroups[i].id + ">" + allGroups[i].group_name + "</li>").appendTo("ul.groups_popup").append(checkbox);
       checkbox.on("change", selectGroup);
