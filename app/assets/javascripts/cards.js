@@ -13,7 +13,6 @@ function addGroups() {
     });
     input.val("");
   showGroups();
-  listCards();
   });
 }
 
@@ -46,9 +45,11 @@ function addCardToGroup(){
     allGroups = response;
     for(var i = 0; i < allGroups.length; i++) {
       $("<li>" + allGroups[i].group_name + "</li>").appendTo("ul.groups_popup").append($("<input type='checkbox'>"));
+
     }
   });
 }
+
 
 
 function showGroups() {
