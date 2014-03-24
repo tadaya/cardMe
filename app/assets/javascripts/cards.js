@@ -44,7 +44,7 @@ function makeCards(i){
 
 
 function addCardToGroup(){
-  $('#add-group').remove();
+  $('ul.groups_popup').remove();
   $("<ul class='groups_popup'>").appendTo($(this).parent());
   $.getJSON("/users/" + localStorage["user_id"] + "/groups", function(response){
   allGroups = response;
@@ -52,12 +52,13 @@ function addCardToGroup(){
     for(var i = 0; i < allGroups.length; i++) {
       var connection_id = $(this).parent().parent().parent().parent().attr("data-connection");
       checkbox = $("<input type='checkbox'>");
+      
       $("<li id=" + allGroups[i].id + ">" + allGroups[i].group_name + "</li>").appendTo("ul.groups_popup").append(checkbox);
       checkbox.on("change", selectGroup);
       //card_id
     }
 
-    $("<button>Add To Groups</button>").appendTo("ul.groups_popup").on("click", getConnections);
+    $("<button>Save</button>").appendTo("ul.groups_popup").on("click", getConnections);
   });
 }
 
