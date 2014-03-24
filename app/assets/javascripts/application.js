@@ -12,5 +12,6 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require menu_jquery
 //= require turbolinks
 //= require_tree ./sitewide 
