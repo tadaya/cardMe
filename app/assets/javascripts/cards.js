@@ -104,6 +104,23 @@ function showGroups() {
   });// ends getJSON
 }// ends showGroups
 
+
+function newStories(){
+$(".connection-cards").on("click","div", function(){
+  $(".showcard div").remove();
+  $(this).clone().appendTo(".showcard");
+  cardId = $(".showcard .card").attr("id");
+  $(".articles li").remove();
+  news = $.get("/card_news/"+cardId, {card_id: cardId}, function(){
+      for (var i = 0; i < 4; i++){
+        newsResponse = news.responseJSON[i]
+        $(".articles").append($("<a href=" + newsResponse["Url"] + "><li>" + newsResponse["Title"] + "</li></a>"))
+      }
+    })
+  });
+};
+
+newStories();
 getConnections();
 showGroups();
 addGroups();
