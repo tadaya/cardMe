@@ -55,7 +55,6 @@ function addCardToGroup(){
       
       $("<li id=" + allGroups[i].id + ">" + allGroups[i].group_name + "</li>").appendTo("ul.groups_popup").append(checkbox);
       checkbox.on("change", selectGroup);
-      //card_id
     }
 
     $("<button>Save</button>").appendTo("ul.groups_popup").on("click", getConnections);
@@ -120,7 +119,7 @@ $(".connection-cards").on("click","div", function(){
   });
 };
 
-newStories();
+// newStories();
 getConnections();
 showGroups();
 addGroups();
