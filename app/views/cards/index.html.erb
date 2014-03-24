@@ -1,41 +1,43 @@
 <div class = "roladex">
 Submit Group Name:
 
-<div id="group_form">
-  <%= form_for [@user, @group] do |f| %>
-    <%= f.label :group_name %>
-    <%= f.text_field :group_name %>
-    <%= f.submit "Submit" %>
-  <% end %>
-</div>
+  <div id="group_form">
+    <%= form_for [@user, @group] do |f| %>
+      <%= f.label :group_name %>
+      <%= f.text_field :group_name %>
+      <%= f.submit "Submit" %>
+    <% end %>
+  </div>
 
-See All Your Connections
-<ul class="connection-cards">
+  See All Your Connections
+  <ul class="connection-cards">
 
 
-</ul>
+  </ul>
 
-  <div class="groups">
+    <div class="groups">
+    </div>
+
+
+  <div class ="right-side-dashboard">
+    <div class="showcard">
+    </div>
+
+
+
+    <div class="news-stories">
+      <h2>News Stories</h2>
+      <ul class ="articles">
+      </ul>
+    </div>
   </div>
 
 
-<div class="showcard">
-</div>
 
+  See your groups:
+  <ul class="groups">
 
-<div class="news-stories">
-  <h2>News Stories</h2>
-  <ul class ="articles">
   </ul>
+
+  <%= javascript_include_tag "cards", "data-turbolinks-track" => true %>
 </div>
-
-
-
-See your groups:
-<ul class="groups">
-
-</ul>
-
-<%= javascript_include_tag "cards", "data-turbolinks-track" => true %>
-</div>
-

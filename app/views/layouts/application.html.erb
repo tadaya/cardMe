@@ -19,7 +19,7 @@
   <ul class="nav">    
     <li><%= link_to "Profile", user_path(session[:user_id]) unless session[:user_id].nil?%></li>
     <li> <%= link_to("Log Out", "/logout", method: "delete") unless session[:user_id].nil? %>
-   </li>
+  </li>
   </ul>
 </header>
 
