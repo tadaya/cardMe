@@ -33,21 +33,29 @@ function getConnections(){
 function makeCards(i){
   $.getJSON("/cards/" + allConnections[i].card_id, function(cardFound) {
     var cards = $("<div class='card' id='" + cardFound.id + "' data-connection='" + allConnections[i].id + "'>");
+    var cardmenu = $("<div class='cardmenu'></div>")
+    var cardContainer = $("<div class='cardContainer'></div>")
     $(cards).appendTo("ul.connection-cards");
-    $("<li>" + cardFound.email + "</li>").appendTo(cards);
-    $("<li>" + cardFound.phone_number + "</li>").appendTo(cards);
-    $("<li>" + cardFound.organization + "</li>").appendTo(cards);
-    $("<li>" + cardFound.position + "</li>").appendTo(cards);
-    $("<button> + </button>").appendTo(cards).on("click", addCardToGroup);
+    $("<li>" + "Email: " + cardFound.email + "</li>").appendTo(cards);
+    $("<li>" + "Phone Number: " + cardFound.phone_number + "</li>").appendTo(cards);
+    $("<li>" + "Organization: " + cardFound.organization + "</li>").appendTo(cards);
+    $("<li>" + "Position: " + cardFound.position + "</li>").appendTo(cards);
+    $("<button class='add'> + </button>").appendTo(cardmenu).on("click", addCardToGroup);
+    $("<button class='arrow'> > </button>").appendTo(cardmenu).on("click", cardDashboard);
+    $(cardmenu).insertAfter(cards)
+    $(cardmenu).appendTo(cardContainer)
+    $(cards).appendTo(cardContainer)
+    $(cardContainer).appendTo($(".connection-cards"))
   });
 }
 
 
 function addCardToGroup(){
-  $('ul.groups_popup').remove();
+  $('#add-group').remove();
+  $("ul.groups_popup").detach();
   $("<ul class='groups_popup'>").appendTo($(this).parent());
 
-  var connection_id = ($(this).parent().attr("data-connection"));
+  var connection_id = $(this).parent().parent().find(".card").attr("data-connection");
   // Making ajax request to get all the groups
   $.getJSON("/users/" + localStorage["user_id"] + "/groups", function(response){
     allGroups = response;
@@ -72,7 +80,6 @@ function addCardToGroup(){
     });
     // This button closes the popup box and refreshes all of the connections 
     $("<button>Add To Groups</button>").appendTo("ul.groups_popup").on("click", getConnections);
-  
   });
 }
 
@@ -120,22 +127,27 @@ function showGroups() {
 }// ends showGroups
 
 
-// function newStories(){
-// $(".connection-cards").on("click","div", function(){
-//   $(".showcard div").remove();
-//   $(this).clone().appendTo(".showcard");
-//   cardId = $(".showcard .card").attr("id");
-//   $(".articles li").remove();
-//   news = $.get("/card_news/"+cardId, {card_id: cardId}, function(){
-//       for (var i = 0; i < 4; i++){
-//         newsResponse = news.responseJSON[i]
-//         $(".articles").append($("<a href=" + newsResponse["Url"] + "><li>" + newsResponse["Title"] + "</li></a>"))
-//       }
-//     })
-//   });
-// };
+function cardDashboard(){
+  $(".showcard div").remove();
+  $(this).parent().parent().find(".card").clone().appendTo(".showcard");
+  $(".showcard .cardmenu").remove();
+  cardId = $(".showcard .card").attr("id");
+  console.log(cardId);
+  $(".articles li").remove();
+  $.get("/card_dashboard/"+cardId, {card_id: cardId}, function(response){
+      companySummary = response[0]["company_summary"];
+      $("<div class=company_summary> Summary:" + companySummary + "</div>").appendTo(".showcard");
+      companyNews = response[0].news;
+      for (var i = 0; i < 4; i++){
+        newsResponse = companyNews[i];
+        $(".articles").append($("<a href=" + newsResponse["Url"] + "><li>" + newsResponse["Title"] + "</li></a>"));
+      }
+    });
+}
 
-// newStories();
+
+cardDashboard();
 getConnections();
 showGroups();
 addGroups();
+

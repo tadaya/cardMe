@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Cardme</title>
+  <title>CardMe</title>
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
 
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
@@ -16,16 +16,10 @@
 <body>
 
 <header>
-  <nav>
-    <ul class="topnav">
-      <li><%= link_to "Profile", user_path(session[:user_id]) unless session[:user_id].nil?%>
-        <ul class="dropdown">
-          <li><a href="#">Edit Profile</a></li>
-        </ul>
-      </li>
-
+  <ul class="nav">    
+    <li><%= link_to "Profile", user_path(session[:user_id]) unless session[:user_id].nil?%></li>
     <li> <%= link_to("Log Out", "/logout", method: "delete") unless session[:user_id].nil? %>
-   </li>
+  </li>
   </ul>
 </header>
 

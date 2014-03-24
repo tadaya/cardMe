@@ -4,7 +4,7 @@ class Card < ActiveRecord::Base
   has_many :connections
   has_many :tokens
 
-    has_attached_file :background_image, :styles => {:cardsize => "50x100>"},
+    has_attached_file :background_image, :styles => {:cardsize => "150x262>"},
                     :storage => :s3,
                     :bucket => 'cardMe',
                     :s3_credentials => {

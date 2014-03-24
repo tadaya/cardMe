@@ -20,23 +20,19 @@ header{
   box-shadow:         0px 5px 5px 0px rgba(50, 50, 50, 0.75);
 }
 
-
-nav {
- float: right;
+.nav {
+float: right;
 }
 
-nav .topnav{
+.nav li{
+  float: left;
+  font-size: 1.5em;
   list-style-type: none;
   position: relative;
   display: inline-block;
 }
 
-nav .topnav li{
-  float: left;
-  font-size: 1.5em;
-}
-
-nav .topnav li a{
+.nav li a{
   color: white;
   text-decoration: none;
   display: block;
@@ -44,39 +40,10 @@ nav .topnav li a{
   padding-right: 30px;
 }
 
+.nav li a:hover{
+  color: #B60707  ;
 
-nav .topnav li a:hover{
-   color: #B60707;
 }
-
-nav .topnav .dropdown{
-  background: #B60707;
-  border-radius: 0px;
-  padding: 0px;
-  position: absolute;
-  top: 100%;
-  display: none;
-}
-
-nav .topnav li:hover > ul{
-  display: block;
-}
-
-nav .topnav li:hover .dropdown a{
-  list-style-type: none;
-  color: white;
-}
-
-nav .topnav li:hover .dropdown li{
-  list-style-type: none;
-  background-color: #B60707;
-  font-size: 12pt;
-  height: 40px;
-}
-
-nav ul:after {
-    content: ""; clear: both; display: block;
-  }
 
 /******************
 LOG IN PAGE
@@ -169,7 +136,18 @@ body{
   margin-top: -5px;
 }
 
-.login .button {
+
+.login .button, .addGroupButton, .form input[type='submit'] {
+  -moz-box-shadow:inset 0px 1px 0px 0px #f5978e  ;
+  -webkit-box-shadow:inset 0px 1px 0px 0px #f5978e  ;
+  box-shadow:inset 0px 1px 0px 0px #f5978e  ;
+  background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #b60707  ), color-stop(1, #d40b0b  ) );
+  background:-moz-linear-gradient( center top, #b60707   5%, #d40b0b   100% );
+  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#b60707  ', endColorstr='#d40b0b  ');
+  background-color:#b60707  ;
+}
+
+.login .button, .addGroupButton {
   -moz-box-shadow:inset 0px 1px 0px 0px #f5978e;
   -webkit-box-shadow:inset 0px 1px 0px 0px #f5978e;
   box-shadow:inset 0px 1px 0px 0px #f5978e;
@@ -204,23 +182,24 @@ body{
   text-align:center;
   text-shadow:1px 1px 0px #810e05;
 }
+
 .login .button:hover {
   background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #d40b0b), color-stop(1, #b60707) );
   background:-moz-linear-gradient( center top, #d40b0b 5%, #b60707 100% );
   filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#d40b0b', endColorstr='#b60707');
   background-color:#d40b0b;
 }
+
 .login .button:active {
   position:relative;
   top:1px;
-
 }
 
 .login a:hover{
   color: black;
 }
 
-.login form{
+.login form, .form form{
   margin: 30px;
   margin-top: 50px;
   line-height: 18pt;
@@ -229,6 +208,11 @@ body{
 .login input{
   margin-top: 5px;
   width: 100%;
+}
+
+.form input{
+  margin-top: 5px;
+  width: 180px;
 }
 
 .login .inputinfo{
@@ -243,7 +227,14 @@ body{
   font-style: italic;
 }
 
+/**********
+JOIN FORM
+***********/
 
+.joinform{
+  margin-top: 150px;
+  margin-left: 30px;
+}
 
 /**********
 CARD FLIP
@@ -301,9 +292,58 @@ CARD FLIP
   padding: 20px;
   border: 1px solid black;
   border-radius: 10px;
-  background-color: white;
 }
 
+.personal_info_list_wrapper {
+  float: right;
+  /*border: 1px solid black;*/
+  border-radius: 10px;
+  font-family:"Myriad Pro", arial, helvetica, sans-serif;
+  font-size: 11px;
+  line-height: 9px;
+  padding: 9px;
+  background-color: rgba(128,128,128, 0.2)
+}
+
+
+.actual_list li, h4{
+  margin-bottom: -5px;
+  margin-top: 9px;
+  text-align: right;
+}
+
+.card-profile-pic {
+  /*border: 1px solid black;*/
+  border-radius: 10px;
+  height: 50px;
+  width: 40px;
+  float: left;
+  position: relative;
+}
+
+/*.card-profile-pic-right-top {
+  border: 1px solid black;
+  height: 50px;
+  width: 40px;
+  float: right;
+}*/
+
+
+/*.card-profile-pic-left-top {
+  border: 1px solid black;
+  height: 50px;
+  width: 40px;
+  float: left;
+  margin-top: -20px;
+}*/
+
+/*card-profile-pic-left-bottom {
+  border: 1px solid black;
+  height: 50px;
+  width: 40px;
+  float: left;
+  margin-top: 70px;
+}*/
 
 .card li{
   list-style-type: none;
@@ -318,40 +358,6 @@ CARD FLIP
   text-decoration: none;
 }
 
-
-.card-profile-pic-right-top {
-  border: 1px solid black;
-  height: 50px;
-  width: 40px;
-  float: right;
-}
-
-
-.card-profile-pic-right-bottom {
-  border: 1px solid black;
-  height: 50px;
-  width: 40px;
-  float: right;
-  margin-top: 70px;
-}
-
-.card-profile-pic-left-top {
-  border: 1px solid black;
-  height: 50px;
-  width: 40px;
-  float: left;
-  margin-top: -20px;
-}
-
-.card-profile-pic-left-bottom {
-  border: 1px solid black;
-  height: 50px;
-  width: 40px;
-  float: left;
-  margin-top: 70px;
-}
-
-
 /****************
 USER PROFILE PAGE
 *****************/
@@ -363,29 +369,35 @@ USER PROFILE PAGE
   font-size: 12pt;
 }
 
-.text input, .email input{
-  line-height: 16pt;
-  width: 200px;
-}
-
-.text select, .email select{
-  width: 100px;
-  line-height: 16pt;
-  font-size: 16pt;
-}
-
-.text, .email{
-  padding: 10px;
-}
-
-.email 
-
 .sendform{
-  width: 80%;
-  margin: 0 auto;
+  width: 60%;
+/*  position: absolute;
+  right: 100px;*/
+  text-align: right;
+  margin-top: 80px;
+  margin-bottom: 80px;
 }
 
-.button{
+.text{
+  margin-bottom: 5px;
+}
+
+.email{
+  margin-top: 5px;
+
+}
+
+.sendform .button{
+  -moz-box-shadow:inset 0px 1px 0px 0px #f5978e  ;
+  -webkit-box-shadow:inset 0px 1px 0px 0px #f5978e  ;
+  box-shadow:inset 0px 1px 0px 0px #f5978e  ;
+  background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #b60707  ), color-stop(1, #d40b0b  ) );
+  background:-moz-linear-gradient( center top, #b60707   5%, #d40b0b   100% );
+  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#b60707  ', endColorstr='#d40b0b  ');
+  background-color:#b60707;
+}
+
+.sendform .button{
   -moz-box-shadow:inset 0px 1px 0px 0px #f5978e;
   -webkit-box-shadow:inset 0px 1px 0px 0px #f5978e;
   box-shadow:inset 0px 1px 0px 0px #f5978e;
@@ -415,10 +427,17 @@ USER PROFILE PAGE
   font-style:normal;
   height:36px;
   line-height:30px;
-  width:76px;
+  width:100px;
   text-decoration:none;
   text-align:center;
   text-shadow:1px 1px 0px #810e05;
+}
+
+.sendform .button:hover {
+  background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #d40b0b  ), color-stop(1, #b60707  ) );
+  background:-moz-linear-gradient( center top, #d40b0b   5%, #b60707   100% );
+  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#d40b0b  ', endColorstr='#b60707  ');
+  background-color:#d40b0b  ;
 }
 
 .button:hover {
@@ -428,7 +447,7 @@ USER PROFILE PAGE
   background-color:#d40b0b;
 }
 
-.button:active {
+.sendform .button:active {
   position:relative;
   top:1px;
 }
@@ -445,15 +464,141 @@ DASHBOARD
   width: 40%;
 }
 
+.right-side-dashboard{
+  float: right;
+  position: absolute;
+  top: 0px;
+  right: 80px;
+  width: 60%;
+}
+
 .showcard{
   padding: 20px;
-  position: fixed;
+  position: absolute;
   top: 10px;
-  right: 20px;
+  left: 100px;
   width: 30%;
 }
 
+/*.card{
+  position: relative;
+}*/
+
+.groups_popup{
+  border: 1px solid black;
+  border-radius: 10px;
+  background-color: #C8C6C7;
+  width: 100px;
+  height: 150px;
+  position: absolute;
+  top: 0px;
+  right: 30px;
+  overflow-y:scroll
+}
+
+.groups_popup li{
+  list-style-type: none;
+  font-size: 12pt;
+  font-family: 'Muli', sans-serif;
+}
+
+.groups_popup li input{
+  margin-left: 5px;
+}
+
+.addGroupButton{
+  width: 120px;
+  position: absolute;
+  left: 8px;
+  font-size: 8pt;
+  margin-top: 8px;
+}
+
+.connection-cards{
+  width: 40%;
+  overflow-y:scroll;
+}
+
+.arrow, .add{
+  -moz-box-shadow:inset 0px 1px 0px 0px #f5978e;
+  -webkit-box-shadow:inset 0px 1px 0px 0px #f5978e;
+  box-shadow:inset 0px 1px 0px 0px #f5978e;
+  background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #f24537), color-stop(1, #c62d1f) );
+  background:-moz-linear-gradient( center top, #f24537 5%, #c62d1f 100% );
+  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#f24537', endColorstr='#c62d1f');
+  background-color:#f24537;
+  -webkit-border-top-left-radius:20px;
+  -moz-border-radius-topleft:20px;
+  border-top-left-radius:20px;
+  -webkit-border-top-right-radius:20px;
+  -moz-border-radius-topright:20px;
+  border-top-right-radius:20px;
+  -webkit-border-bottom-right-radius:20px;
+  -moz-border-radius-bottomright:20px;
+  border-bottom-right-radius:20px;
+  -webkit-border-bottom-left-radius:20px;
+  -moz-border-radius-bottomleft:20px;
+  border-bottom-left-radius:20px;
+  text-indent:0;
+  border:1px solid #d02718;
+  display:inline-block;
+  color:#ffffff;
+  font-family:Arial;
+  font-size:16px;
+  font-weight:bold;
+  font-style:normal;
+  height:40px;
+  line-height:40px;
+  width:40px;
+  text-decoration:none;
+  text-align:center;
+  text-shadow:1px 1px 0px #810e05;
+}
+.add:hover, .arrow:hover {
+  background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #c62d1f), color-stop(1, #f24537) );
+  background:-moz-linear-gradient( center top, #c62d1f 5%, #f24537 100% );
+  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#c62d1f', endColorstr='#f24537');
+  background-color:#c62d1f;
+}
+
+.add:hover, .arrow:hover {
+  position:relative;
+  top:1px;
+}
+
+.cardmenu{
+  width: 230px;
+  height: 230px;
+  float: left;
+  position: absolute;
+  top: 20px;
+  right: 10px;
+}
+
+.add{
+  margin-bottom: 4px;
+  display: block;
+}
+
+.cardContainer{
+  width: 600px;
+  position: relative;
+}
+
 .roladex{
+  position: relative;
+  width: 100%;
   margin-top: 100px;
   margin-left: 30px;
+}
+
+
+/****************
+FORM
+*****************/
+
+.form{
+  margin-top: 150px;
+  margin-left: 30px;
+  font-size: 12pt;  
 }
