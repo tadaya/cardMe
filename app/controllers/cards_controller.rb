@@ -9,6 +9,7 @@ class CardsController < ApplicationController
     @connections = @user.connections
     @cards = @user.cards.all
     @all_cards = Card.all
+  end
 
   def edit
     
