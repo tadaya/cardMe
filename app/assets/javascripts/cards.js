@@ -87,7 +87,7 @@ function showGroups() {
     allGroups = response;
     $("ul.groups").empty();
     for(var i = 0; i < allGroups.length; i++) {
-      ($("<li>" + allGroups[i].group_name + "</li>").append("<span id="+ allGroups[i].id + ">" + ' X ' + "</span>")).appendTo("ul.groups");
+      ($("<li class='has-sub'>" + allGroups[i].group_name + "</li>").append("<span id="+ allGroups[i].id + ">" + ' X ' + "</span>")).appendTo("ul.groups");
     }// for loop ends
     $("span").on("click", function(e){
       var groupId = e.target.id;
@@ -123,3 +123,22 @@ $(".connection-cards").on("click","div", function(){
 getConnections();
 showGroups();
 addGroups();
+
+$('#groupmenu > ul > li > a').click(function() {
+  $('#groupmenu li').removeClass('active');
+  $(this).closest('li').addClass('active'); 
+  var checkElement = $(this).next();
+  if((checkElement.is('ul')) && (checkElement.is(':visible'))) {
+    $(this).closest('li').removeClass('active');
+    checkElement.slideUp('normal');
+  }
+  if((checkElement.is('ul')) && (!checkElement.is(':visible'))) {
+    $('#groupmenu ul ul:visible').slideUp('normal');
+    checkElement.slideDown('normal');
+  }
+  if($(this).closest('li').find('ul').children().length == 0) {
+    return true;
+  } else {
+    return false; 
+  }   
+});
