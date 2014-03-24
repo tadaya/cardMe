@@ -34,4 +34,15 @@ class Card < ActiveRecord::Base
   validates_attachment_size :ogranization_logo, :less_than => 5.megabytes
   validates_attachment_size :profile_picture, :less_than => 5.megabytes
 
+
+  def company_summary
+    org = self.organization
+    org = org.downcase
+    org = org.gsub(" ","_")
+    org = org.gsub(/[\&\'\,']/, "")
+    puts org
+    response = HTTParty.get("https://www.googleapis.com/freebase/v1/topic/en/#{org}?filter=/organization/common/topic/article&key=AIzaSyCDr3U_5O8wWfSslYbrMgf59aGiZbXjuPY")
+    return response["property"]["/common/topic/article"]["values"][0]["property"]["/common/document/text"]["values"][0]["value"]
+  end
+
 end
