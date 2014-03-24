@@ -20,23 +20,19 @@ header{
   box-shadow:        0px 5px 5px 0px rgba(50, 50, 50, 0.75);
 }
 
-
-nav {
+.nav {
 float: right;
 }
 
-nav .topnav{
+.nav li{
+  float: left;
+  font-size: 1.5em;
   list-style-type: none;
   position: relative;
   display: inline-block;
 }
 
-nav .topnav li{
-  float: left;
-  font-size: 1.5em;
-}
-
-nav .topnav li a{
+.nav li a{
   color: white;
   text-decoration: none;
   display: block;
@@ -44,54 +40,9 @@ nav .topnav li a{
   padding-right: 30px;
 }
 
-
-nav .topnav li a:hover{
+.nav li a:hover{
   color: #B60707  ;
 }
-
-nav .topnav .dropdown{
-  background: #B60707  ;
-  border-radius: 0px;
-  padding: 0px;
-  position: absolute;
-  top: 100%;
-  display: none;
-}
-
-.nav{
-  position: absolute;
-  top: 30px;
-  right: 40px;
-}
-
-.nav li a{
-  text-decoration: none;
-  color: white;
-  font-size: 1.5em;
-  display: inline-block;
-  float: left;
-}
-
-
-nav .topnav li:hover > ul{
-  display: block;
-}
-
-nav .topnav li:hover .dropdown a{
-  list-style-type: none;
-  color: white;
-}
-
-nav .topnav li:hover .dropdown li{
-  list-style-type: none;
-  background-color: #B60707  ;
-  font-size: 12pt;
-  height: 40px;
-}
-
-nav ul:after {
-    content: ""; clear: both; display: block;
-  }
 
 /******************
 LOG IN PAGE
@@ -108,10 +59,6 @@ body{
   height: 1000px;
   margin-top: -40px;
   font-family: 'Muli', sans-serif;
-}
-
-.welcomepage{
-  margin-top: 50px;                                  
 }
 
 .description{
@@ -188,7 +135,7 @@ body{
   margin-top: -5px;
 }
 
-.login .button, .addGroupButton {
+.login .button, .addGroupButton, .form input[type='submit'] {
   -moz-box-shadow:inset 0px 1px 0px 0px #f5978e  ;
   -webkit-box-shadow:inset 0px 1px 0px 0px #f5978e  ;
   box-shadow:inset 0px 1px 0px 0px #f5978e  ;
@@ -223,23 +170,24 @@ body{
   text-align:center;
   text-shadow:1px 1px 0px #810e05  ;
 }
+
 .login .button:hover {
   background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #d40b0b  ), color-stop(1, #b60707  ) );
   background:-moz-linear-gradient( center top, #d40b0b   5%, #b60707   100% );
   filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#d40b0b  ', endColorstr='#b60707  ');
   background-color:#d40b0b  ;
 }
+
 .login .button:active {
   position:relative;
   top:1px;
-
 }
 
 .login a:hover{
   color: black;
 }
 
-.login form{
+.login form, .form form{
   margin: 30px;
   margin-top: 50px;
   line-height: 18pt;
@@ -248,6 +196,11 @@ body{
 .login input{
   margin-top: 5px;
   width: 100%;
+}
+
+.form input{
+  margin-top: 5px;
+  width: 180px;
 }
 
 .login .inputinfo{
@@ -262,7 +215,14 @@ body{
   font-style: italic;
 }
 
+/**********
+JOIN FORM
+***********/
 
+.joinform{
+  margin-top: 150px;
+  margin-left: 30px;
+}
 
 /**********
 CARD FLIP
@@ -323,7 +283,56 @@ CARD FLIP
   background-color: white;
 }
 
+.personal_info_list_wrapper {
+  float: right;
+  /*border: 1px solid black;*/
+  border-radius: 10px;
+  font-family:"Myriad Pro", arial, helvetica, sans-serif;
+  font-size: 11px;
+  line-height: 9px;
+  padding: 9px;
+  background-color: rgba(128,128,128, 0.1)
+}
 
+
+.actual_list li, h4{
+  margin-bottom: -5px;
+  margin-top: 9px;
+  text-align: right;
+}
+
+.card-profile-pic {
+  /*border: 1px solid black;*/
+  border-radius: 10px;
+  height: 50px;
+  width: 40px;
+  float: left;
+  position: relative;
+}
+
+/*.card-profile-pic-right-top {
+  border: 1px solid black;
+  height: 50px;
+  width: 40px;
+  float: right;
+}*/
+
+
+/*.card-profile-pic-left-top {
+  border: 1px solid black;
+  height: 50px;
+  width: 40px;
+  float: left;
+  margin-top: -20px;
+}*/
+
+/*card-profile-pic-left-bottom {
+  border: 1px solid black;
+  height: 50px;
+  width: 40px;
+  float: left;
+  margin-top: 70px;
+}*/
 .card li{
   list-style-type: none;
 }
@@ -337,10 +346,6 @@ CARD FLIP
   text-decoration: none;
 }
 
-.personal_info_list {
-  font-family: 
-  float: left;
-}
 
 .card-profile-pic-right-top {
   border: 1px solid black;
@@ -386,29 +391,24 @@ USER PROFILE PAGE
   font-size: 12pt;
 }
 
-.text input, .email input{
-  line-height: 16pt;
-  width: 200px;
-}
-
-.text select, .email select{
-  width: 100px;
-  line-height: 16pt;
-  font-size: 16pt;
-}
-
-.text, .email{
-  padding: 10px;
-}
-
-.email 
-
 .sendform{
-  width: 80%;
-  margin: 0 auto;
+  width: 60%;
+/*  position: absolute;
+  right: 100px;*/
+  text-align: right;
+  margin-top: 80px;
+  margin-bottom: 80px;
 }
 
-.button{
+.text{
+  margin-bottom: 5px;
+}
+
+.email{
+  margin-top: 5px;
+}
+
+.sendform .button{
   -moz-box-shadow:inset 0px 1px 0px 0px #f5978e  ;
   -webkit-box-shadow:inset 0px 1px 0px 0px #f5978e  ;
   box-shadow:inset 0px 1px 0px 0px #f5978e  ;
@@ -438,20 +438,20 @@ USER PROFILE PAGE
   font-style:normal;
   height:36px;
   line-height:30px;
-  width:76px;
+  width:100px;
   text-decoration:none;
   text-align:center;
   text-shadow:1px 1px 0px #810e05  ;
 }
 
-.button:hover {
+.sendform .button:hover {
   background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #d40b0b  ), color-stop(1, #b60707  ) );
   background:-moz-linear-gradient( center top, #d40b0b   5%, #b60707   100% );
   filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#d40b0b  ', endColorstr='#b60707  ');
   background-color:#d40b0b  ;
 }
 
-.button:active {
+.sendform .button:active {
   position:relative;
   top:1px;
 }
@@ -595,9 +595,13 @@ DASHBOARD
   margin-left: 30px;
 }
 
-#company-info-header{
-  height: 40px;
-  background:rgb(62,62,64);
-  color: white;
-  text-align: center;
+
+/****************
+FORM
+*****************/
+
+.form{
+  margin-top: 150px;
+  margin-left: 30px;
+  font-size: 12pt;  
 }
