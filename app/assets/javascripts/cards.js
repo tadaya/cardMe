@@ -114,22 +114,27 @@ function showGroups() {
 }// ends showGroups
 
 
-function newStories(){
-  console.log($(this));
+
+function cardDashboard(){
+$(".connection-cards").on("click","div", function(){
   $(".showcard div").remove();
   $(this).parent().parent().find(".card").clone().appendTo(".showcard");
   $(".showcard .cardmenu").remove();
   cardId = $(".showcard .card").attr("id");
   $(".articles li").remove();
-  news = $.get("/card_news/"+cardId, {card_id: cardId}, function(){
-    for (var i = 0; i < 4; i++){
-      newsResponse = news.responseJSON[i]
-      $(".articles").append($("<a href=" + newsResponse["Url"] + "><li>" + newsResponse["Title"] + "</li></a>"))
-    }
+  $.get("/card_dashboard/"+cardId, {card_id: cardId}, function(response){
+      companySummary = response[0]["company_summary"];
+      $("<div class=company_summary> Summary:" + companySummary + "</div>").appendTo(".showcard");
+      companyNews = response[0].news;
+      for (var i = 0; i < 4; i++){
+        newsResponse = companyNews[i];
+        $(".articles").append($("<a href=" + newsResponse["Url"] + "><li>" + newsResponse["Title"] + "</li></a>"))
+      }
+    })
   });
 };
 
-// newStories();
+cardDashboard();
 getConnections();
 showGroups();
 addGroups();
