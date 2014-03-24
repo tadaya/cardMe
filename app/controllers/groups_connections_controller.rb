@@ -1,5 +1,10 @@
 class GroupsConnectionsController < ApplicationController
 
+
+  def index
+    @all_group_connections = ConnectionsGroups.all
+  end
+
   def create
     @group_connection = ConnectionsGroups.create(connection_id: params[:connection], group_id: params[:group])
     render json: @group_connection

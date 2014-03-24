@@ -28,21 +28,20 @@ class CardsController < ApplicationController
     # @nytarticles = news_stories(@connection_card.organization)
   end
 
-  
-# <div class ="news-stories">
-#   <h1>News Stories</h1>
-#   <% @nytarticles.take(4).each do |article| %>
-#     <li><a href= "<%= article["Url"] %>"><%= article["Title"] %></a></li>
-#   <% end %>
-# </div> 
 
   def edit
     
   end
 
   def show
+    # call new function
     render json: @card
   end
+
+  # def card_news
+  #   @card = Card.find_by()
+  #   render json: @card
+  # end
 
   def update
     @card.update(card_params)
@@ -68,8 +67,17 @@ class CardsController < ApplicationController
     params.require(:card).permit(:email, :card_name, :position, :organization, :phone_number, :user_id, :background_image, :ogranization_logo, :profile_picture)
   end
 
+  def card_news
+    @user = current_user
+    @connections = @user.connections
+    @connection = @connections.find_by(card_id: params[:card_id])
+    @connection_card = Card.find(@connection.card_id)
+    @nytarticles = news_stories(@connection_card.organization)
+    render json: @nytarticles
+  end
+
   def news_stories(organization)
-    allarticles = HTTParty.get("http://api.nytimes.com/svc/search/v2/articlesearch.json?fq=#{organization}&api-key=#{NYTIMES_CLIENT_ID}&begin_date=20130101")
+    allarticles = HTTParty.get("http://api.nytimes.com/svc/search/v2/articlesearch.json?#{organization}&api-key=#{NYTIMES_CLIENT_ID}&begin_date=20130101")
     articles = allarticles["response"]["docs"].map { |article| {"Title" => "#{article["snippet"]}", "Url" => "#{article["web_url"]}" }}
   end
 
