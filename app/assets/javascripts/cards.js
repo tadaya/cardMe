@@ -33,18 +33,26 @@ function getConnections(){
 function makeCards(i){
   $.getJSON("/cards/" + allConnections[i].card_id, function(cardFound) {
     var cards = $("<div class='card' id='" + cardFound.id + "' data-connection='" + allConnections[i].id + "'>");
+    var cardmenu = $("<div class='cardmenu'></div>")
+    var cardContainer = $("<div class='cardContainer'></div>")
     $(cards).appendTo("ul.connection-cards");
     $("<li>" + cardFound.email + "</li>").appendTo(cards);
     $("<li>" + cardFound.phone_number + "</li>").appendTo(cards);
     $("<li>" + cardFound.organization + "</li>").appendTo(cards);
     $("<li>" + cardFound.position + "</li>").appendTo(cards);
-    $("<button> + </button>").appendTo(cards).on("click", addCardToGroup);
+    $("<button class='add'> + </button>").appendTo(cardmenu).on("click", addCardToGroup);
+    $("<button class='arrow'> > </button>").appendTo(cardmenu).on("click", cardDashboard);
+    $(cardmenu).insertAfter(cards)
+    $(cardmenu).appendTo(cardContainer)
+    $(cards).appendTo(cardContainer)
+    $(cardContainer).appendTo($(".connection-cards"))
   });
 }
 
 
 function addCardToGroup(){
-  $('ul.groups_popup').remove();
+  $('#add-group').remove();
+  $("ul.groups_popup").detach();
   $("<ul class='groups_popup'>").appendTo($(this).parent());
   $.getJSON("/users/" + localStorage["user_id"] + "/groups", function(response){
   allGroups = response;
@@ -52,12 +60,12 @@ function addCardToGroup(){
     for(var i = 0; i < allGroups.length; i++) {
       var connection_id = $(this).parent().parent().parent().parent().attr("data-connection");
       checkbox = $("<input type='checkbox'>");
-      
       $("<li id=" + allGroups[i].id + ">" + allGroups[i].group_name + "</li>").appendTo("ul.groups_popup").append(checkbox);
       checkbox.on("change", selectGroup);
+      //card_id
     }
 
-    $("<button>Save</button>").appendTo("ul.groups_popup").on("click", getConnections);
+    $("<button class='addGroupButton'>Add To Groups</button>").appendTo("ul.groups_popup").on("click", getConnections);
   });
 }
 
@@ -87,7 +95,7 @@ function showGroups() {
     allGroups = response;
     $("ul.groups").empty();
     for(var i = 0; i < allGroups.length; i++) {
-      ($("<li class='has-sub'>" + allGroups[i].group_name + "</li>").append("<span id="+ allGroups[i].id + ">" + ' X ' + "</span>")).appendTo("ul.groups");
+      ($("<li>" + allGroups[i].group_name + "</li>").append("<span id="+ allGroups[i].id + ">" + ' X ' + "</span>")).appendTo("ul.groups");
     }// for loop ends
     $("span").on("click", function(e){
       var groupId = e.target.id;
@@ -104,41 +112,25 @@ function showGroups() {
 }// ends showGroups
 
 
-function newStories(){
-$(".connection-cards").on("click","div", function(){
+function cardDashboard(){
   $(".showcard div").remove();
-  $(this).clone().appendTo(".showcard");
+  $(this).parent().parent().find(".card").clone().appendTo(".showcard");
+  $(".showcard .cardmenu").remove();
   cardId = $(".showcard .card").attr("id");
   $(".articles li").remove();
-  news = $.get("/card_news/"+cardId, {card_id: cardId}, function(){
+  $.get("/card_dashboard/"+cardId, {card_id: cardId}, function(response){
+      companySummary = response[0]["company_summary"];
+      $("<div class=company_summary> Summary:" + companySummary + "</div>").appendTo(".showcard");
+      companyNews = response[0].news;
       for (var i = 0; i < 4; i++){
-        newsResponse = news.responseJSON[i]
+        newsResponse = companyNews[i];
         $(".articles").append($("<a href=" + newsResponse["Url"] + "><li>" + newsResponse["Title"] + "</li></a>"))
       }
     })
-  });
 };
 
-// newStories();
+cardDashboard();
 getConnections();
 showGroups();
 addGroups();
 
-$('#groupmenu > ul > li > a').click(function() {
-  $('#groupmenu li').removeClass('active');
-  $(this).closest('li').addClass('active'); 
-  var checkElement = $(this).next();
-  if((checkElement.is('ul')) && (checkElement.is(':visible'))) {
-    $(this).closest('li').removeClass('active');
-    checkElement.slideUp('normal');
-  }
-  if((checkElement.is('ul')) && (!checkElement.is(':visible'))) {
-    $('#groupmenu ul ul:visible').slideUp('normal');
-    checkElement.slideDown('normal');
-  }
-  if($(this).closest('li').find('ul').children().length == 0) {
-    return true;
-  } else {
-    return false; 
-  }   
-});
