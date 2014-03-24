@@ -71,7 +71,7 @@ class CardsController < ApplicationController
     org = org.gsub(/[\&\'\,']/, "")
     org = org.gsub("  "," ")
     org = org.gsub(" ","_")
-    response = HTTParty.get("https://www.googleapis.com/freebase/v1/topic/en/#{org}?filter=/common/topic/article&key=#{GOOGLE...}")
+    response = HTTParty.get("https://www.googleapis.com/freebase/v1/topic/en/#{org}?filter=/common/topic/article&key=#{GOOGLE_CLIENT_ID}")
     summary = response["property"]["/common/topic/article"]["values"][0]["property"]["/common/document/text"]["values"][0]["value"]
     id = response["property"]["/common/topic/article"]["values"][0]["id"]
     image = "https://usercontent.googleapis.com/freebase/v1/image/m/#{id}&key=#{GOOGLE_CLIENT_ID}"
