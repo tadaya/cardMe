@@ -76,7 +76,7 @@ class CardsController < ApplicationController
     render json: @nytarticles
   end
 
-  def news_stories(organization)
+  def news_stories
     allarticles = HTTParty.get("http://api.nytimes.com/svc/search/v2/articlesearch.json?#{organization}&api-key=#{NYTIMES_CLIENT_ID}&begin_date=20130101")
     articles = allarticles["response"]["docs"].map { |article| {"Title" => "#{article["snippet"]}", "Url" => "#{article["web_url"]}" }}
   end
