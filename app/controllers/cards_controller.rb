@@ -10,25 +10,6 @@ class CardsController < ApplicationController
     @cards = @user.cards.all
     @all_cards = Card.all
 
-    #@connection = @connections.find_by(card_id: 3)
-    #@connection_card = Card.find(@connection.card_id)
-    #@nytarticles = news_stories(@connection_card.organization)
-
-
-## TO DO : PUT BACK IN CARDS INDEX
-#     <div class ="news-stories">
-#   <h1>News Stories</h1>
-#   <% @nytarticles.take(4).each do |article| %>
-#     <li><a href= "<%= article["Url"] %>"><%= article["Title"] %></a></li>
-#   <% end %>
-# </div> 
-
-    # @connection = @connections.find_by(card_id: 3)
-    # @connection_card = Card.find(@connection.card_id)
-    # @nytarticles = news_stories(@connection_card.organization)
-  end
-
-
   def edit
     
   end
@@ -76,11 +57,10 @@ class CardsController < ApplicationController
     render json: @nytarticles
   end
 
-  def news_stories(organization)
+  def news_stories
     allarticles = HTTParty.get("http://api.nytimes.com/svc/search/v2/articlesearch.json?#{organization}&api-key=#{NYTIMES_CLIENT_ID}&begin_date=20130101")
     articles = allarticles["response"]["docs"].map { |article| {"Title" => "#{article["snippet"]}", "Url" => "#{article["web_url"]}" }}
   end
-
 
 private
 
