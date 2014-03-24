@@ -75,7 +75,7 @@ class CardsController < ApplicationController
     response = HTTParty.get("https://www.googleapis.com/freebase/v1/topic/en/#{org}?filter=/common/topic/article&key=AIzaSyCDr3U_5O8wWfSslYbrMgf59aGiZbXjuPY")
     summary = response["property"]["/common/topic/article"]["values"][0]["property"]["/common/document/text"]["values"][0]["value"]
     id = response["property"]["/common/topic/article"]["values"][0]["id"]
-    image = "https://usercontent.googleapis.com/freebase/v1/image/m/#{id}&key=AIzaSyCDr3U_5O8wWfSslYbrMgf59aGiZbXjuPY"
+    image = "https://usercontent.googleapis.com/freebase/v1/image/m/#{id}&key=#{GOOGLE_CLIENT_ID}"
     return {summary: summary, logo: image}
   end
 
