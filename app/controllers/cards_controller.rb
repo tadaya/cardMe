@@ -73,7 +73,6 @@ class CardsController < ApplicationController
     articles = allarticles["response"]["docs"].map { |article| {"Title" => "#{article["snippet"]}", "Url" => "#{article["web_url"]}" }}
   end
 
-
 private
 
   def load_user
