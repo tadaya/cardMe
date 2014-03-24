@@ -18,8 +18,11 @@ Cardme::Application.routes.draw do
 
   post "/groupsconnections", to: "groups_connections#create"
   delete "/groupsconnections", to: "groups_connections#destroy"
+  get "/groupsconnections", to: "groups_connections#index"
 
   get "/login", to: "session#new"
   post "/session", to: "session#create"
   delete "/logout", to: "session#destroy"
+
+  get "/card_news/:id", to: "cards#card_news"
 end

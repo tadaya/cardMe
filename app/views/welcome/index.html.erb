@@ -1,41 +1,69 @@
-<body class ="joinpage">
+<div class="background">
 
-<%= link_to "Join cardMe", new_user_path %>
-
-<div class="flip-container" ontouchstart="this.classList.toggle('hover');">
-  <div class="flipper">
-    <div class="front">
-      <%= image_tag("cardmelogo.png")%>
-    </div>
-    <div class="back">
-      <div class="cardback">
+  <div class="flip-container" ontouchstart="this.classList.toggle('hover');">
+    <div class="flipper">
+      <div class="front">
+        <%= image_tag("cardmelogo.png")%>
+      </div>
+      <div class="back">
+          <%= image_tag("cardmelogoback.png")%>
       </div>
     </div>
   </div>
-</div>
 
 
 
-<div class = "login">
-<h2>Log In</h2>
+  <div class = "login">
+  <h2>LOG IN</h2>
 
- <%= form_tag "/session" do %>
-    <%= label_tag :email %>:
-    <%= email_field_tag :email %></br>
-    <%= label_tag :password %>:
-    <%= password_field_tag :password %></br>
-    
-    <%= submit_tag "Log in!" %>
-  <% end %>
+  <hr>
 
-  <% unless flash[:message].nil? %>
-    <div id="errors">
-      <h3>Errors!</h3>
-      <ul>
-        <li><em><%= flash[:message] %></em></li>
-      </ul>
-    </div>
+  <%= link_to "Join cardMe", new_user_path unless session[:user_id] %>
+
+   <%= form_tag "/session" do %>
+      <div class="inputinfo">
+        <%= label_tag :email %>:
+        <%= email_field_tag :email %>
+      </div>  
+      </br>
+      <div class="inputinfo">
+      <%= label_tag :password %>:
+      <%= password_field_tag :password %>
+      </div>
+      </br>
+      
+      <%= submit_tag "Log in!", class: 'button' %>
     <% end %>
-</div>
-</body>
 
+    <% unless flash[:message].nil? %>
+      <div id="errors">
+        <h3>Errors!</h3>
+        <ul>
+          <li><em><%= flash[:message] %></em></li>
+        </ul>
+      </div>
+      <% end %>
+  </div>
+  </div>
+
+  <div class = "description">
+    <div class="how">
+      <h2> HOW DOES IT WORK? </h2>
+    </div>
+    <ul class="list">
+      <li class="step">
+        <%= image_tag("icon.gif") %>
+        <span>Create custom business cards. Fill in your information and add images to make it unique.</span>
+      </li>
+      <li class="step">
+        <%= image_tag("icon2.gif") %>
+        <span>Text or email your card to people you connect with. They can view and save your card.</span>
+  
+      </li>
+      <li class="step">
+         <%= image_tag("icon3.gif") %>
+         <span>
+         Save cards to your roladex and view company information on your dashboard. </span>
+      </li>
+    </ul>
+  </div>
