@@ -59,7 +59,7 @@ class CardsController < ApplicationController
     org = org.gsub(/[\&\'\,']/, "")
     org = org.gsub("  "," ")
     org = org.gsub(" ","_")
-    allarticles = HTTParty.get("http://api.nytimes.com/svc/search/v2/articlesearch.json?q=#{org}&api-key=39DF8DDBDD4E589D9DB4A757AEC977E0:11:68994445")
+    allarticles = HTTParty.get("http://api.nytimes.com/svc/search/v2/articlesearch.json?q=#{org}&api-key=#{NYTIMES_CLIENT_ID}")
     articles = allarticles["response"]["docs"].map { |article| {"Title" => "#{article["snippet"]}", "Url" => "#{article["web_url"]}" }}
   end
 
@@ -69,7 +69,7 @@ class CardsController < ApplicationController
     org = org.gsub(/[\&\'\,']/, "")
     org = org.gsub("  "," ")
     org = org.gsub(" ","_")
-    response = HTTParty.get("https://www.googleapis.com/freebase/v1/topic/en/#{org}?filter=/common/topic/article&key=AIzaSyCDr3U_5O8wWfSslYbrMgf59aGiZbXjuPY")
+    response = HTTParty.get("https://www.googleapis.com/freebase/v1/topic/en/#{org}?filter=/common/topic/article&key=#{GOOGLE_CLIENT_ID}")
     summary = response["property"]["/common/topic/article"]["values"][0]["property"]["/common/document/text"]["values"][0]["value"]
   end
 
