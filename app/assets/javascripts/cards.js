@@ -33,18 +33,26 @@ function getConnections(){
 function makeCards(i){
   $.getJSON("/cards/" + allConnections[i].card_id, function(cardFound) {
     var cards = $("<div class='card' id='" + cardFound.id + "' data-connection='" + allConnections[i].id + "'>");
+    var cardmenu = $("<div class='cardmenu'></div>")
+    var cardContainer = $("<div class='cardContainer'></div>")
     $(cards).appendTo("ul.connection-cards");
     $("<li>" + cardFound.email + "</li>").appendTo(cards);
     $("<li>" + cardFound.phone_number + "</li>").appendTo(cards);
     $("<li>" + cardFound.organization + "</li>").appendTo(cards);
     $("<li>" + cardFound.position + "</li>").appendTo(cards);
-    $("<button> + </button>").appendTo(cards).on("click", addCardToGroup);
+    $("<button class='add'> + </button>").appendTo(cardmenu).on("click", addCardToGroup);
+    $("<button class='arrow'> > </button>").appendTo(cardmenu).on("click", newStories);
+    $(cardmenu).insertAfter(cards)
+    $(cardmenu).appendTo(cardContainer)
+    $(cards).appendTo(cardContainer)
+    $(cardContainer).appendTo($(".connection-cards"))
   });
 }
 
 
 function addCardToGroup(){
   $('#add-group').remove();
+  $("ul.groups_popup").detach();
   $("<ul class='groups_popup'>").appendTo($(this).parent());
   $.getJSON("/users/" + localStorage["user_id"] + "/groups", function(response){
   allGroups = response;
@@ -57,7 +65,7 @@ function addCardToGroup(){
       //card_id
     }
 
-    $("<button>Add To Groups</button>").appendTo("ul.groups_popup").on("click", getConnections);
+    $("<button class='addGroupButton'>Add To Groups</button>").appendTo("ul.groups_popup").on("click", getConnections);
   });
 }
 
@@ -105,17 +113,17 @@ function showGroups() {
 
 
 function newStories(){
-$(".connection-cards").on("click","div", function(){
+  console.log($(this));
   $(".showcard div").remove();
-  $(this).clone().appendTo(".showcard");
+  $(this).parent().parent().find(".card").clone().appendTo(".showcard");
+  $(".showcard .cardmenu").remove();
   cardId = $(".showcard .card").attr("id");
   $(".articles li").remove();
   news = $.get("/card_news/"+cardId, {card_id: cardId}, function(){
-      for (var i = 0; i < 4; i++){
-        newsResponse = news.responseJSON[i]
-        $(".articles").append($("<a href=" + newsResponse["Url"] + "><li>" + newsResponse["Title"] + "</li></a>"))
-      }
-    })
+    for (var i = 0; i < 4; i++){
+      newsResponse = news.responseJSON[i]
+      $(".articles").append($("<a href=" + newsResponse["Url"] + "><li>" + newsResponse["Title"] + "</li></a>"))
+    }
   });
 };
 
