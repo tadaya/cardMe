@@ -9,23 +9,6 @@ class CardsController < ApplicationController
     @connections = @user.connections
     @cards = @user.cards.all
     @all_cards = Card.all
-
-    #@connection = @connections.find_by(card_id: 3)
-    #@connection_card = Card.find(@connection.card_id)
-    #@nytarticles = news_stories(@connection_card.organization)
-
-
-## TO DO : PUT BACK IN CARDS INDEX
-#     <div class ="news-stories">
-#   <h1>News Stories</h1>
-#   <% @nytarticles.take(4).each do |article| %>
-#     <li><a href= "<%= article["Url"] %>"><%= article["Title"] %></a></li>
-#   <% end %>
-# </div> 
-
-    # @connection = @connections.find_by(card_id: 3)
-    # @connection_card = Card.find(@connection.card_id)
-    # @nytarticles = news_stories(@connection_card.organization)
   end
 
 
@@ -37,11 +20,6 @@ class CardsController < ApplicationController
     # call new function
     render json: @card
   end
-
-  # def card_news
-  #   @card = Card.find_by()
-  #   render json: @card
-  # end
 
   def update
     @card.update(card_params)
@@ -67,7 +45,7 @@ class CardsController < ApplicationController
     params.require(:card).permit(:email, :card_name, :position, :organization, :phone_number, :user_id, :background_image, :ogranization_logo, :profile_picture)
   end
 
-  def card_news
+  def card_dashboard
     @user = current_user
     @connections = @user.connections
     @connection = @connections.find_by(card_id: params[:card_id])
