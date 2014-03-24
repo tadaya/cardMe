@@ -135,7 +135,7 @@ body{
   margin-top: -5px;
 }
 
-.login .button, .addGroupButton {
+.login .button, .addGroupButton, .form input[type='submit'] {
   -moz-box-shadow:inset 0px 1px 0px 0px #f5978e;
   -webkit-box-shadow:inset 0px 1px 0px 0px #f5978e;
   box-shadow:inset 0px 1px 0px 0px #f5978e;
@@ -187,7 +187,7 @@ body{
   color: black;
 }
 
-.login form{
+.login form, .form form{
   margin: 30px;
   margin-top: 50px;
   line-height: 18pt;
@@ -196,6 +196,11 @@ body{
 .login input{
   margin-top: 5px;
   width: 100%;
+}
+
+.form input{
+  margin-top: 5px;
+  width: 180px;
 }
 
 .login .inputinfo{
@@ -275,7 +280,6 @@ CARD FLIP
   padding: 20px;
   border: 1px solid black;
   border-radius: 10px;
-  background-color: white;
 }
 
 
@@ -337,29 +341,24 @@ USER PROFILE PAGE
   font-size: 12pt;
 }
 
-.text input, .email input{
-  line-height: 16pt;
-  width: 200px;
-}
-
-.text select, .email select{
-  width: 100px;
-  line-height: 16pt;
-  font-size: 16pt;
-}
-
-.text, .email{
-  padding: 10px;
-}
-
-.email 
-
 .sendform{
-  width: 80%;
-  margin: 0 auto;
+  width: 60%;
+/*  position: absolute;
+  right: 100px;*/
+  text-align: right;
+  margin-top: 80px;
+  margin-bottom: 80px;
 }
 
-.button{
+.text{
+  margin-bottom: 5px;
+}
+
+.email{
+  margin-top: 5px;
+}
+
+.sendform .button{
   -moz-box-shadow:inset 0px 1px 0px 0px #f5978e;
   -webkit-box-shadow:inset 0px 1px 0px 0px #f5978e;
   box-shadow:inset 0px 1px 0px 0px #f5978e;
@@ -389,20 +388,20 @@ USER PROFILE PAGE
   font-style:normal;
   height:36px;
   line-height:30px;
-  width:76px;
+  width:100px;
   text-decoration:none;
   text-align:center;
   text-shadow:1px 1px 0px #810e05;
 }
 
-.button:hover {
+.sendform .button:hover {
   background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #d40b0b), color-stop(1, #b60707) );
   background:-moz-linear-gradient( center top, #d40b0b 5%, #b60707 100% );
   filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#d40b0b', endColorstr='#b60707');
   background-color:#d40b0b;
 }
 
-.button:active {
+.sendform .button:active {
   position:relative;
   top:1px;
 }
@@ -553,5 +552,6 @@ FORM
 
 .form{
   margin-top: 150px;
-  margin-left: 30px;  
+  margin-left: 30px;
+  font-size: 12pt;  
 }

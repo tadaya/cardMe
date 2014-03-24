@@ -60,7 +60,7 @@ class CardsController < ApplicationController
     org = org.gsub(/[\&\'\,']/, "")
     org = org.gsub("  "," ")
     org = org.gsub(" ","_")
-    allarticles = HTTParty.get("http://api.nytimes.com/svc/search/v2/articlesearch.json?#{org}&api-key=39DF8DDBDD4E589D9DB4A757AEC977E0:11:68994445&begin_date=20130101")
+    allarticles = HTTParty.get("http://api.nytimes.com/svc/search/v2/articlesearch.json?q=#{org}&api-key=39DF8DDBDD4E589D9DB4A757AEC977E0:11:68994445")
     articles = allarticles["response"]["docs"].map { |article| {"Title" => "#{article["snippet"]}", "Url" => "#{article["web_url"]}" }}
   end
 

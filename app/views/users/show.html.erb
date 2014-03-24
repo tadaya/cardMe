@@ -1,26 +1,24 @@
 <div class="welcomepage">
   <p>Hello, <%= @user.first_name %>!<p>
 
+<h2> SEND CARD </h2>
+<hr>
 <div class ="sendform">
-  <div class= "text">
+  <div class ="text">
     <%= form_tag("/users/#{@user.id}/sms") do %>
       Phone Number: <%= text_field_tag 'phone' %>
-      <div class = "text">
       <%= label_tag("Select Card") %>
       <%= select_tag(:my_cards, options_for_select(@my_card)) %>
       <%= submit_tag "Text Card", class: 'button' %>
-      </div>
     <% end %>
-  </text>
+  </div>
 
-  <div class = "email">
+  <div class ="email">
     <%= form_tag(user_path(@user)) do %>
       Email: <%= email_field_tag 'email' %>
-      <div class = "email">
       <%= label_tag("Select Card") %>
       <%= select_tag(:my_cards, options_for_select(@my_card)) %>
       <%= submit_tag "Email Card", class: 'button' %>
-      </div>
     <% end %>
   </div>
 
