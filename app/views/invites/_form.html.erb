@@ -1,4 +1,4 @@
-  <%= link_to "Join cardMe", new_user_path unless session[:user_id] %>
+  <%= link_to "Join cardMe", new_user_path unless logged_in? %>
 
 
   <form>
@@ -31,9 +31,8 @@
               addButton();
 
 
-
             } else {
-              <%= link_to "Join cardMe", new_user_path unless session[:user_id] %>
+    
              
             }
            })
