@@ -49,8 +49,10 @@ class CardsController < ApplicationController
     @connection = @connections.find_by(card_id: params[:card_id])
     @connection_card = Card.find_by(id: @connection.card_id)
     @nytarticles = news_stories(@connection_card.organization)
-    @company_summary = company_summary(@connection_card.organization)
-    render json: [news: @nytarticles, company_summary: @company_summary]
+    @info = company_info(@connection_card.organization)
+    @company_summary = @info[:summary]
+    @logo = @info[:logo]
+    render json: [news: @nytarticles, company_summary: @company_summary, logo: @logo]
   end
 
   def news_stories(organization)
@@ -63,7 +65,7 @@ class CardsController < ApplicationController
     articles = allarticles["response"]["docs"].map { |article| {"Title" => "#{article["snippet"]}", "Url" => "#{article["web_url"]}" }}
   end
 
-  def company_summary(organization)
+  def company_info(organization)
     org = organization
     org.downcase!
     org = org.gsub(/[\&\'\,']/, "")
@@ -71,10 +73,9 @@ class CardsController < ApplicationController
     org = org.gsub(" ","_")
     response = HTTParty.get("https://www.googleapis.com/freebase/v1/topic/en/#{org}?filter=/common/topic/article&key=#{GOOGLE_CLIENT_ID}")
     summary = response["property"]["/common/topic/article"]["values"][0]["property"]["/common/document/text"]["values"][0]["value"]
-  end
-
-  def company_logo(organization)
-
+    id = response["property"]["/common/topic/article"]["values"][0]["id"]
+    image = "https://usercontent.googleapis.com/freebase/v1/image/m/#{id}&key=#{GOOGLE_CLIENT_ID}"
+    return {summary: summary, logo: image}
   end
 
 private
