@@ -36,10 +36,10 @@ function makeCards(i){
     var cardmenu = $("<div class='cardmenu'></div>")
     var cardContainer = $("<div class='cardContainer'></div>")
     $(cards).appendTo("ul.connection-cards");
-    $("<li>" + cardFound.email + "</li>").appendTo(cards);
-    $("<li>" + cardFound.phone_number + "</li>").appendTo(cards);
-    $("<li>" + cardFound.organization + "</li>").appendTo(cards);
-    $("<li>" + cardFound.position + "</li>").appendTo(cards);
+    $("<li>" + "Email: " + cardFound.email + "</li>").appendTo(cards);
+    $("<li>" + "Phone Number: " + cardFound.phone_number + "</li>").appendTo(cards);
+    $("<li>" + "Organization: " + cardFound.organization + "</li>").appendTo(cards);
+    $("<li>" + "Position: " + cardFound.position + "</li>").appendTo(cards);
     $("<button class='add'> + </button>").appendTo(cardmenu).on("click", addCardToGroup);
     $("<button class='arrow'> > </button>").appendTo(cardmenu).on("click", cardDashboard);
     $(cardmenu).insertAfter(cards)
