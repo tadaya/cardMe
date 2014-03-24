@@ -17,7 +17,6 @@ class CardsController < ApplicationController
   end
 
   def show
-    # call new function
     render json: @card
   end
 
@@ -49,16 +48,35 @@ class CardsController < ApplicationController
     @user = current_user
     @connections = @user.connections
     @connection = @connections.find_by(card_id: params[:card_id])
-    @connection_card = Card.find(@connection.card_id)
+    @connection_card = Card.find_by(id: @connection.card_id)
     @nytarticles = news_stories(@connection_card.organization)
-    render json: @nytarticles
+    @company_summary = company_summary(@connection_card.organization)
+    render json: [news: @nytarticles, company_summary: @company_summary]
   end
 
   def news_stories(organization)
-    allarticles = HTTParty.get("http://api.nytimes.com/svc/search/v2/articlesearch.json?#{organization}&api-key=#{NYTIMES_CLIENT_ID}&begin_date=20130101")
+    org = organization
+    org.downcase!
+    org = org.gsub(/[\&\'\,']/, "")
+    org = org.gsub("  "," ")
+    org = org.gsub(" ","_")
+    allarticles = HTTParty.get("http://api.nytimes.com/svc/search/v2/articlesearch.json?#{org}&api-key=39DF8DDBDD4E589D9DB4A757AEC977E0:11:68994445&begin_date=20130101")
     articles = allarticles["response"]["docs"].map { |article| {"Title" => "#{article["snippet"]}", "Url" => "#{article["web_url"]}" }}
   end
 
+  def company_summary(organization)
+    org = organization
+    org.downcase!
+    org = org.gsub(/[\&\'\,']/, "")
+    org = org.gsub("  "," ")
+    org = org.gsub(" ","_")
+    response = HTTParty.get("https://www.googleapis.com/freebase/v1/topic/en/#{org}?filter=/common/topic/article&key=AIzaSyCDr3U_5O8wWfSslYbrMgf59aGiZbXjuPY")
+    summary = response["property"]["/common/topic/article"]["values"][0]["property"]["/common/document/text"]["values"][0]["value"]
+  end
+
+  def company_logo(organization)
+
+  end
 
 private
 
