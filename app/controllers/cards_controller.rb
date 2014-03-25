@@ -11,6 +11,12 @@ class CardsController < ApplicationController
     @all_cards = Card.all
   end
 
+  def allcards
+    @allcards = Card.all
+    render json: @allcards
+  end
+
+
   def edit
     
   end

@@ -1,19 +1,31 @@
 function Connection(userId, cardId) {
- this.userId = userId
- this.cardId = cardId
- this.updateConnected();
+ this.userId = userId;
+ this.cardId = cardId;
+ // this.updateConnected();
 }
 
-ConnectionGroup.prototype.updateConnected = function(){
+// ConnectionGroup.prototype.updateConnected = function(){
  //ajax call that sets the connected status to what is in the database
 
 // }
 
 
-Group.getGroups = function(){
+Connection.getConnections = function(){
   $.getJSON("/connections", function(allConnections){
     for(var i=0; i < allConnections.length; i++){
-      var connection = new Connection(allConnections[i].user_id, allConnections[i].card_id);
+      var connection = new Connection(allConnections.user_id, allConnections.card_id);
+      CardMe.connections.push(connection);
     }
-  }
+  });
 }
+
+// Connection.getConnectionsForUser = function(){
+//   $.getJSON("/users/"+ localStorage["user_id"]+"/connections", function(allConnections){
+//     for(var i=0; i < allConnections.length; i++){
+//       var connection = new Connection(allConnections.user_id, allConnections.card_id);
+//     }
+//   });
+// }
+
+console.log("CONNECTION MODEL");
+

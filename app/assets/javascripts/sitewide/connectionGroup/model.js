@@ -1,12 +1,12 @@
 
 // one for each ConnectionGroup
 function ConnectionGroup(connectionId, groupId) {
- this.connectionId = connectionId:
+ this.connectionId = connectionId;
  this.groupId      = groupId;
- this.updateConnected();
+ // this.updateConnected();
 }
 
-ConnectionGroup.prototype.updateConnected = function(){
+// ConnectionGroup.prototype.updateConnected = function(){
  //ajax call that sets the connected status to what is in the database
 
 // }
@@ -27,12 +27,13 @@ ConnectionGroup.prototype.disconnect = function(){
   });
 }
 
-ConnectionGroup.getConnections = function(){
+ConnectionGroup.getConnectionsGroups = function(){
   $.getJSON("/groupsconnections", function(groupsconnections) {
     for(var i=0; i<groupsconnections.length; i++) {
-      var connectiongroup = new ConnectionGroup(groupconnections[i].connection_id, groupsconnections[i].group_id)3
+      var connectiongroup = new ConnectionGroup(groupsconnections[i].connection_id, groupsconnections[i].group_id)
+      CardMe.groupsconnections.push(connectiongroup);
     }
-  }
+  });
  //ajax call to get all groups, and then loop for each group and instantiate a new ConnectionGroup
 
  //render a ul
