@@ -44,12 +44,26 @@ function makeCards(i){
     $(".card").css({"background-image": "url('http://s3.amazonaws.com/cardMe/cards/background_images/000/000/001/original/lights.jpeg')" });
     $("<button class='add'> + </button>").appendTo(cardmenu).on("click", addCardToGroup);
     $("<button class='arrow'> > </button>").appendTo(cardmenu).on("click", cardDashboard);
+    $("<button id="+ allConnections[i].id +" class='delete-connection'> x </button>").appendTo(cardmenu).on("click", deleteConnection);
     $(cardmenu).insertAfter(cards)
     $(cardmenu).appendTo(cardContainer)
     $(cards).appendTo(cardContainer)
     $(cardContainer).appendTo($(".connection-cards"));
   });
 }
+
+function deleteConnection(){
+    var deleteButtonId = $(this).attr("id")
+    console.log(deleteButtonId)
+    $.ajax({
+    url: '/connections/' + deleteButtonId,
+    type: "DELETE",
+    success: function(){
+      getConnections(); 
+    }
+  })
+}
+
 
 function addCardToGroup(){
   $('#add-group').remove();
