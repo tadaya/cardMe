@@ -146,7 +146,7 @@ body{
   background-color:#b60707  ;
 }
 
-.login .button, .addGroupButton {
+.login .button, .addGroupButton, .form input[type='submit'] {
   -moz-box-shadow:inset 0px 1px 0px 0px #f5978e;
   -webkit-box-shadow:inset 0px 1px 0px 0px #f5978e;
   box-shadow:inset 0px 1px 0px 0px #f5978e;
@@ -182,14 +182,14 @@ body{
   text-shadow:1px 1px 0px #810e05;
 }
 
-.login .button:hover {
+.login .button:hover, .form input[type='submit']:hover {
   background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #d40b0b), color-stop(1, #b60707) );
   background:-moz-linear-gradient( center top, #d40b0b 5%, #b60707 100% );
   filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#d40b0b', endColorstr='#b60707');
   background-color:#d40b0b;
 }
 
-.login .button:active {
+.login .button:active, .form input[type='submit']:active {
   position:relative;
   top:1px;
 }
@@ -209,11 +209,6 @@ body{
   width: 100%;
 }
 
-.form input{
-  margin-top: 5px;
-  width: 180px;
-}
-
 .login .inputinfo{
   line-height: 8pt;
   width: 80%;
@@ -230,10 +225,6 @@ body{
 JOIN FORM
 ***********/
 
-.joinform{
-  margin-top: 150px;
-  margin-left: 30px;
-}
 
 /**********
 CARD FLIP
@@ -370,10 +361,23 @@ USER PROFILE PAGE
   font-size: 12pt;
 }
 
+.welcomepage a {
+  text-decoration: none;
+  color: black;
+}
+
+.sendform a, .create-card a{
+  text-decoration: none;
+  color: black;
+  font-size: 16pt;
+}
+
+.welcomepage a:hover, .create-card a:hover{
+  color: #b60707;
+}
+
 .sendform{
-  width: 60%;
-/*  position: absolute;
-  right: 100px;*/
+  width: 61%;
   text-align: right;
   margin-top: 80px;
   margin-bottom: 80px;
@@ -385,6 +389,7 @@ USER PROFILE PAGE
 
 .email{
   margin-top: 5px;
+  margin-bottom: 20px;
 
 }
 
@@ -460,6 +465,7 @@ USER PROFILE PAGE
   position:relative;
   top:1px;
 }
+
 
 /****************
 DASHBOARD
@@ -608,8 +614,21 @@ DASHBOARD
 FORM
 *****************/
 
-.form{
+.form {
+  width: 60%;
   margin-top: 150px;
   margin-left: 30px;
-  font-size: 12pt;  
+  font-size: 14pt;  
+}
+
+.form input{
+  margin-top: 5px;
+  width: 180px;
+  height: 20px;
+  line-height: 20pt;
+}
+
+.form input[type='submit']{
+  margin-top: 10px;
+  width: 120px;
 }

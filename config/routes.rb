@@ -13,6 +13,8 @@ Cardme::Application.routes.draw do
 
   post "/invitesession", to: "session#newsession" 
 
+  post "/joinfrominvite", to: "invites#create"
+
   get "/connections", to: "connections#index"
   get "/connections/:id/groupsconnections", to: "groups_connections#index"
   post "/connections", to: "connections#create"
