@@ -18,11 +18,12 @@ function addGroups() {
 }
 
 function showGroups() {
-  $.getJSON("/users/" + localStorage["user_id"] + "/groups", function(response) {
-    allGroups = response;
+  $.getJSON("/users/" + localStorage["user_id"] + "/groups", function(groups) {
     $("ul.groups").empty();
-    for(var i = 0; i < allGroups.length; i++) {
-      ($("<li>" + allGroups[i].group_name + "</li>").append("<span id="+ allGroups[i].id + ">" + ' X ' + "</span>")).appendTo("ul.groups");
+    for(var i = 0; i < groups.length; i++) {
+      allGroups = [];
+      var group = new Group(groups[i]);
+      ($("<li>" + groups[i].group_name + "</li>").append("<span id="+ groups[i].id + ">" + ' X ' + "</span>")).appendTo("ul.groups");
     }// for loop ends
     $("span").on("click", function(e){
       var groupId = e.target.id;
@@ -47,17 +48,15 @@ function Card(card) {
     var cards = $("<div class='card'>");
     var cardmenu = $("<div class='cardmenu'></div>")
     var cardContainer = $("<div class='cardContainer'></div>")
-    $(cards).appendTo("ul.connection-cards");
+    cardContainer.appendTo("ul.connection-cards");
+    cardmenu.appendTo(cardContainer);
+    cards.appendTo(cardContainer);
     $("<li>" + "Email: " + this.card.email + "</li>").appendTo(cards);
     $("<li>" + "Phone Number: " + this.card.phone_number + "</li>").appendTo(cards);
     $("<li>" + "Organization: " + this.card.organization + "</li>").appendTo(cards);
     $("<li>" + "Position: " + this.card.position + "</li>").appendTo(cards);
     $("<button class='add'> + </button>").appendTo(cardmenu).on("click", addCardToGroup);
     $("<button class='arrow'> > </button>").appendTo(cardmenu).on("click", cardDashboard);
-    $(cardmenu).insertAfter(cards)
-    $(cardmenu).appendTo(cardContainer)
-    $(cards).appendTo(cardContainer)
-    $(cardContainer).appendTo($(".connection-cards"))
   }
   allCards.push(this);
 };
@@ -72,11 +71,11 @@ function Group(group) {
   allGroups.push(this);
 }
 
-
 function getUserConnections(){
   $.getJSON("/users/" + localStorage["user_id"] + "/connections", function(connections){
     for(var i=0; i< connections.length; i++){
-      var connection = new Connection(connection)
+      allConnections = [];
+      var connection = new Connection(connection);
       $.getJSON("/cards/" +connections[i].card_id, function(cardFound){
         console.log(connections[i]);
         var card = new Card(cardFound);
@@ -87,8 +86,51 @@ function getUserConnections(){
 };
 
 
+function addCardToGroup(){
+    $("ul.groups_popup").remove();
+    console.log(this);
+    $("<ul class='groups_popup'>").appendTo($(this).parent());
+    $.getJSON("/users/" + localStorage["user_id"] + "/groups", function(groups){
+      for(var i=0; i < groups.length; i++){
+        var grouplisting = $("<li>" + groups[i].group_name + "</li>")
+        var checkbox = $("<input type='checkbox'>");
+        checkbox.appendTo(grouplisting);
+        grouplisting.appendTo('ul.groups_popup');
+
+        for(var i=0; i<allConnections.length; i++){
+          $.getJSON("/connections/" + allConnections[i].connection.id + "/groupsconnections", function(groupsconnections) {
+
+          });
+        }
+
+
+
+        $(checkbox).on("change", selectGroup);
+      };
+  });
+}
+
+
+function selectGroup(group_id, connection_id) {
+  if(this.checked === true){
+    $.ajax({
+      url: "/groupsconnections",
+      data: {connection: connection_id, group: group_id},
+      type: "POST"
+    });
+  } else {
+    // This deletes the connection from a group
+    $.ajax({
+      url: "/groupsconnections",
+      data: {connection: connection_id, group: group_id},
+      type: "DELETE"
+    });
+  }
+}
+
 getUserConnections();
 showGroups();
+addGroups();
 
 
 
@@ -98,16 +140,12 @@ showGroups();
 
 // function addCardToGroup(){
 //   $('#add-group').remove();
-//   $("ul.groups_popup").detach();
-//   $("<ul class='groups_popup'>").appendTo($(this).parent());
+//   
 
 //   var connection_id = $(this).parent().parent().find(".card").attr("data-connection");
 //   // Making ajax request to get all the groups
-//   $.getJSON("/users/" + localStorage["user_id"] + "/groups", function(response){
-//     allGroups = response;
 //     // Get all of the connections that are already grouped together
-//     $.getJSON("/connections/" + connection_id + "/groupsconnections", function(response) {
-//       var current_connections = response;
+//     
 
 //       // Iterate through the groups and make a new li and checkbox for the user to make a choice
 //       for(var i = 0; i < allGroups.length; i++) {
@@ -127,26 +165,6 @@ showGroups();
 //     // This button closes the popup box and refreshes all of the connections 
 //     $("<button>Add To Groups</button>").appendTo("ul.groups_popup").on("click", getConnections);
 //   });
-// }
-
-// function selectGroup() {
-//   var group_id = $(this).parent().attr('id');
-//   var connection_id = $(this).parent().parent().parent().attr("data-connection");
-//   // This posts the connection to whatever group is checked
-//   if(this.checked === true){
-//     $.ajax({
-//       url: "/groupsconnections",
-//       data: {connection: connection_id, group: group_id},
-//       type: "POST"
-//     });
-//   } else {
-//     // This deletes the connection from a group
-//     $.ajax({
-//       url: "/groupsconnections",
-//       data: {connection: connection_id, group: group_id},
-//       type: "DELETE"
-//     });
-//   }
 // }
 
 
@@ -170,9 +188,3 @@ showGroups();
 //       }
 //     });
 // }
-
-
-// cardDashboard();
-// getConnections();
-// showGroups();
-// addGroups();
