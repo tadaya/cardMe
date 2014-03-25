@@ -7,6 +7,11 @@ Cardme::Application.routes.draw do
     resources :connections
   end
 
+  resources :cards, only: [:index]
+
+
+  get "/users/:user_id/connections/:id/cards", to: "cards#allcards"
+
  get "/groupsconnections", to: "groups_connections#index"
 
   post "/users/:id", to: "users#send_mail"
@@ -18,7 +23,7 @@ Cardme::Application.routes.draw do
 
   post "/joinfrominvite", to: "invites#create"
 
-  get "/allcards", to: "cards#allcards"
+  #get "/allcards", to: "cards#allcards"
 
   get "/connections", to: "connections#index"
   get "/connections/:id/groupsconnections", to: "groups_connections#index"
