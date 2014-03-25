@@ -18,6 +18,7 @@ Cardme::Application.routes.draw do
   get "/connections", to: "connections#index"
   get "/connections/:id/groupsconnections", to: "groups_connections#index"
   post "/connections", to: "connections#create"
+  delete "/connections/:id", to: "connections#destroy"
 
   post "/groupsconnections", to: "groups_connections#create"
   delete "/groupsconnections", to: "groups_connections#destroy"
