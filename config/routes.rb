@@ -4,6 +4,7 @@ Cardme::Application.routes.draw do
   resources :users do
     resources :cards, shallow: true 
     resources :groups
+    resources :connections
   end
 
   post "/users/:id", to: "users#send_mail"
