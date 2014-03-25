@@ -41,12 +41,13 @@ function makeCards(i){
     $("<li>" + "Phone Number: " + cardFound.phone_number + "</li>").appendTo(cards);
     $("<li>" + "Organization: " + cardFound.organization + "</li>").appendTo(cards);
     $("<li>" + "Position: " + cardFound.position + "</li>").appendTo(cards);
+    $(".card").css({"background-image": "url('http://s3.amazonaws.com/cardMe/cards/background_images/000/000/001/original/lights.jpeg')" });
     $("<button class='add'> + </button>").appendTo(cardmenu).on("click", addCardToGroup);
     $("<button class='arrow'> > </button>").appendTo(cardmenu).on("click", cardDashboard);
     $(cardmenu).insertAfter(cards)
     $(cardmenu).appendTo(cardContainer)
     $(cards).appendTo(cardContainer)
-    $(cardContainer).appendTo($(".connection-cards"))
+    $(cardContainer).appendTo($(".connection-cards"));
   });
 }
 
@@ -60,22 +61,25 @@ function addCardToGroup(){
   $.getJSON("/users/" + localStorage["user_id"] + "/groups", function(response){
     allGroups = response;
     // Get all of the connections that are already grouped together
-    $.getJSON("/connections/" + connection_id + "/groupsconnections", function(response) {
+    $.getJSON("/user/" + connection_id + "/groupsconnections", function(response) {
       var current_connections = response;
 
       // Iterate through the groups and make a new li and checkbox for the user to make a choice
       for(var i = 0; i < allGroups.length; i++) {
         var checkbox = $("<input type='checkbox'>");
+                $("<li id=" + allGroups[i].id + ">" + allGroups[i].group_name + "</li>").appendTo("ul.groups_popup").append(checkbox);
+        $(checkbox).on("change", selectGroup);
 
         // Iterate through the table that has the information about which cards have already been connected to a specific group, and if they have been connected previously, check the checkbox true. Otherwise leave it blank.
         for(var j = 0; j < current_connections.length; j++){
           if((current_connections[j].connection_id === parseInt(connection_id)) && (current_connections[j].group_id === allGroups[i].id)){
             $(checkbox).prop('checked', true);
+          } else {
+            $(checkbox).prop('checked', false);
           }
         }
         // Append the li and the checkbox(including it's value) to the popup div called groups_popup
-        groupNames = $("<li id=" + allGroups[i].id + ">" + allGroups[i].group_name + "</li>").appendTo("ul.groups_popup").append(checkbox);
-        $(checkbox).on("change", selectGroup);
+
       }
     });
     // This button closes the popup box and refreshes all of the connections 

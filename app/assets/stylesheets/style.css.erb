@@ -254,24 +254,26 @@ CARD FLIP
   height: 200px;
   margin-left: 30px; 
   padding-top: 70px;
+  display: inline-block;
 }
 
-
+ul li {
+  list-style-type: none;
+}
 /* flip speed goes here */
 .flipper {
   -webkit-transition: 0.6s;
   -webkit-transform-style: preserve-3d;
-
   position: relative;
 }
 
 /* hide back of pane during swap */
 .front, .back {
   -webkit-backface-visibility: hidden;
-
   position: absolute;
   top: 0;
   left: 0;
+
 }
 
 /* front pane, placed above back */
@@ -463,6 +465,7 @@ DASHBOARD
   float: right;
   width: 40%;
 }
+
 
 .right-side-dashboard{
   float: right;

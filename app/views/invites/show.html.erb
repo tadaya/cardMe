@@ -11,12 +11,16 @@
 
 
     <% if current_user %>
-      <button> ADD ME </button>
+      <button class='addconnection'> ADD ME </button>
 
       <script>
 
-      $(".addbutton").on("click", function() {
-        $.post("/connections", {user: <%=current_user.id %>, card: <%= @card.id%>})
+      $(".addconnection").on("click", function() {
+        $.post("/connections", {user: <%=current_user.id %>, card: <%= @card.id%>}).done(function(response_connection){
+          if (response_connection.success ==true ){
+            window.location = 'http://localhost:3000/users/' +response_connection.id + '/cards';
+          }
+        });
       });
       </script>
     <% else %>
