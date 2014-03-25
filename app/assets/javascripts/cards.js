@@ -1,34 +1,40 @@
 var allCards = [];
-var allGroups = [];
 var allConnections =[];
+
+var allGroups = [];
+
 var allGroupsConnections = [];
 var allChecks = [];
-
 
 // CARD FACTORY
 function Card(card) {
   this.user = localStorage["user_id"];
   this.card = card;
-  this.displayCard = function() {
+  allCards.push(this);
+};
+
+function displayCards() {
+  for(var i=0;i<allCards.length;i++) {
+    card = allCards[i];
     var cards = $("<div class='card'>");
-    var cardmenu = $("<div class='cardmenu'></div>")
+    var cardmenu = $("<div class='cardmenu'></div>");
     var cardContainer = $("<div class='cardContainer'id="+ this.card.id + "></div>")
     cardContainer.appendTo("ul.connection-cards");
     cardmenu.appendTo(cardContainer);
     cards.appendTo(cardContainer);
-    $("<li>" + "Email: " + this.card.email + "</li>").appendTo(cards);
-    $("<li>" + "Phone Number: " + this.card.phone_number + "</li>").appendTo(cards);
-    $("<li>" + "Organization: " + this.card.organization + "</li>").appendTo(cards);
-    $("<li>" + "Position: " + this.card.position + "</li>").appendTo(cards);
+    $("<li>" + "Email: " + card.email + "</li>").appendTo(cards);
+    $("<li>" + "Phone Number: " + card.phone_number + "</li>").appendTo(cards);
+    $("<li>" + "Organization: " + card.organization + "</li>").appendTo(cards);
+    $("<li>" + "Position: " + card.position + "</li>").appendTo(cards);
     $("<button class='add'> + </button>").appendTo(cardmenu).on("click", addCardToGroup);
-    $("<button class='arrow'> > </button>").appendTo(cardmenu).on("click", cardDashboard);
-  }
-  allCards.push(this);
+    $("<button class='arrow'> > </button>").appendTo(cardmenu).on("click", console.log("DASH"));
+  };
 };
 
 function Connection(connection) {
   this.connection = connection;
   allConnections.push(this);
+  this.card = allCards.indexOf(this);
 }
 
 function Group(group) {
@@ -42,12 +48,6 @@ function GroupsConnections(groupsconnection){
   allGroupsConnections.push(this);
 }
 
-function CheckBox(check, connection, group){
-  this.connection = connection;
-  this.group = group;
-  this.check = check;
-  allChecks.push(this);
-}
 
 
 function addGroups() {
@@ -97,9 +97,8 @@ function getUserConnections(){
     allConnections = [];
     for(var i=0; i < connections.length; i++){
       var connection = new Connection(connections[i]);
-      $.getJSON("/cards/" +connections[i].card_id, function(cardFound){
+      $.getJSON("/cards/" + connections[i].card_id, function(cardFound){
         var card = new Card(cardFound);
-        card.displayCard();
       });
     };
   });
@@ -108,7 +107,6 @@ function getUserConnections(){
 function getGroupsConnections(){
   for(var i=0; i < allConnections.length; i++){
     $.getJSON("/connections/" + allConnections[i].connection.id + "/groupsconnections", function(groupsconnections) {
-      allGroupsConnections = [];
       for(var j=0; j<groupsconnections.length; j++){
         var cg = new GroupsConnections(groupsconnections[j]);
       };
@@ -118,71 +116,72 @@ function getGroupsConnections(){
 
 function addCardToGroup(){
   $("ul.groups_popup").remove();
-  $("<ul class='groups_popup'>").appendTo($(this).parent());
+  popup = $("<ul class='groups_popup'>");
+  popup.appendTo($(this).parent());
   cardID = $(this).parent().parent().attr("id");
+  var connectionID;
 
-
+  // match connection to card ID
+  for(var x=0; x<allConnections.length; x++){
+      if(allConnections[x].connection.card_id === cardID){
+      connectionID = allConnections[x].connection.id;
+    }
+  }
 
   allChecks=[];
 
-
   for(var i=0; i<allConnections.length;i++){
     for(var j =0; j<allGroups.length; j++){
-      var check = false
-      var check = new CheckBox(check, allConnections[i].connection.id, allGroups[j].group.id);
+      var checkbox = $("<input type='checkbox' data-connection=" + allConnections[i].connection.id + " data-group=" + allGroups[j].group.id +">");
+      allChecks.push(checkbox);
     };
   };
 
   for(var k =0; k<allChecks.length; k++) {
     for(var l=0; l<allGroupsConnections.length; l++){
-      if(allGroupsConnections[l].group === allChecks[k].group && allGroupsConnections[l].connection === allChecks[l].connection) {
-        allChecks[k].check = true;
+      if( (allGroupsConnections[l].group === allChecks[k].attr("data-group")) && (allGroupsConnections[l].connection === allChecks[l].attr("data-connection"))) {
+        allChecks[k].prop("checked", true);
       }
     };
   };
 
-
-  for(var t=0; t<allConnections.length; t++){
-    if(allConnections[t].card_id === cardID){
-        connectionID = connection[t];
-      for(var s=0; t<allChecks.length; s++){
-        if(allchecks[s].connection === connectionID){
-          for(var j=0; j<allGroups.length; j++){
-            var grouplisting = $("<li>" + allGroups[j].group.group_name + "</li>");
-            grouplisting.appendTo('.groups_popup');
-            var checkbox = $("<input type='checkbox'>");
-            checkbox.prop("checekd", allchecks[s].check)
-            checkbox.appendTo(grouplisting);
-            checkbox.on("change",)
-          }
-        }
+  for(var t=0; t<allGroups.length; t++){
+    for(var s=0; s<allChecks.length; s++){
+      if(allChecks[s].attr("data-connection") === connectionID) {
+        allchecks[s].appendTo(popup);
+        allchecks[s].on("change", selectGroup);
       }
-    };
-  };
+    }
+  }
 };
-
 
 function selectGroup() {
   if(this.checked === true){
     $.ajax({
       url: "/groupsconnections",
-      data: {connection: connection_id, group: group_id},
+      data: {connection: this.attr('data-connection'), group: this.attr('data-group')},
       type: "POST"
     });
   } else {
     // This deletes the connection from a group
     $.ajax({
       url: "/groupsconnections",
-      data: {connection: connection_id, group: group_id},
+      data: {connection: this.attr('data-connection'), group: this.attr('data-group')},
       type: "DELETE"
     });
   }
 }
 
+
+
+
+addGroups();
+showGroups();
+
+displayCards();
 getUserConnections();
 getGroupsConnections();
-showGroups();
-addGroups();
+displayCards();
 
 
 // function cardDashboard(){
