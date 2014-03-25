@@ -7,13 +7,15 @@ body{
   margin-top: 130px;
   list-style-type: none;
   font-family: 'Muli', sans-serif;
+  background: rgb(211,212,214);;
 }
 
 header{
   height: 70px;
   width: 100%;
-  position: absolute;
+  position: fixed;
   top: 0;
+  z-index: 1;
   background-color: #363636;
   -webkit-box-shadow: 0px 5px 5px 0px rgba(50, 50, 50, 0.75);
   -moz-box-shadow:    0px 5px 5px 0px rgba(50, 50, 50, 0.75);
@@ -286,15 +288,15 @@ ul li {
   border-radius: 10px;
 }
 
-.personal_info_list_wrapper {
-  float: right;
-  /*border: 1px solid black;*/
-  border-radius: 10px;
-  font-family:"Myriad Pro", arial, helvetica, sans-serif;
-  font-size: 11px;
-  line-height: 9px;
-  padding: 9px;
-  background-color: rgba(128,128,128, 0.2)
+
+.card-small {
+  width: 30%;
+  height: 40%;
+}
+
+
+.card li{
+  list-style-type: none;
 }
 
 
@@ -313,7 +315,7 @@ ul li {
   position: relative;
 }
 
-/*.card-profile-pic-right-top {
+.card-profile-pic-right-top {
   border: 1px solid black;
   height: 50px;
   width: 40px;
@@ -335,11 +337,8 @@ ul li {
   width: 40px;
   float: left;
   margin-top: 70px;
-}*/
-
-.card li{
-  list-style-type: none;
 }
+
 
 .edit li{
   list-style-type: none;
@@ -472,44 +471,54 @@ DASHBOARD
 *****************/
 
 .news-stories{
-  border: 1px solid black;
-  border-radius: 10px;
-  padding: 20px;
+  position: relative;
+  right: 55px;
+  top: -80px;
+/*  border-radius: 10px;*/
   float: right;
   width: 40%;
+  background: rgb(242, 243, 245);
+  height: 300px;
+  width: 550px;
+
 }
 
+#news-stories-header{
+  color: white;
+  height: 40px;
+  background: rgb(62,62,64);
+  text-align: center;
+}
 
-.right-side-dashboard{
-  float: right;
-  position: absolute;
-  top: 0px;
-  right: 80px;
-  width: 60%;
+.articles li a{
+  color: rgb(155, 209, 31);
+  text-decoration: none;
 }
 
 .showcard{
   padding: 20px;
   position: absolute;
   top: 10px;
-  left: 100px;
-  width: 30%;
+  left: 725px;
+  width: 50%;
+  border: 1px solid red;
 }
 
-/*.card{
+.card{
   position: relative;
-}*/
+  border: 2px solid black;
+}
 
 .groups_popup{
-  border: 1px solid black;
+  /*border: 1px solid black;*/
   border-radius: 10px;
-  background-color: #C8C6C7;
-  width: 100px;
+  background-color: rgba(134,164,183,0.5);
+  width: 150px;
   height: 150px;
   position: absolute;
   top: 0px;
-  right: 30px;
-  overflow-y:scroll
+  right: -40px;
+ /* overflow-y:scroll*/
 }
 
 .groups_popup li{
@@ -524,15 +533,29 @@ DASHBOARD
 
 .addGroupButton{
   width: 120px;
-  position: absolute;
-  left: 8px;
+  position: relative;
+  top: 65px;
+  left: 1px;
   font-size: 8pt;
   margin-top: 8px;
 }
 
 .connection-cards{
   width: 40%;
-  overflow-y:scroll;
+ /* overflow-y:scroll;*/
+}
+
+.connection-box{
+  position: relative;
+  top: 20px;
+  background: rgb(242, 243, 245);
+}
+
+#connection-box-text{
+  background: rgb(62,62,64);
+  height: 40px;
+  color: white;
+  text-align: center;
 }
 
 .arrow, .add, .delete-connection{
@@ -602,11 +625,78 @@ DASHBOARD
   position: relative;
 }
 
-.roladex{
+/*.roladex{
+  background: rgb(211,212,214);
+  padding: 30px;
+}*/
+
+#dashboard-groups{
+  /*border: 1px solid black;*/
+  width: 500px;
+  height: 200px;
+  background: rgb(242,243,245);
+}
+
+.groups li{
+  height: 40px;
+  width: 90px;
+  border-color: rgb(62,62,64);
+  background-color: rgb(62,62,64);
+  border-radius: 5px;
+  display: inline-block;
+  margin-left: 10px;
+  text-align: center;
+  color: rgb(155, 209, 31); /*neon green*/
+ /* color: rgb(137, 185, 207);*/ /* blue */
+  font-weight: bold;
+  font-size: 12px;
+
+  padding: 10px;
+  -webkit-box-sizing: border-box; 
+  -moz-box-sizing: border-box;    
+  box-sizing: border-box; 
+}
+#menu-column{
+  width: 500px;
   position: relative;
-  width: 100%;
-  margin-top: 100px;
-  margin-left: 30px;
+  top: 100px;
+  left: 20px;
+}
+
+.company_summary{
+  position: relative;
+  top: 200px;
+  left: 520px;
+  width: 500px;
+  height: 200px;
+  background: rgb(242, 243, 245);
+  padding: 20px;
+  text-align: justify;
+}
+
+.company_summary_header{
+  background: rgb(242, 243, 245);
+  width: 540px;
+  height: 250px;
+  margin-left: 660px;
+  margin-top: -396px;
+}
+
+#company-box-head{
+  background: rgb(62,62,64);
+  height: 40px;
+  color: white;
+  text-align: center;
+  padding: 5px;
+}
+
+#group_form{
+  /*border: 1px solid green;*/
+  background: rgb(62,62,64);
+  height: 40px;
+  color: white;
+  text-align: center;
+  padding-top: 5px;
 }
 
 
