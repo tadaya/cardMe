@@ -1,4 +1,10 @@
-<form>
+<% unless logged_in? %>
+  <button class="joinbutton">JOIN CARDME</button>
+    <form class="joinForm">
+    </form>
+<% end %> 
+
+<form class="invitelogin">
   Email: <input type="email" name="email"><br>
   Password: <input type="password" name="password">
   <input type="submit" value="Log In">
@@ -6,27 +12,26 @@
 
 
 <script>
+
   $('form').on("submit", function(e){
     e.preventDefault();
-    console.log("hello")
     $.post('/session', {email: $("input[name='email']").val(), password: $("input[name='password']").val() }).done(function(response){
           if (response.success === true){
           
             var addButton =  function(){
                 $("<button class ='addbutton'> ADD CARD </button>").appendTo("body");
-                $("form").remove();
+                $("invitelogin").remove();
                 $(".addbutton").on("click", function() {
                   $.post("/connections", {user:response.id, card: <%= @card.id%>}).done(function(response_connection){
+                    console.log("hello")
                     if (response_connection.success ==true ){
-                      window.location = 'http://getcarded.herokuapp.com/users/' +response_connection.id + '/cards';
+                      window.location = 'http://localhost:3000/users/' +response_connection.id + '/cards';
                     }
                   })
                 });
               };
 
             addButton();
-
-
 
           } else {
           
@@ -37,6 +42,28 @@
         });
   })
 
-  
+  $(".joinbutton").on("click", function(addButton){
+      $(".joinForm").append("Email: <input type='email', name='email'></input>");
+      $(".joinForm").append("Password: <input type='password', name='password'></input>");
+      $(".joinForm").append("Password Confirmation: <input type='password', name='password_confirmation'></input>");
+      $(".joinForm").append("First Name: <input type='text', name='first_name'></input>");
+      $(".joinForm").append("Last Name: <input type='text', name='last_name'></input>");
+      $(".joinForm").append("<input type='submit', value='Join'></input>");
+      $(".invitelogin").remove();
+      $(".joinbutton").remove();
+    });
+      
+      $(".joinForm").on("submit", function(e){
+        e.preventDefault();
+        $.post('/joinfrominvite', { email: $("input[name='email']").val(), 
+                           password: $("input[name='password']").val(), 
+                           password_confirmation: $("input[name='password_confirmation']").val(), 
+                           first_name: $("input[name='first_name']").val(), 
+                           last_name: $("input[name='last_name']").val()}, function(){
+                            $(".joinForm").remove();
+                            $(".addbutton").remove();
+                            window.location.reload()
+                           } )
+      }); 
 
 </script>

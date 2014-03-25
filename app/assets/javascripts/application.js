@@ -14,4 +14,6 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree ./sitewide 
+//= require_tree .sitewide/connectionGroup
 
+ 

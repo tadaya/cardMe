@@ -12,8 +12,9 @@ body{
 header{
   height: 70px;
   width: 100%;
-  position: absolute;
+  position: fixed;
   top: 0;
+  z-index: 1;
   background-color: #363636;
   -webkit-box-shadow: 0px 5px 5px 0px rgba(50, 50, 50, 0.75);
   -moz-box-shadow:    0px 5px 5px 0px rgba(50, 50, 50, 0.75);
@@ -136,7 +137,6 @@ body{
   margin-top: -5px;
 }
 
-
 .login .button, .addGroupButton, .form input[type='submit'] {
   -moz-box-shadow:inset 0px 1px 0px 0px #f5978e  ;
   -webkit-box-shadow:inset 0px 1px 0px 0px #f5978e  ;
@@ -147,7 +147,7 @@ body{
   background-color:#b60707  ;
 }
 
-.login .button, .addGroupButton {
+.login .button, .addGroupButton, .form input[type='submit'] {
   -moz-box-shadow:inset 0px 1px 0px 0px #f5978e;
   -webkit-box-shadow:inset 0px 1px 0px 0px #f5978e;
   box-shadow:inset 0px 1px 0px 0px #f5978e;
@@ -183,14 +183,14 @@ body{
   text-shadow:1px 1px 0px #810e05;
 }
 
-.login .button:hover {
+.login .button:hover, .form input[type='submit']:hover {
   background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #d40b0b), color-stop(1, #b60707) );
   background:-moz-linear-gradient( center top, #d40b0b 5%, #b60707 100% );
   filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#d40b0b', endColorstr='#b60707');
   background-color:#d40b0b;
 }
 
-.login .button:active {
+.login .button:active, .form input[type='submit']:active {
   position:relative;
   top:1px;
 }
@@ -210,11 +210,6 @@ body{
   width: 100%;
 }
 
-.form input{
-  margin-top: 5px;
-  width: 180px;
-}
-
 .login .inputinfo{
   line-height: 8pt;
   width: 80%;
@@ -231,10 +226,6 @@ body{
 JOIN FORM
 ***********/
 
-.joinform{
-  margin-top: 150px;
-  margin-left: 30px;
-}
 
 /**********
 CARD FLIP
@@ -254,24 +245,26 @@ CARD FLIP
   height: 200px;
   margin-left: 30px; 
   padding-top: 70px;
+  display: inline-block;
 }
 
-
+ul li {
+  list-style-type: none;
+}
 /* flip speed goes here */
 .flipper {
   -webkit-transition: 0.6s;
   -webkit-transform-style: preserve-3d;
-
   position: relative;
 }
 
 /* hide back of pane during swap */
 .front, .back {
   -webkit-backface-visibility: hidden;
-
   position: absolute;
   top: 0;
   left: 0;
+
 }
 
 /* front pane, placed above back */
@@ -294,15 +287,15 @@ CARD FLIP
   border-radius: 10px;
 }
 
-.personal_info_list_wrapper {
-  float: right;
-  /*border: 1px solid black;*/
-  border-radius: 10px;
-  font-family:"Myriad Pro", arial, helvetica, sans-serif;
-  font-size: 11px;
-  line-height: 9px;
-  padding: 9px;
-  background-color: rgba(128,128,128, 0.2)
+
+.card-small {
+  width: 30%;
+  height: 40%;
+}
+
+
+.card li{
+  list-style-type: none;
 }
 
 
@@ -321,33 +314,30 @@ CARD FLIP
   position: relative;
 }
 
-/*.card-profile-pic-right-top {
+.card-profile-pic-right-top {
   border: 1px solid black;
   height: 50px;
   width: 40px;
   float: right;
-}*/
+}
 
 
-/*.card-profile-pic-left-top {
+.card-profile-pic-left-top {
   border: 1px solid black;
   height: 50px;
   width: 40px;
   float: left;
   margin-top: -20px;
-}*/
+}
 
-/*card-profile-pic-left-bottom {
+.card-profile-pic-left-bottom {
   border: 1px solid black;
   height: 50px;
   width: 40px;
   float: left;
   margin-top: 70px;
-}*/
-
-.card li{
-  list-style-type: none;
 }
+
 
 .edit li{
   list-style-type: none;
@@ -369,10 +359,23 @@ USER PROFILE PAGE
   font-size: 12pt;
 }
 
+.welcomepage a {
+  text-decoration: none;
+  color: black;
+}
+
+.sendform a, .create-card a{
+  text-decoration: none;
+  color: black;
+  font-size: 16pt;
+}
+
+.welcomepage a:hover, .create-card a:hover{
+  color: #b60707;
+}
+
 .sendform{
-  width: 60%;
-/*  position: absolute;
-  right: 100px;*/
+  width: 61%;
   text-align: right;
   margin-top: 80px;
   margin-bottom: 80px;
@@ -384,6 +387,7 @@ USER PROFILE PAGE
 
 .email{
   margin-top: 5px;
+  margin-bottom: 20px;
 
 }
 
@@ -395,6 +399,14 @@ USER PROFILE PAGE
   background:-moz-linear-gradient( center top, #b60707   5%, #d40b0b   100% );
   filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#b60707  ', endColorstr='#d40b0b  ');
   background-color:#b60707;
+}
+
+.text{
+  margin-bottom: 5px;
+}
+
+.email{
+  margin-top: 5px;
 }
 
 .sendform .button{
@@ -452,48 +464,83 @@ USER PROFILE PAGE
   top:1px;
 }
 
+
 /****************
 DASHBOARD
 *****************/
 
-.news-stories{
-  border: 1px solid black;
-  border-radius: 10px;
-  padding: 20px;
-  float: right;
-  width: 40%;
+.roladex{
+  width: 100%;
+  margin-top: 80px;
+  margin-right: 20px;
+  margin-left: 20px;
 }
 
-.right-side-dashboard{
+#menu-column{
+  margin-top: 30px;
+  width: 500px;
+  float: left;
+}
+
+#right-side-dashboard{
+  margin-top: 30px;
+  width: 500px;
   float: right;
-  position: absolute;
-  top: 0px;
-  right: 80px;
-  width: 60%;
+  margin-right: 300px;
+}
+
+.news-stories {
+  border-radius: 10px;
+  width: 40%;
+  background: rgb(242, 243, 245);
+  height: 400px;
+  width: 550px;
+}
+
+.articles{
+  padding: 20px;
+  font-size: 12pt;
+}
+
+#news-stories-header, #company-header, #connection-header{
+  color: white;
+  padding-top: 20px;
+  height: 40px;
+  background: rgb(62,62,64);
+  text-align: center;
+}
+
+.company_summary{
+  padding: 40px;
+  font-size: 12pt;
+}
+
+.articles a{
+  text-decoration: none;
+  padding: 3px;
+  color: black;
+}
+
+.articles a:hover{
+  color: #B60707;
 }
 
 .showcard{
   padding: 20px;
-  position: absolute;
-  top: 10px;
-  left: 100px;
-  width: 30%;
+  height: 200px;
+  margin-bottom: 10px;
 }
 
-/*.card{
-  position: relative;
-}*/
-
 .groups_popup{
-  border: 1px solid black;
+  /*border: 1px solid black;*/
   border-radius: 10px;
-  background-color: #C8C6C7;
-  width: 100px;
+  background-color: rgba(134,164,183,0.5);
+  width: 150px;
   height: 150px;
   position: absolute;
   top: 0px;
-  right: 30px;
-  overflow-y:scroll
+  right: -40px;
+ /* overflow-y:scroll*/
 }
 
 .groups_popup li{
@@ -508,18 +555,25 @@ DASHBOARD
 
 .addGroupButton{
   width: 120px;
-  position: absolute;
-  left: 8px;
+  position: relative;
+  top: 65px;
+  left: 1px;
   font-size: 8pt;
   margin-top: 8px;
 }
 
 .connection-cards{
   width: 40%;
-  overflow-y:scroll;
+ /* overflow-y:scroll;*/
 }
 
-.arrow, .add{
+.connection-box{
+  position: relative;
+  top: 20px;
+  background: rgb(242, 243, 245);
+}
+
+.arrow, .add, .delete-connection{
   -moz-box-shadow:inset 0px 1px 0px 0px #f5978e;
   -webkit-box-shadow:inset 0px 1px 0px 0px #f5978e;
   box-shadow:inset 0px 1px 0px 0px #f5978e;
@@ -554,28 +608,29 @@ DASHBOARD
   text-align:center;
   text-shadow:1px 1px 0px #810e05;
 }
-.add:hover, .arrow:hover {
+.add:hover, .arrow:hover, .delete-connection:hover {
   background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #c62d1f), color-stop(1, #f24537) );
   background:-moz-linear-gradient( center top, #c62d1f 5%, #f24537 100% );
   filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#c62d1f', endColorstr='#f24537');
   background-color:#c62d1f;
 }
 
-.add:hover, .arrow:hover {
+.add:hover, .arrow:hover, .delete-connection:hover {
   position:relative;
   top:1px;
 }
 
+
 .cardmenu{
   width: 230px;
-  height: 230px;
+  height: 300px;
   float: left;
   position: absolute;
   top: 20px;
   right: 10px;
 }
 
-.add{
+.add, .arrow, .delete-connection{
   margin-bottom: 4px;
   display: block;
 }
@@ -585,11 +640,59 @@ DASHBOARD
   position: relative;
 }
 
-.roladex{
-  position: relative;
-  width: 100%;
-  margin-top: 100px;
-  margin-left: 30px;
+
+#dashboard-groups{
+  /*border: 1px solid black;*/
+  width: 500px;
+  height: 200px;
+  background: rgb(242,243,245);
+}
+
+.groups li{
+  height: 40px;
+  width: 90px;
+  border-color: rgb(62,62,64);
+  background-color: rgb(62,62,64);
+  border-radius: 5px;
+  display: inline-block;
+  margin-left: 10px;
+  text-align: center;
+  color: rgb(155, 209, 31); /*neon green*/
+ /* color: rgb(137, 185, 207);*/ /* blue */
+  font-weight: bold;
+  font-size: 12px;
+
+  padding: 10px;
+  -webkit-box-sizing: border-box; 
+  -moz-box-sizing: border-box;    
+  box-sizing: border-box; 
+}
+
+.company-summary-box{
+  background: rgb(242, 243, 245);
+  height: 500px;
+  margin-top: 30px;
+  width: 550px;
+  margin-bottom: 20px;
+  border-radius: 0 0 10px 10px;
+}
+
+#company-box-head{
+  background: rgb(62,62,64);
+  height: 40px;
+  color: white;
+  text-align: center;
+  padding: 5px;
+
+}
+
+#group_form{
+  /*border: 1px solid green;*/
+  background: rgb(62,62,64);
+  height: 40px;
+  color: white;
+  text-align: center;
+  padding-top: 5px;
 }
 
 
@@ -597,8 +700,21 @@ DASHBOARD
 FORM
 *****************/
 
-.form{
+.form {
+  width: 60%;
   margin-top: 150px;
   margin-left: 30px;
-  font-size: 12pt;  
+  font-size: 14pt;  
+}
+
+.form input{
+  margin-top: 5px;
+  width: 180px;
+  height: 20px;
+  line-height: 20pt;
+}
+
+.form input[type='submit']{
+  margin-top: 10px;
+  width: 120px;
 }
