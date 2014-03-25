@@ -40,15 +40,10 @@
 <%= link_to("Create a new card", new_user_card_path(@user)) %>
 <% else %>
   <% @cards.each do |card| %>
-  <div class="flip-container" ontouchstart="this.classList.toggle('hover');">
-  <div class="flipper">
-    <div class="front">
+
     <div id="<%= card.id %>" class="card" style="background-image: url('<%= card.background_image %>'); background-size: 100%";>
-    </div>
-  </div>
       <div class="personal_info_list_wrapper">
         <div class="actual_list">
-          <div class="back">
           <ul>
             <h4>Email Address</h4>
             <li><%= card.email %></li>
@@ -61,8 +56,7 @@
           </ul>
         </div>
       </div>
-      </div>
-      <div class="card-profile-pic" style="background-image: url('<%= card.profile_picture %>'); background-size: 100% 100%; height: 90px; width: 75px">
+            <div class="card-profile-pic" style="background-image: url('<%= card.profile_picture %>'); background-size: 100% 100%; height: 90px; width: 75px">
       </div>
     </div>
     <ul class="edit">
