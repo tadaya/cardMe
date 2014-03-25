@@ -11,4 +11,10 @@ class ConnectionsController < ApplicationController
     render json: {connection: @connection.id, success: true, id: params[:user]}
   end
 
+  def destroy
+    @connection = Connection.find(params[:id])
+    @connection.destroy
+    render json: @connection
+  end
+
 end

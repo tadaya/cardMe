@@ -526,7 +526,7 @@ DASHBOARD
   overflow-y:scroll;
 }
 
-.arrow, .add{
+.arrow, .add, .delete-connection{
   -moz-box-shadow:inset 0px 1px 0px 0px #f5978e;
   -webkit-box-shadow:inset 0px 1px 0px 0px #f5978e;
   box-shadow:inset 0px 1px 0px 0px #f5978e;
@@ -561,28 +561,29 @@ DASHBOARD
   text-align:center;
   text-shadow:1px 1px 0px #810e05;
 }
-.add:hover, .arrow:hover {
+.add:hover, .arrow:hover, .delete-connection:hover {
   background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #c62d1f), color-stop(1, #f24537) );
   background:-moz-linear-gradient( center top, #c62d1f 5%, #f24537 100% );
   filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#c62d1f', endColorstr='#f24537');
   background-color:#c62d1f;
 }
 
-.add:hover, .arrow:hover {
+.add:hover, .arrow:hover, .delete-connection:hover {
   position:relative;
   top:1px;
 }
 
+
 .cardmenu{
   width: 230px;
-  height: 230px;
+  height: 300px;
   float: left;
   position: absolute;
   top: 20px;
   right: 10px;
 }
 
-.add{
+.add, .arrow, .delete-connection{
   margin-bottom: 4px;
   display: block;
 }
