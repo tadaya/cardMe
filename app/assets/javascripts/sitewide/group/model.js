@@ -16,5 +16,7 @@ Group.getGroups = function(){
       var group = new Group(userGroups[i].group_name, userGroups[i].user_id);
       CardMe.groups.push(group);
     }
-  });
+  }).success(Application);
 }
+
+

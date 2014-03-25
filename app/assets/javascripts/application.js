@@ -9,11 +9,11 @@
 //
 // Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
 // about supported directives.
+
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree ./sitewide
-//= require application
 //= require cards
 //= require_self
 
@@ -27,4 +27,6 @@ CardMe.groups = [];
 CardMe.groupsconnections = [];
 
 console.log("APPLICATION")
+
+var NumberLoaded = 0;
 

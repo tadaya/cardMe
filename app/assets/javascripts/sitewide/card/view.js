@@ -6,12 +6,13 @@ Card.prototype.render = function() {
     cardmenu.appendTo(cardContainer);
     cards.appendTo(cardContainer);
 
+    console.log(this);
     console.log($(this));
 
     $("<li>" + "Email: " + this.card.email + "</li>").appendTo(cards);
     $("<li>" + "Phone Number: " + this.card.phone_number + "</li>").appendTo(cards);
     $("<li>" + "Organization: " + this.card.organization + "</li>").appendTo(cards);
     $("<li>" + "Position: " + this.card.position + "</li>").appendTo(cards);
-    $("<button class='add'> + </button>").appendTo(cardmenu).on("click", console.log("Add to Group"));
+    $("<button class='add'> + </button>").appendTo(cardmenu).on("click", renderGroupsPopup);
     $("<button class='arrow'> > </button>").appendTo(cardmenu).on("click", console.log("DASHBOARD"));
 }

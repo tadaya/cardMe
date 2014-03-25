@@ -9,27 +9,25 @@
 // for each groups connection, set those listeners so its its posting to DB
 // render 
 
+  Card.getCards();
+  ConnectionGroup.getConnectionsGroups();
+  Group.getGroups();
+  Connection.getConnections();
 
-Card.getCards();
-ConnectionGroup.getConnectionsGroups();
-Group.getGroups();
-Connection.getConnections();
-console.log(CardMe.connections)
-console.log(CardMe.groups)
-
-  for(var i = 0; i < CardMe.connections.length; i++){
-    console.log("card1")
-    for(var j = 0; j < CardMe.cards.length; j++){
-      if (localStorage["user_id"] === CardMe.connections[i].userId){
-        CardMe.cards[j].render();
-        console.log("card")
+function Application() {
+  if(NumberLoaded === 3) {
+    for(var i = 0; i < CardMe.connections.length; i++){
+      for(var j = 0; j < CardMe.cards.length; j++){
+        if (parseInt(localStorage["user_id"]) === CardMe.connections[i].userId){
+          CardMe.cards[j].render();
+        }
       }
     }
+  } else {
+    NumberLoaded++;
+    console.log(NumberLoaded);
   }
-
-  console.log("after");
-  console.log(CardMe.connections);
-
+}
 
 
 

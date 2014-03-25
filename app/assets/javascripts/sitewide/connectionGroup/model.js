@@ -33,7 +33,7 @@ ConnectionGroup.getConnectionsGroups = function(){
       var connectiongroup = new ConnectionGroup(groupsconnections[i].connection_id, groupsconnections[i].group_id)
       CardMe.groupsconnections.push(connectiongroup);
     }
-  });
+  }).success(Application);
  //ajax call to get all groups, and then loop for each group and instantiate a new ConnectionGroup
 
  //render a ul
