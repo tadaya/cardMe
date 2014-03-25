@@ -1,43 +1,8 @@
 var allCards = [];
 var allGroups = [];
 var allConnections =[];
-
-
-function addGroups() {
-  $('#group_form').on("submit", function(e){
-    e.preventDefault();
-    input = $('input#group_group_name');
-    $.ajax({
-      url: '/users/' + localStorage["user_id"] + '/groups',
-      type: 'POST',
-      data: {group_name: input.val()}
-    });
-    input.val("");
-  showGroups();
-  });
-}
-
-function showGroups() {
-  $.getJSON("/users/" + localStorage["user_id"] + "/groups", function(groups) {
-    $("ul.groups").empty();
-    for(var i = 0; i < groups.length; i++) {
-      allGroups = [];
-      var group = new Group(groups[i]);
-      ($("<li>" + groups[i].group_name + "</li>").append("<span id="+ groups[i].id + ">" + ' X ' + "</span>")).appendTo("ul.groups");
-    }// for loop ends
-    $("span").on("click", function(e){
-      var groupId = e.target.id;
-      $.ajax({
-        url: '/users/' + localStorage["user_id"] + '/groups/' + groupId,
-        type: "DELETE",
-        success: function(){
-          e.target.parentElement.remove();
-        }//ends removing element from dom
-      });
-      //ajax closed
-    });// ends listener
-  });// ends getJSON
-}// ends showGroups
+var allGroupsConnections = [];
+var allChecks = [];
 
 
 // CARD FACTORY
@@ -47,7 +12,7 @@ function Card(card) {
   this.displayCard = function() {
     var cards = $("<div class='card'>");
     var cardmenu = $("<div class='cardmenu'></div>")
-    var cardContainer = $("<div class='cardContainer'></div>")
+    var cardContainer = $("<div class='cardContainer'id="+ this.card.id + "></div>")
     cardContainer.appendTo("ul.connection-cards");
     cardmenu.appendTo(cardContainer);
     cards.appendTo(cardContainer);
@@ -71,13 +36,68 @@ function Group(group) {
   allGroups.push(this);
 }
 
+function GroupsConnections(groupsconnection){
+  this.group = groupsconnection.group_id;
+  this.connection = groupsconnection.connection_id;
+  allGroupsConnections.push(this);
+}
+
+function CheckBox(check, connection, group){
+  this.connection = connection;
+  this.group = group;
+  this.check = check;
+  allChecks.push(this);
+}
+
+
+function addGroups() {
+  $('#group_form').on("submit", function(e){
+    e.preventDefault();
+    input = $('input#group_group_name');
+    $.ajax({
+      url: '/users/' + localStorage["user_id"] + '/groups',
+      type: 'POST',
+      data: {group_name: input.val()}
+    });
+    input.val("");
+  showGroups();
+  });
+}
+
+function showGroups() {
+  $.getJSON("/users/" + localStorage["user_id"] + "/groups", function(groups) {
+    $("ul.groups").empty();
+    allGroups = [];
+    for(var i = 0; i < groups.length; i++) {
+      var group = new Group(groups[i]);
+      ($("<li>" + groups[i].group_name + "</li>").append("<span id="+ groups[i].id + ">" + ' X ' + "</span>")).appendTo("ul.groups");
+    }// for loop ends
+    $("span").on("click", function(e){
+      var groupId = e.target.id;
+      $.ajax({
+        url: '/users/' + localStorage["user_id"] + '/groups/' + groupId,
+        type: "DELETE",
+        success: function(){
+          for(var i=0; i<allGroups.length; i++) {
+            if(allGroups[i].group.id==groupId){
+             allGroups.splice(i, 1); 
+            }
+          }
+          e.target.parentElement.remove();
+        }//ends removing element from dom
+      });
+      //ajax closed
+    });// ends listener
+  });// ends getJSON
+}// ends showGroups
+
+
 function getUserConnections(){
   $.getJSON("/users/" + localStorage["user_id"] + "/connections", function(connections){
-    for(var i=0; i< connections.length; i++){
-      allConnections = [];
-      var connection = new Connection(connection);
+    allConnections = [];
+    for(var i=0; i < connections.length; i++){
+      var connection = new Connection(connections[i]);
       $.getJSON("/cards/" +connections[i].card_id, function(cardFound){
-        console.log(connections[i]);
         var card = new Card(cardFound);
         card.displayCard();
       });
@@ -85,33 +105,64 @@ function getUserConnections(){
   });
 };
 
+function getGroupsConnections(){
+  for(var i=0; i < allConnections.length; i++){
+    $.getJSON("/connections/" + allConnections[i].connection.id + "/groupsconnections", function(groupsconnections) {
+      allGroupsConnections = [];
+      for(var j=0; j<groupsconnections.length; j++){
+        var cg = new GroupsConnections(groupsconnections[j]);
+      };
+    })
+  };
+};
 
 function addCardToGroup(){
-    $("ul.groups_popup").remove();
-    console.log(this);
-    $("<ul class='groups_popup'>").appendTo($(this).parent());
-    $.getJSON("/users/" + localStorage["user_id"] + "/groups", function(groups){
-      for(var i=0; i < groups.length; i++){
-        var grouplisting = $("<li>" + groups[i].group_name + "</li>")
-        var checkbox = $("<input type='checkbox'>");
-        checkbox.appendTo(grouplisting);
-        grouplisting.appendTo('ul.groups_popup');
+  $("ul.groups_popup").remove();
+  $("<ul class='groups_popup'>").appendTo($(this).parent());
+  cardID = $(this).parent().parent().attr("id");
 
-        for(var i=0; i<allConnections.length; i++){
-          $.getJSON("/connections/" + allConnections[i].connection.id + "/groupsconnections", function(groupsconnections) {
 
-          });
+
+  allChecks=[];
+
+
+  for(var i=0; i<allConnections.length;i++){
+    for(var j =0; j<allGroups.length; j++){
+      var check = false
+      var check = new CheckBox(check, allConnections[i].connection.id, allGroups[j].group.id);
+    };
+  };
+
+  for(var k =0; k<allChecks.length; k++) {
+    for(var l=0; l<allGroupsConnections.length; l++){
+      if(allGroupsConnections[l].group === allChecks[k].group && allGroupsConnections[l].connection === allChecks[l].connection) {
+        allChecks[k].check = true;
+      }
+    };
+  };
+
+
+  for(var t=0; t<allConnections.length; t++){
+    if(allConnections[t].card_id === cardID){
+        connectionID = connection[t];
+      for(var s=0; t<allChecks.length; s++){
+        if(allchecks[s].connection === connectionID){
+          for(var j=0; j<allGroups.length; j++){
+            var grouplisting = $("<li>" + allGroups[j].group.group_name + "</li>");
+            grouplisting.appendTo('.groups_popup');
+            var checkbox = $("<input type='checkbox'>");
+            checkbox.prop("checekd", allchecks[s].check)
+            checkbox.appendTo(grouplisting);
+            checkbox.on("change",)
+          }
         }
+      }
+    };
+  };
+};
 
 
-
-        $(checkbox).on("change", selectGroup);
-      };
-  });
-}
-
-
-function selectGroup(group_id, connection_id) {
+function selectGroup() {
   if(this.checked === true){
     $.ajax({
       url: "/groupsconnections",
@@ -129,46 +180,9 @@ function selectGroup(group_id, connection_id) {
 }
 
 getUserConnections();
+getGroupsConnections();
 showGroups();
 addGroups();
-
-
-
-
-
-
-
-// function addCardToGroup(){
-//   $('#add-group').remove();
-//   
-
-//   var connection_id = $(this).parent().parent().find(".card").attr("data-connection");
-//   // Making ajax request to get all the groups
-//     // Get all of the connections that are already grouped together
-//     
-
-//       // Iterate through the groups and make a new li and checkbox for the user to make a choice
-//       for(var i = 0; i < allGroups.length; i++) {
-//         var checkbox = $("<input type='checkbox'>");
-
-//         // Iterate through the table that has the information about which cards have already been connected to a specific group, and if they have been connected previously, check the checkbox true. Otherwise leave it blank.
-//         for(var j = 0; j < current_connections.length; j++){
-//           if((current_connections[j].connection_id === parseInt(connection_id)) && (current_connections[j].group_id === allGroups[i].id)){
-//             $(checkbox).prop('checked', true);
-//           }
-//         }
-//         // Append the li and the checkbox(including it's value) to the popup div called groups_popup
-//         groupNames = $("<li id=" + allGroups[i].id + ">" + allGroups[i].group_name + "</li>").appendTo("ul.groups_popup").append(checkbox);
-//         $(checkbox).on("change", selectGroup);
-//       }
-//     });
-//     // This button closes the popup box and refreshes all of the connections 
-//     $("<button>Add To Groups</button>").appendTo("ul.groups_popup").on("click", getConnections);
-//   });
-// }
-
-
-
 
 
 // function cardDashboard(){

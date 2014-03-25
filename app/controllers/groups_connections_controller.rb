@@ -1,6 +1,5 @@
 class GroupsConnectionsController < ApplicationController
 
-
   def index
     @all_group_connections = ConnectionsGroups.where(connection_id: params[:id])
     render json: @all_group_connections
