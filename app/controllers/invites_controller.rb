@@ -10,4 +10,15 @@ class InvitesController < ApplicationController
     @card = Card.find_by(id: @token.card_id)
   end
 
+ def create
+    @user = User.new(email: params[:email], password: params[:password], password_confirmation: params[:password_confirmation], first_name: params[:first_name], last_name: params[:last_name])
+    if  @user.save
+      session[:user_id] = @user.id
+      redirect_to(:back)
+    else
+      render :new
+    end
+  end
+
+
 end

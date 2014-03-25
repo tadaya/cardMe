@@ -41,6 +41,15 @@ function makeCards(i){
     $("<li>" + "Phone Number: " + cardFound.phone_number + "</li>").appendTo(cards);
     $("<li>" + "Organization: " + cardFound.organization + "</li>").appendTo(cards);
     $("<li>" + "Position: " + cardFound.position + "</li>").appendTo(cards);
+
+    if (parseInt(cardFound.id) <= 9){
+      $(".card").css({"background-image": "url('http://s3.amazonaws.com/cardMe/cards/background_images/000/000/00" + cardFound.id + "/original/" + cardFound.background_image_file_name + "')" });
+    } else if ((parseInt(cardFound.id) <= 99)) {
+    $(".card").css({"background-image": "url('http://s3.amazonaws.com/cardMe/cards/background_images/000/000/0" + cardFound.id + "/original/" + cardFound.background_image_file_name + "')" });
+    } else {
+      $(".card").css({"background-image": "url('http://s3.amazonaws.com/cardMe/cards/background_images/000/000/" + cardFound.id + "/original/" + cardFound.background_image_file_name + "')" });
+    }
+
     $("<button class='add'> + </button>").appendTo(cardmenu).on("click", addCardToGroup);
     $("<button class='arrow'> > </button>").appendTo(cardmenu).on("click", cardDashboard);
     $(cardmenu).insertAfter(cards)
@@ -150,3 +159,4 @@ cardDashboard();
 getConnections();
 showGroups();
 addGroups();
+

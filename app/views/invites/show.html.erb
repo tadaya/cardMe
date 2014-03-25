@@ -1,14 +1,26 @@
 <div class="form">
 
-    <div class="card">
-      <ul>
-        <li><%= @card.email %></li>
-        <li><%= @card.phone_number %></li>
-        <li><%= @card.organization %></li>
-        <li><%= @card.position %></li>
-      </ul>
-    </div>
+  <h2>YOU'VE BEEN CARDED!</h2>
+  <hr>
 
+    <div class="card" style="background-image: url('<%= @card.background_image %>'); background-size: 100%";>
+      <div class="personal_info_list_wrapper">
+        <div class="actual_list">
+          <ul>
+            <h4>Email Address</h4>
+            <li><%= @card.email %></li>
+            <h4>Phone Number</h4>
+            <li><%= @card.phone_number %></li>
+            <h4>Organization</h4>
+            <li><%= @card.organization %></li>
+            <h4>Position</h4>
+            <li><%= @card.position %></li>
+          </ul>
+        </div>
+      </div>
+      <div class="card-profile-pic" style="background-image: url('<%= @card.profile_picture %>'); background-size: 100% 100%; height: 90px; width: 75px">
+      </div>
+    </div>
 
     <% if current_user %>
       <button> ADD ME </button>
