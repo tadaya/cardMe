@@ -22,21 +22,25 @@
 // create application namespace
 var CardMe = {};
 
-// add data to application
+// add data structures to application
 CardMe.cards       = [];
 CardMe.connections = [];
 CardMe.groups      = [];
 CardMe.groupsconnections = [];
 CardMe.numberLoaded = 0;
 
-// async load data from server-models
+// async load those data structures from server-models
 Card.getCards();
 ConnectionGroup.getConnectionsGroups(); // pull all our groups connections
 Group.getGroups();                      // pull all ours users groups
 Connection.getConnections();
 
-// this fucntion compares users groups to groupsConnections
+// this function compares users groups to groupsConnections
 // and then finds a card to render and calls render function
+// but only after all the above have run and loaded results,
+// which we ensure by incrementing the CardMe.numberLoaded value
+//
+// ...is a callback in the $.ajax.success functions
 function findCardToRenderAndRender() {
   if(CardMe.numberLoaded === 3) {
     for(var i = 0; i < CardMe.connections.length; i++){
@@ -52,6 +56,12 @@ function findCardToRenderAndRender() {
     console.log("Number loaded: " + CardMe.numberLoaded);
   }
 }
+
+
+
+
+
+
 
 // on page load!
 $(document).ready(function(){
