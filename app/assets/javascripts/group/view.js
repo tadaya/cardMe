@@ -6,17 +6,17 @@ function renderGroupsPopup(){
     var group = $("<li data-connection=" + CardMe.groups[i].id + ">" + CardMe.groups[i].name + "</li>")
     group.appendTo(popup);
     var checkbox = $("<input type='checkbox'>");
-    var checked = false;
-    isCheckboxChecked(checked);
-    console.log(checked)
-    checkbox.prop("checked", checked);
-    console.log(checked)
+    checkbox.prop("checkbox", false);
+    isCheckboxChecked(checkbox);
     checkbox.appendTo(group);
 
     var groupId = checkbox.parent().attr("data-connection");
-    console.log(groupId)
+    console.log("groupid:" + groupId)
     var connectionId = checkbox.parent().parent().parent().find(".add").attr("data-connection");
-    console.log(connectionId)
+    console.log("connectionId" + connectionId)
+
+    checkbox.attr("data-connection", connectionId)
+    checkbox.attr("data-group", groupId)
 
     checkbox.on("change", function() {
       if(this.checked === false) {
@@ -25,9 +25,7 @@ function renderGroupsPopup(){
         postGroupConnection(connectionId, groupId)
     }
   })
-
 }
-
   $("<button class='popup_save'> Close </button>").appendTo(popup);
 }
 
@@ -48,13 +46,20 @@ function deleteGroupConnection(connectionId, groupId) {
   });
 };
 
-function isCheckboxChecked(checked){
-  var connectionId = $(this).parent().parent().parent().find(".add").attr("data-connection");
-  var groupId = $(this).parent().attr("data-connection");
+function isCheckboxChecked(checkbox){
+  console.log("checkboxinsidecheckfunction:" + checkbox);
+  
+  var connectionId = checkbox.attr("data-connection");
+  var groupId = checkbox.attr("data-group");
+
+  console.log("Connection ID" + connectionId);
+   console.log("Group ID" + groupId);
+
 
   for(var i = 0; i < CardMe.groupsconnections.length; i++){
     if((CardMe.groupsconnections[i].connectionId == connectionId ) && (CardMe.groupsconnections[i].groupId == groupId )){
-        checked = true;
+        checkbox.prop("checked", true);
+        console.log("HERE!");
     }
   }
 }

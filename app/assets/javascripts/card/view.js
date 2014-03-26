@@ -14,7 +14,7 @@ Card.prototype.render = function() {
     $("<li>" + "Organization: " + this.card.organization + "</li>").appendTo(cards);
     $("<li>" + "Position: " + this.card.position + "</li>").appendTo(cards);
     $("<button class='add' data-connection=" + this.card.id + "> + </button>").appendTo(cardmenu).on("click", renderGroupsPopup);
-    $("<button class='arrow'> > </button>").appendTo(cardmenu).on("click", function(){console.log("DASHBOARD: TBD!");} );
+    $("<button class='arrow'> > </button>").appendTo(cardmenu).on("click", console.log("DASH!"));//cardDashboard);
 }
 
 
